@@ -2,7 +2,7 @@
 \usepackage[T1]{fontenc}
 \usepackage[polish]{babel}
 \usepackage[utf8]{inputenc}
-\usepackage[backend=biber]{biblatex}
+\usepackage[backend=biber,style=numeric,sortcites=true]{biblatex}
 \usepackage{hyperref}
 \usepackage{csquotes}
 \usepackage{amsmath}
@@ -34,43 +34,87 @@
             się dane z Australii. Tamtejszy odpowiednik Urzędu Statystycznego dzieli obszary w niestandardowy sposób
             utrudniający analizę, dodatkowo sama możliwość eksportu tych danych jest mocno ograniczona. Problem ten
             ma przełożenie na wszystkie inne przestrzenne dane populacyjne dotyczące Australii.
-            \item Miejsce zatrudnienia/populacja dzienna/populacja w miejscu pracy (ludność De Facto): O ile ten typ danych nie znajdował się początkowo w obszarze moich poszukiwań, to może on jednak wykazywać wyższą rzeczywistą użyteczność w analizie dostępności transportu miejskiego przy analizie uwzględniającej liczbę zatrudnionych. Dane takie dostępne są często wraz z poprzednim typem danych, jednak dla Francji i Niemiec nie zostały uwzględnione w głównym spisie powszechnym, ale dostępne są do pobrania w podobnej formie z innych źródeł. Status dostępności danych dotyczących Australii taki sam jak wyżej.
-            \item Dokładana lokalizacja miejsca pracy: Dane te różnią się od poprzednich tym, że określają dokąd ludzie udają się do pracy, a nie ile osób na danym obszarze ma pracę. Dane tego typu pozwoliłyby mi uwzględnić potencjalne dzienne przepływy ludności, co znacząco podniosłoby trafność analiz, jednakże ich dostępność jest bardzo mocno ograniczona:
+            \item Miejsce zatrudnienia/populacja dzienna/populacja w miejscu pracy (ludność De Facto): O ile ten typ
+            danych nie znajdował się początkowo w obszarze moich poszukiwań, to może on jednak wykazywać wyższą
+            rzeczywistą użyteczność w analizie dostępności transportu miejskiego przy analizie uwzględniającej
+            liczbę zatrudnionych. Dane takie dostępne są często wraz z poprzednim typem danych, jednak dla Francji i
+            Niemiec nie zostały uwzględnione w głównym spisie powszechnym, ale dostępne są do pobrania w podobnej
+            formie z innych źródeł. Status dostępności danych dotyczących Australii taki sam jak wyżej.
+            \item Dokładana lokalizacja miejsca pracy: Dane te różnią się od poprzednich tym, że określają dokąd
+            ludzie udają się do pracy, a nie ile osób na danym obszarze ma pracę. Dane tego typu pozwoliłyby mi
+            uwzględnić potencjalne dzienne przepływy ludności, co znacząco podniosłoby trafność analiz, jednakże ich
+            dostępność jest bardzo mocno ograniczona:
             \begin{itemize}
-                \item Dublin - zdecydowanie najlepsza sytuacja, gdzie dostępne są dane o lokalizacji zatrudnienia w siatce 1 km x 1km.
-                \item Paryż - pomimo istnienia danych takick, jak w przypadku Dublina, nie są one publicznie dostępne (bądź nie udało mi się ich znaleźć, pomimo intesywnych poszukiwań), jednakże odnalazłem dane określające strefy o wysokim zatrudnieniu, które pomimo trudności z eksportem ich są możliwe do zescrappowania.
-                \item Warszawa - nie są publicznie dostępne dane w stylu Dublina, czy nawet Paryża, jedynie udało mi się znaleźć dane określające liczbę ofert pracy w podziale na dzielnice, co stanowi punkt wyjścia. O ile się orientuję, to istnieje jeszcze możliwość zamówienia indywidualnej analizy poprzez GUS, ale zgłębiałem w pełni tego tematu.
-                \item Dla pozostałych miast, dla których szukałem danych tj. Lublin, Adelaide, Berlin, Brisbane, Canberra, Helsinki, Kuopio, Luxembourg, Melbourne, Rzym, Turku, Sydney, Winnipeg; nie udało mi się znaleźć tego typu danych.
+                \item Dublin - zdecydowanie najlepsza dostępność danych, możliwe do pobrania są dane o lokalizacji
+                zatrudnienia w siatce 1 km x 1km.
+                \item Paryż - pomimo istnienia danych takich, jak w przypadku Dublina, nie są one publicznie
+                dostępne (bądź nie udało mi się ich znaleźć, pomimo intesywnych poszukiwań), jednakże odnalazłem
+                dane określające strefy o wysokim zatrudnieniu, które pomimo trudności z eksportem ich są możliwe do
+                zescrappowania.
+                \item Warszawa - nie są dostępne publicznie dane w stylu Dublina, czy nawet Paryża, jedynie udało mi
+                się znaleźć dane określające liczbę ofert pracy w podziale na dzielnice, co stanowi punkt wyjścia. O
+                ile się orientuję, to istnieje jeszcze możliwość zamówienia indywidualnej analizy poprzez GUS, ale nie
+                zgłębiałem w pełni tego tematu.
+                \item Dla pozostałych miast, dla których szukałem danych tj. Lublin, Adelaide, Berlin, Brisbane,
+                Canberra, Helsinki, Kuopio, Luxembourg, Melbourne, Rzym, Turku, Sydney, Winnipeg; nie udało mi się
+                znaleźć tego typu danych.
             \end{itemize}
         \end{itemize}
     \subsection{Dane dotyczące komunikacji miejskiej}\label{subsec:dane-dotyczace-komunikacji-miejskiej}
 \begin{itemize}
             \item Polska:
 
-            Udało mi się znaleźć dane dotyczące wszystkich interesujących mnie przewoźników (ZTM Warszawa, Warszawska Kolej Dojazdowa, Koleje Mazowieckie, PolRegio), udostępnianie bezpośrednio przez nich i skatalogowane na stronie \href{https://dane.gov.pl/pl/dataset/1739,krajowy-punkt-dostepowy-kpd-multimodalne-usugi-informacji-o-podrozach/resource/327976/table?page=1&per_page=20&q=warszaw&sort=}{dane.gov.pl}.
+            Udało mi się znaleźć dane dotyczące wszystkich interesujących mnie przewoźników (ZTM Warszawa,
+            Warszawska Kolej Dojazdowa, Koleje Mazowieckie, PolRegio), udostępnianie bezpośrednio przez nich i
+            skatalogowane na stronie \href{https://dane.gov.pl/pl/dataset/1739,krajowy-punkt-dostepowy-kpd-multimodalne-usugi-informacji-o-podrozach/resource/327976/table?page=1&per_page=20&q=warszaw&sort=}{dane.gov.pl}.
             \item Zbiór 25-cities:
 
-            Informacje o ofercie komunikacyjnej pozostałych miast pochodzić będą ze zbioru danych 25-cities \cite{25cities}, który zawiera dane GTFS dla 25 miast na świecie, w tym Paryża i Dublina. Nie wykluczam jednak możliwości pozyskania nowszych danych GTFS bezpośrednio od przewoźników lub z oficjalnych repozytoriów danych otwartych.
+            Informacje o ofercie komunikacyjnej pozostałych miast pochodzić będą ze zbioru danych 25-cities
+            \cite{25cities}, który zawiera dane GTFS dla 25 miast na świecie, w tym Paryża i Dublina. Nie wykluczam
+            jednak możliwości pozyskania nowszych danych GTFS bezpośrednio od przewoźników lub z oficjalnych
+            repozytoriów danych otwartych.
 
         \end{itemize}
 
 \section{Cele Pracy Magisterskiej}\label{sec:cele-pracy-magisterskiej}
-Głównym celem pracy jest opracowanie i zastosowanie holistycznych ram oceny dostępności transportu zbiorowego (TZ), które wykraczają poza tradycyjne miary bazujące wyłącznie na podaży (ofercie przewozowej), w celu przeprowadzenia komparatywnej analizy trzech zróżnicowanych aglomeracji: Paryża, Dublina i Warszawy.
+Głównym celem pracy jest opracowanie i zastosowanie holistycznych ram oceny dostępności transportu zbiorowego (TZ),
+które wykraczają poza tradycyjne miary bazujące wyłącznie na podaży (ofercie przewozowej), w celu przeprowadzenia
+komparatywnej analizy trzech zróżnicowanych aglomeracji: Paryża, Dublina i Warszawy.
 
-Cel ten zostanie osiągnięty poprzez realizację następujących szczegółowych celów:
+Cel ten zostanie osiągnięty poprzez realizację następujących szczegółowych zadań:
 \begin{enumerate}
-    \item Rozszerzenie Metodologiczne Analizy Dostępności (Paryż): Rozbudowanie wyników projektu zaliczeniowego o zaawansowane miary dostępności, w tym modele grawitacyjne i analizę topologiczną L-space/P-space.
+
+    \item Rozszerzenie metodologiczne analizy dostępności (Paryż): Rozbudowanie wyników projektu zaliczeniowego o
+    zaawansowane miary dostępności, w tym modele grawitacyjne oraz analizę topologiczną L-space (
+    Space-of-Infrastructure) i P-space (Space-of-Service). Użycie tych dualnych reprezentacji jest niezbędne do
+    diagnozowania problemów sieciowych, rozróżniając, czy niski poziom dostępności wynika z braku fizycznej
+    infrastruktury (L-space), czy z nieefektywnych operacji (P-space)~\cite{LUO2019102505}.
+
     \item Integracja Perspektywy Popytu i Podaży (Modele Grawitacyjne): Kwantyfikacja potencjału dostępu do
     kluczowych celów (np. miejsc pracy, POI) z wykorzystaniem modelu grawitacyjnego, najlepiej dwustronnie
-    ograniczonego (doubly constrained) \cite{garvity}, który uwzględnia zarówno popyt (ludność), jak i podaż (pojemność celów)~\cite{garvity}.
+    ograniczonego (doubly constrained). Model ten, poprzez zastosowanie współczynników normalizacyjnych ($A_i$ i $B_i$),
+    jest bardziej realistyczny niż model pojedynczo ograniczony, ponieważ uwzględnia konkurencję o ograniczone
+    zasoby (pojemność celów - $E_j$) i jednocześnie ogranicza całkowity wypływ z obszaru początkowego (popyt - $P_i$)
+    ~\cite{gravity, gravity2}.
+
     \item Wzbogacenie Behawioralne Impedancji (Whole Travel Chain - WTC): Uwzględnienie pełnego kosztu podróży z
-    perspektywy użytkownika, włączając tzw. pierwszą i ostatnią milę (first/last mile), oraz czasy oczekiwania i
-    transferów, w celu uzyskania bardziej realistycznej miary impedancji ($c_{ij}$)~\cite{capetown}.
-    \item Weryfikacja Wymiaru Sprawiedliwości Społecznej (Mapowanie Społeczne): Przeprowadzenie analizy równości dostępu do możliwości, poprzez segmentację modelu grawitacyjnego i kalibrację współczynnika zaniku ($\beta$) w oparciu o różnice w zamożności (dochody) poszczególnych stref.
+    perspektywy użytkownika, który jest kluczowy dla realistycznej miary impedancji $c_{ij}$. Oznacza to włącznie
+    tzw. pierwszej i ostatniej mili, szacunkowego czasu oczekiwania oraz czasu/penalizacji za przesiadki. Pominięcie
+    tych składników prowadzi do przeszacowania użyteczności systemu TZ~\cite{LUO2019102505, capetown}.
+
+    \item Weryfikacja Wymiaru Sprawiedliwości Społecznej (Mapowanie Społeczne): Przeprowadzenie analizy
+    sprawiedliwości (equity), która, w przeciwieństwie do równości (equality), wymaga dostosowanego wsparcia i
+    traktowania w oparciu o potrzeby grup. Należy to osiągnąć poprzez segmentację demograficzną modelu
+    grawitacyjnego i kalibrację współczynnika zaniku $\beta$ (wrażliwość na czas podróży) w oparciu o różnice w
+    zamożności (dochodach). Sprawiedliwe rezultaty w transporcie publicznym (PT) są kluczowe dla redukcji
+    nierówności, zwłaszcza w dostępie do zatrudnienia, opieki zdrowotnej i edukacji~
+    \cite{KHALIFE2023160, capetown, urban_institute, review}.
+
     \item Analiza Komparatywna i Zarządzanie Niespójnością Danych: Porównanie wyników dostępności uzyskanych za
-    pomocą tej samej holistycznej metodologii dla trzech miast o różnym charakterze (metropolia globalna - Paryż,
-    metropolia o dobrych danych - Dublin, miasto lokalne - Warszawa), przy jednoczesnym uwzględnieniu faktu, że dane
-    pochodzą z różnych okresów czasowych, co jest kluczowym problemem do zaadresowania w dyskusji i metodologii~\cite{gravity}.
+    pomocą tej samej holistycznej metodologii dla trzech miast, z uwzględnieniem, że analizy porównawcze są w
+    literaturze rzadkie, ponieważ istniejące metody są często zależne od GIS. Konieczne jest udokumentowanie
+    horyzontów czasowych i oszacowanie ryzyka zniekształcenia wyników z powodu niespójności danych z różnych okresów~\cite{LUO2019102505}
+
 \end{enumerate}
 
 \section{Aspekty Analityczne}\label{sec:aspekty-analityczne}
@@ -78,20 +122,31 @@ Cel ten zostanie osiągnięty poprzez realizację następujących szczegółowyc
     \item Analiza Topologiczna (L-space i P-space) \newline
     Zastosowanie topologii L-space (Space-of-Infrastructure) i P-space (Space-of-Service)~\cite{luo} jest niezbędne do:
     \begin{itemize}
-        \item Modelowania Sieci Transportu Zbiorowego (PTN): L-space modeluje fizyczne powiązania między kolejnymi przystankami na trasie. P-space modeluje połączenia między wszystkimi przystankami obsługiwanymi przez tę samą linię, odzwierciedlając bezpośrednią łączność i doświadczenie użytkownika.
-        \item Diagnostyka Problemów: Porównanie centralności lub miar dostępności obliczonych w obu przestrzeniach pozwala zdiagnozować, czy niski poziom dostępności wynika z braku infrastruktury (niski L-space) czy z nieefektywnych operacji (niski P-space przy wysokim L-space, np. rzadkie kursy lub złe przesiadki).
+        \item Modelowania Sieci Transportu Zbiorowego (PTN): L-space modeluje fizyczne powiązania między kolejnymi
+        przystankami na trasie. P-space modeluje połączenia między wszystkimi przystankami obsługiwanymi przez tę
+        samą linię, odzwierciedlając bezpośrednią łączność i doświadczenie użytkownika.
+        \item Diagnostyka Problemów: Porównanie centralności lub miar dostępności obliczonych w obu przestrzeniach
+        pozwala zdiagnozować, czy niski poziom dostępności wynika z braku infrastruktury (niski L-space) czy z
+        nieefektywnych operacji (niski P-space przy wysokim L-space, np. rzadkie kursy lub złe przesiadki).
         \item Źródła Danych: Wymaga to użycia danych GTFS dla każdego z miast, które zawierają informacje o trasach,
         przystankach i sekwencjach~\cite{luo, 25cities}.
     \end{itemize}
     \item Modele Grawitacyjne i Impedancja \newline
-    Modele grawitacyjne (Gravity-type approach)~\cite{garvity} będą stanowiły rdzeń ilościowej oceny dostępności potencjalnej:
+    Modele grawitacyjne (Gravity-type approach)~\cite{gravity2} będą stanowiły rdzeń ilościowej oceny dostępności
+    potencjalnej:
     \begin{itemize}
-        \item Identyfikacja POI (Points of Interest): Wskaźnik atrakcyjności ($T_{attr}$) musi uwzględniać dzienne cele przepływu ludności, takie jak miejsca pracy (zatrudnienie), jako kluczowy element analizy dojazdów~\cite{garvity}. Możliwe będzie wykorzystanie istniejących danych demograficznych (siatka 1x1 km) oraz specyficznych danych o lokalizacji zatrudnienia, szczególnie dostępnych dla Dublina.
+        \item Identyfikacja POI (Points of Interest): Wskaźnik atrakcyjności ($T_{attr}$) musi uwzględniać dzienne
+        cele przepływu ludności, takie jak miejsca pracy (zatrudnienie), jako kluczowy element analizy
+        dojazdów~\cite{gravity2}. Możliwe będzie wykorzystanie istniejących danych demograficznych (siatka 1x1 km)
+        oraz specyficznych danych o lokalizacji zatrudnienia, szczególnie dostępnych dla Dublina.
         \item Aktualizacja Metryki Kosztu: Zamiast prostego syntetycznego wskaźnika, użytego w projekcie wstępnym,
         zastosowany zostanie uogólniony koszt podróży (Generalized Travel Cost - GTC), który będzie stanowił
         podstawę funkcji impedancji $f(c_{ij})$~\cite{luo}. Koszt $c_{ij}$ powinien być oczekiwanym czasem podróży
-        transportem zbiorowym~\cite{garvity}.
-        \item Współczynnik Impedancji oparty o Zamożność ($\beta$): W celu uwzględnienia sprawiedliwości społecznej (Society Mapping), współczynnik zaniku ($\beta$), określający wrażliwość na czas podróży, musi być kalibrowany w oparciu o różnice w zamożności (dochody). Wysoki dochód często koreluje z wyższą wrażliwością na czas (wyższe $\beta$), co wymaga segmentacji demograficznej modelu.
+        transportem zbiorowym~\cite{gravity2}.
+        \item Współczynnik Impedancji oparty o Zamożność ($\beta$): W celu uwzględnienia sprawiedliwości społecznej
+        (Society Mapping), współczynnik zaniku ($\beta$), określający wrażliwość na czas podróży, musi być
+        kalibrowany w oparciu o różnice w zamożności (dochody). Wysoki dochód często koreluje z wyższą wrażliwością
+        na czas (wyższe $\beta$), co wymaga segmentacji demograficznej modelu.
     \end{itemize}
     \item Cały Łańcuch Podróży (Whole Travel Chain - WTC) \newline
     Analiza WTC zapewni realistyczne uwzględnienie multimodalnego charakteru podróży:
@@ -103,7 +158,9 @@ Cel ten zostanie osiągnięty poprzez realizację następujących szczegółowyc
         GTFS na podstawie OpenStreetMap~\cite{25cities}. Czas oczekiwania ($T_{wait}$) zostanie oszacowany na podstawie
         częstotliwości kursowania (headway) z danych GTFS~\cite{luo, metropolitan}. Pominięcie tych
         kosztów (jak to często bywa w uproszczonych modelach) prowadzi do przeszacowania użyteczności systemu TZ.
-        \item Włączenie Baterii (Bariery Fizyczne i Społeczne): Choć trudne, bariery socjologiczne (np. w przypadku osób z niepełnosprawnościami) mogą być włączone do modelu WTC jako negatywne stałe specyficzne dla alternatywy ($ASC_m$), obniżające użyteczność całego łańcucha podróży dla wrażliwych grup.
+        \item Włączenie Baterii (Bariery Fizyczne i Społeczne): Choć trudne, bariery socjologiczne (np. w przypadku
+        osób z niepełnosprawnościami) mogą być włączone do modelu WTC jako negatywne stałe specyficzne dla
+        alternatywy ($ASC_m$), obniżające użyteczność całego łańcucha podróży dla wrażliwych grup.
     \end{itemize}
     \item Zarządzanie Niespójnością Czasową Danych \newline
     Fakt, że dane transportowe (GTFS, np. Paryż 2016) i dane demograficzne/zatrudnienia (np. spis powszechny, dane
@@ -111,8 +168,10 @@ Cel ten zostanie osiągnięty poprzez realizację następujących szczegółowyc
     \begin{itemize}
         \item Udokumentować Horyzonty Czasowe: Szczegółowo opisać, z jakiego okresu pochodzi każda kategoria danych
         dla każdego miasta~\cite{25cities}.
-        \item Oszacować Ryzyko Zniekształcenia: Ocenić, w jakim stopniu zmiany w sieci transportowej (GTFS) lub dystrybucji populacji/zatrudnienia mogły wpłynąć na wyniki w okresie między pozyskaniem danych a datą analizy.
-        \item Strategia Metodologiczna: Przyjąć spójne założenia, np. używać starszych danych populacyjnych jako statycznego rozkładu popytu dla analizy wrażliwości sieci transportowej z danego okresu.
+        \item Oszacować Ryzyko Zniekształcenia: Ocenić, w jakim stopniu zmiany w sieci transportowej (GTFS) lub
+        dystrybucji populacji/zatrudnienia mogły wpłynąć na wyniki w okresie między pozyskaniem danych a datą analizy.
+        \item Strategia Metodologiczna: Przyjąć spójne założenia, np. używać starszych danych populacyjnych jako
+        statycznego rozkładu popytu dla analizy wrażliwości sieci transportowej z danego okresu.
     \end{itemize}
 \end{enumerate}
 
@@ -189,7 +248,8 @@ Cel ten zostanie osiągnięty poprzez realizację następujących szczegółowyc
 \subsection*{Wprowadzenie}
 \begin{enumerate}
     \item Wstęp: Definicja dostępności obszarowej i jej znaczenie w planowaniu zrównoważonego transportu.
-    \item Kontekst badawczy: Krótki przegląd istniejących miar dostępności (np. kumulatywne możliwości, modele potencjalne/grawitacyjne).
+    \item Kontekst badawczy: Krótki przegląd istniejących miar dostępności (np. kumulatywne możliwości, modele
+    potencjalne/grawitacyjne).
     \item Ograniczenia projektu wstępnego: Krytyka wskaźnika użytego w projekcie dla Paryża (skoncentrowanie na
     podaży/ofercie) i uzasadnienie potrzeby przejścia na model grawitacyjny i perspektywę behawioralną.
     \item Cele i pytania badawcze: Jasne sformułowanie celów pracy oraz hipotez badawczych.

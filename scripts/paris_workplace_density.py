@@ -30,6 +30,29 @@ LAMBERT_93 = "EPSG:2154"
 GRID_SIZE_M = 1000.0
 
 ACTIVE_STATUS_VALUES = {"A", "ACTIF", "ACTIVE"}
+
+# Mapowanie kodów trancheEffectifsEtablissement (INSEE) na punkt środkowy przedziału etatów.
+# Źródło: https://www.sirene.fr/static-resources/htm/v_sommaire.htm
+# Kod NN oznacza brak deklaracji (nowo zarejestrowane lub brak obowiązku) — traktujemy jako 0.
+TRANCHE_EFFECTIFS_MIDPOINT: dict[str, float] = {
+    "NN": 0.0,   # nieokreślony
+    "00": 0.0,   # 0 pracowników najemnych
+    "01": 1.5,   # 1–2
+    "02": 4.0,   # 3–5
+    "03": 7.5,   # 6–9
+    "11": 14.5,  # 10–19
+    "12": 34.5,  # 20–49
+    "21": 74.5,  # 50–99
+    "22": 149.5, # 100–199
+    "31": 224.5, # 200–249
+    "32": 374.5, # 250–499
+    "41": 749.5, # 500–999
+    "42": 1499.5,# 1000–1999
+    "51": 3499.5,# 2000–4999
+    "52": 7499.5,# 5000–9999
+    "53": 10000.0,# 10 000+
+}
+
 LATITUDE_COLUMNS = ("latitude", "latitudeEtablissement")
 LONGITUDE_COLUMNS = ("longitude", "longitudeEtablissement")
 LAMBERT_X_COLUMNS = (
@@ -153,6 +176,11 @@ def required_sirene_columns(available_columns: list[str]) -> list[str]:
     identifier_columns = [c for c in ("siret", "siren") if c in available_columns]
     columns.extend(identifier_columns)
 
+    # Kolumny do ważonej estymacji zatrudnienia z trancheEffectifs
+    for col in ("trancheEffectifsEtablissement", "caractereEmployeurEtablissement"):
+        if col in available_columns:
+            columns.append(col)
+
     return sorted(set(columns))
 
 
@@ -237,7 +265,31 @@ def active_mask(df: pd.DataFrame) -> pd.Series:
     return status.isin(ACTIVE_STATUS_VALUES)
 
 
+def estimate_employment_from_tranche(df: pd.DataFrame) -> pd.Series:
+    """Szacuje liczbę etatów dla każdego établissement na podstawie trancheEffectifsEtablissement.
+
+    Jeśli kolumna trancheEffectifs jest dostępna, przypisuje punkt środkowy przedziału.
+    Jednostki z kodem 'NN' lub '00' (brak pracowników / brak deklaracji) dostają 0.
+    Jeśli kolumna jest niedostępna, fallback = 1.0 na podmiot (stara metodologia — liczenie firm).
+    """
+    if "trancheEffectifsEtablissement" not in df.columns:
+        return pd.Series(1.0, index=df.index, name="employment_estimate")
+
+    codes = df["trancheEffectifsEtablissement"].astype("string").str.strip().str.upper()
+    estimates = codes.map(TRANCHE_EFFECTIFS_MIDPOINT)
+
+    unknown_codes = codes[estimates.isna() & codes.notna()].unique()
+    if len(unknown_codes) > 0:
+        print(f"  [trancheEffectifs] Nieznane kody (traktuję jako 0): {unknown_codes.tolist()}")
+
+    estimates = estimates.fillna(0.0)
+    return estimates.rename("employment_estimate")
+
+
 def build_establishment_geodataframe(df: pd.DataFrame) -> gpd.GeoDataFrame:
+    # Szacowanie etatów z trancheEffectifs przed odrzuceniem wierszy bez koordynatów
+    employment_estimates = estimate_employment_from_tranche(df)
+
     lon_col = pick_first_existing(LONGITUDE_COLUMNS, df.columns)
     lat_col = pick_first_existing(LATITUDE_COLUMNS, df.columns)
     lambert_x = pick_first_existing(LAMBERT_X_COLUMNS, df.columns)
@@ -250,6 +302,7 @@ def build_establishment_geodataframe(df: pd.DataFrame) -> gpd.GeoDataFrame:
         filtered = df.loc[valid].copy()
         filtered[lon_col] = x.loc[valid]
         filtered[lat_col] = y.loc[valid]
+        filtered["employment_estimate"] = employment_estimates.loc[valid]
         gdf = gpd.GeoDataFrame(
             filtered,
             geometry=gpd.points_from_xy(filtered[lon_col], filtered[lat_col]),
@@ -264,6 +317,7 @@ def build_establishment_geodataframe(df: pd.DataFrame) -> gpd.GeoDataFrame:
         filtered = df.loc[valid].copy()
         filtered[lambert_x] = x.loc[valid]
         filtered[lambert_y] = y.loc[valid]
+        filtered["employment_estimate"] = employment_estimates.loc[valid]
         return gpd.GeoDataFrame(
             filtered,
             geometry=gpd.points_from_xy(filtered[lambert_x], filtered[lambert_y]),
@@ -400,19 +454,48 @@ def ensure_cell_id(grid: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
 
 def aggregate_points_to_grid(points: gpd.GeoDataFrame, grid: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
     grid_metric = ensure_cell_id(grid.to_crs(LAMBERT_93))
+    # Usuń kolumny, które będą nadpisane przez agregację, aby uniknąć konfliktów _x/_y przy merge
+    cols_to_drop = [c for c in ("workplace_count", "employment", "workplace_density_km2") if c in grid_metric.columns]
+    if cols_to_drop:
+        grid_metric = grid_metric.drop(columns=cols_to_drop)
     points_metric = points.to_crs(LAMBERT_93)
 
+    has_estimates = "employment_estimate" in points_metric.columns
+    cols_to_join = [c for c in points_metric.columns if c != "geometry"] + ["geometry"]
     joined = gpd.sjoin(
-        points_metric[[c for c in points_metric.columns if c != "geometry"] + ["geometry"]],
+        points_metric[cols_to_join],
         grid_metric[["cell_id", "geometry"]],
         how="inner",
         predicate="within",
     )
-    counts = joined.groupby("cell_id").size().rename("workplace_count")
 
-    result = grid_metric.merge(counts, on="cell_id", how="left")
+    # Liczba podmiotów (zachowane dla zgodności wstecznej i jako diagnostyka)
+    counts = joined.groupby("cell_id").size().reset_index(name="workplace_count")
+
+    if has_estimates:
+        # Ważona suma etatów z trancheEffectifs: lepsza metodologicznie niż liczenie firm
+        emp_sum = (
+            joined.groupby("cell_id")["employment_estimate"]
+            .sum()
+            .reset_index(name="employment")
+        )
+        agg = counts.merge(emp_sum, on="cell_id", how="left")
+    else:
+        # Fallback: brak trancheEffectifs — traktuj każdy podmiot jako 1 etat
+        print("  [aggregate] Brak kolumny employment_estimate — fallback: workplace_count = employment")
+        agg = counts.copy()
+        agg["employment"] = agg["workplace_count"].astype(float)
+
+    print(f"  [aggregate] agg columns: {list(agg.columns)}, rows: {len(agg)}")
+
+    result = grid_metric.merge(agg, on="cell_id", how="left")
     result["workplace_count"] = result["workplace_count"].fillna(0).astype(int)
-    result["workplace_density_km2"] = result["workplace_count"].astype(float)
+    if "employment" in result.columns:
+        result["employment"] = result["employment"].fillna(0.0)
+    else:
+        print(f"  [aggregate] WARN: 'employment' not in result after merge — columns: {list(result.columns)}")
+        result["employment"] = 0.0
+    result["workplace_density_km2"] = result["employment"]
     return result
 
 
@@ -427,15 +510,15 @@ def build_folium_map(grid: gpd.GeoDataFrame, output_html: Path) -> None:
 
     folium.Choropleth(
         geo_data=grid_wgs84.to_json(),
-        data=grid_wgs84[["cell_id", "workplace_count"]],
-        columns=["cell_id", "workplace_count"],
+        data=grid_wgs84[["cell_id", "employment"]],
+        columns=["cell_id", "employment"],
         key_on="feature.properties.cell_id",
         fill_color="YlOrRd",
         fill_opacity=0.75,
         line_opacity=0.2,
         line_weight=0.5,
         nan_fill_color="#f2f2f2",
-        legend_name="Workplaces per 1 km grid cell",
+        legend_name="Estimated employment (FTE midpoint) per 1 km grid cell",
     ).add_to(base_map)
 
     tooltip = folium.GeoJson(
@@ -446,8 +529,8 @@ def build_folium_map(grid: gpd.GeoDataFrame, output_html: Path) -> None:
             "fillOpacity": 0.0,
         },
         tooltip=folium.GeoJsonTooltip(
-            fields=["cell_id", "workplace_count", "workplace_density_km2"],
-            aliases=["Cell ID", "Workplace count", "Density per km2"],
+            fields=["cell_id", "workplace_count", "employment"],
+            aliases=["Cell ID", "Establishments (count)", "Employment estimate (FTE)"],
             localize=True,
             sticky=False,
         ),

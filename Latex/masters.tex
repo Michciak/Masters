@@ -40,6 +40,7 @@
 \usepackage{tabularx}
 \usepackage{array}
 \usepackage{multirow}
+\usepackage{makecell}
 
 % \usepackage{url}
 
@@ -381,20 +382,20 @@ Fundamentem każdej rzetelnej analizy realizowanej w systemach informacji geogra
 
 \subsection{Unifikacja do siatki analitycznej}
 
-Aby zneutralizować wpływ zjawiska MAUP i zagwarantować matematyczną porównywalność ośrodków badawczych, zrezygnowano z układu granic administracyjnych na rzecz nałożenia na każdy obszar regularnej siatki wektorowej o stałej rozdzielczości 1~km $\times$ 1~km. Wymiar ten stanowi optymalny kompromis badawczy. Gwarantuje on odpowiednią szczegółowość w mikroskali, co jest niezbędne do modelowania pieszej składowej w łańcuchu podróży, a jednocześnie utrzymuje złożoność obliczeniową deterministycznych silników trasujących na wykonalnym poziomie przy wyznaczaniu macierzy aglomeracyjnych. Całkowity zasięg przestrzenny wygenerowanych siatek dopasowano ściśle do charakterystyki poszczególnych ośrodków. W celu umożliwienia zarówno precyzyjnej analizy rdzeni miejskich, jak i ujęcia szerszego kontekstu metropolitalnego, dla każdego ośrodka zdefiniowano dwa równoległe warianty przestrzenne: \textbf{wariant rdzeniowy} (Core) oraz \textbf{wariant rozszerzony} (Extended).
+Aby zneutralizować wpływ zjawiska MAUP i zagwarantować matematyczną porównywalność ośrodków badawczych, zrezygnowano z układu granic administracyjnych na rzecz nałożenia na każdy obszar regularnej siatki wektorowej o stałej rozdzielczości 1~km $\times$ 1~km. Wymiar ten stanowi optymalny kompromis badawczy. Gwarantuje on odpowiednią szczegółowość w mikroskali, co jest niezbędne do modelowania pieszej składowej w łańcuchu podróży, a jednocześnie utrzymuje złożoność obliczeniową deterministycznych silników trasujących na wykonalnym poziomie przy wyznaczaniu macierzy aglomeracyjnych. Całkowity zasięg przestrzenny wygenerowanych siatek dopasowano ściśle do charakterystyki poszczególnych ośrodków. W celu umożliwienia zarówno precyzyjnej analizy rdzeni miejskich, jak i ujęcia szerszego kontekstu metropolitalnego, dla każdego ośrodka zdefiniowano dwa równoległe warianty przestrzenne: wariant rdzeniowy (Core) oraz wariant rozszerzony (Extended).
 
-\paragraph{Wariant rdzeniowy (Core)} obejmuje ścisłe granice administracyjne metropolitalnego rdzenia każdego ośrodka, bez dodatkowego filtru bliskości przystanków:
+\paragraph{Wariant rdzeniowy} (Core)\newline Obejmuje ścisłe granice administracyjne metropolitalnego rdzenia każdego ośrodka.
 \begin{itemize}
-\item[]\textbf{Dublin Core} --- delimitacja oparta na granicach Dublin City (Dublin City Council), obejmująca obszar $\sim$115~km$^2$. Zasięg ten wyklucza hrabstwa Fingal, South Dublin oraz Dún Laoghaire-Rathdown.
-\item[]\textbf{Paryż Core} --- 12 terytoriów EPT wchodzących w skład Métropole du Grand Paris, łącznie $\sim$814~km$^2$, w tym Paryż i bezpośrednie gminy peryferyjne.
-\item[]\textbf{Warszawa Core} --- Miasto Stołeczne Warszawa w ścisłych granicach administracyjnych, $\sim$517~km$^2$.
+\item[]\textbf{Dublin}\newline Delimitacja oparta na granicach Dublin City (Dublin City Council), obejmująca obszar $\sim$115~km$^2$. Zasięg ten wyklucza hrabstwa Fingal, South Dublin oraz Dún Laoghaire-Rathdown.
+\item[]\textbf{Paryż}\newline Obejmuje 12 terytoriów EPT wchodzących w skład Métropole du Grand Paris, łącznie $\sim$814~km$^2$, w tym Paryż i bezpośrednie gminy peryferyjne.
+\item[]\textbf{Warszawa}\newline Miasto Stołeczne Warszawa w ścisłych granicach administracyjnych, $\sim$517~km$^2$.
 \end{itemize}
 
-\paragraph{Wariant rozszerzony (Extended)} powiększa zasięg o gminy/powiaty funkcjonalnie powiązane z rdzeniem. Zastosowano filtr bliskości przystanków ($\leq$3~000~m) eliminujący komórki pozbawione obsługi transportowej:
+\paragraph{Wariant rozszerzony} (Extended)\newline Powiększa zasięg o gminy/powiaty funkcjonalnie powiązane z rdzeniem. Ze względu na czas potrzebny do wykonania obliczeń zastosowano filtr bliskości przystanków ($\leq$3~000~m) eliminujący komórki pozbawione obsługi transportowej. Jest to ograniczenie, które jest konieczne do odnotowania w kontekście przeprowadzanych analiz.
 \begin{itemize}
-\item[]\textbf{Dublin Extended} --- hrabstwo Dublin (County Dublin), $\sim$921~km$^2$, obejmuje Dublin City oraz Fingal, South Dublin i Dún Laoghaire-Rathdown.
-\item[]\textbf{Paryż Extended} --- pełny region Île-de-France.
-\item[]\textbf{Warszawa Extended} --- Miasto Stołeczne Warszawa oraz 7 sąsiednich powiatów (zachodni, piaseczyński, pruszkowski, legionowski, wołomiński, miński, otwocki).
+\item[]\textbf{Dublin}\newline Hrabstwo Dublin (County Dublin), obejmuje Dublin City oraz Fingal, South Dublin i Dún Laoghaire-Rathdown.
+\item[]\textbf{Paryż}\newline Pełny region Île-de-France, obejmujący miasto Paryż oraz 7 otaczających go departamentów: Hauts-de-Seine, Seine-Saint-Denis, Val-de-Marne (tworzące tzw. Małą Koronę – Petite Couronne) oraz Seine-et-Marne, Yvelines, Essonne i Val-d'Oise (tworzące tzw. Wielką Koronę – Grande Couronne).
+\item[]\textbf{Warszawa}\newline Miasto Stołeczne Warszawa oraz 7 sąsiednich powiatów (zachodni, piaseczyński, pruszkowski, legionowski, wołomiński, miński, otwocki).
 \end{itemize}
 
 % Placeholder mapy z reprezentacją siatek
@@ -413,37 +414,46 @@ Rygorystyczna ewaluacja komponentu transportowego (odległości fizyczne, zasię
 
 Uzyskane centroidy komórek pełnią w strukturze modelu rolę wirtualnych węzłów popytu i podaży, stanowiąc punkty źródłowe (O) i docelowe (D) dla stochastycznych algorytmów optymalizacyjnych, na ich podstawie wyznaczana jest macierz czasu podróży, a liczba relacji OD wynika wprost z iloczynu liczby zakwalifikowanych komórek po stronie źródeł i celów. W wariancie rozszerzonym (Extended) do analizy włączono wyłącznie komórki, których centroid leży w odległości nie większej niż 3~000~m od najbliższego przystanku sieci transportu zbiorowego. Filtr ten eliminuje strefy pozbawione obsługi sieciowej, dla których silnik routingowy zwróciłby wyłącznie wartości puste lub czasy zdominowane przez składnik pieszy. W wariancie rdzeniowym (Core) filtr bliskości nie jest stosowany --- wszystkie komórki w granicach rdzenia są uwzględnione.
 
-\begin{table}[ht]
+\begin{table}[H]
     \centering
     \small
     \renewcommand{\arraystretch}{1.4}
     \setlength{\tabcolsep}{4pt}
     
-    \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.2cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+    % Zmiana zachowania kolumn X na wyśrodkowane w pionie
+    \renewcommand{\tabularxcolumn}[1]{m{#1}}
+    
+    % Zmiana p{...} na m{...} w pierwszej kolumnie
+    \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}m{3.2cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
     
      & \multicolumn{2}{c|}{\textbf{Paryż}} & \multicolumn{2}{c|}{\textbf{Warszawa}} & \multicolumn{2}{c|}{\textbf{Dublin}} \\ \cline{2-7}
      & \textit{Core} & \textit{Extended} & \textit{Core} & \textit{Extended} & \textit{Core} & \textit{Extended} \\ \hline
 
     \textbf{Analizowany Obszar} & Métropole du Grand Paris & Île-de-France & Miasto Stołeczne Warszawa & MSW + 7~powiatów & Dublin City & Hrabstwo Dublin \\ \hline
 
-    \textbf{Powierzchnia} & $\sim$814~km$^2$ & ---~km$^2$ & $\sim$517~km$^2$ & ---~km$^2$ & $\sim$115~km$^2$ & $\sim$921~km$^2$ \\ \hline
+    \textbf{Powierzchnia} & $\sim$814~km$^2$ & $\sim$12~000~km$^2$ & $\sim$517~km$^2$ & $\sim$5~043~km$^2$ & $\sim$115~km$^2$ & $\sim$921~km$^2$ \\ \hline
     
     \textbf{Filtr bliskości przystanków} & brak & 3~000~m & brak & 3~000~m & brak & 3~000~m \\ \hline
     
-    \textbf{Rozmiar Matrycy Analitycznej} & 814 kom. & 12\,018 kom. & 515 kom. & 2\,996 kom. & 110\,/\,129 kom. & 739\,/\,830 kom. \\ \hline
+    \textbf{Rozmiar Matrycy Analitycznej}$^{\text{(1)}}$ & 814 kom. & 12\,018 kom. & 515 kom. & 2\,996 kom. & 110\,/\,129 kom. & 739\,/\,830 kom. \\ \hline
     
     \textbf{Wolumen Par O-D} (Przepływy) & 662\,596 & 144\,432\,324 & 265\,225 & 8\,976\,016 & 14\,190 & 613\,370 \\ \hline
     
-    \textbf{Metryczny Układ Współrzędnych} & \multicolumn{2}{c|}{EPSG:2154 \newline (Lambert-93)} & \multicolumn{2}{c|}{EPSG:2180 \newline (Polska CS92)} & \multicolumn{2}{c|}{EPSG:2157 \newline (ITM)} \\ \hline
+    % Tutaj zwykłe makecell bez [t], bo reszta tabeli jest już wyśrodkowana w pionie
+    \textbf{Metryczny Układ Współrzędnych} & \multicolumn{2}{c|}{\makecell{EPSG:2154 \\ (Lambert-93)}} & \multicolumn{2}{c|}{\makecell{EPSG:2180 \\ (Polska CS92)}} & \multicolumn{2}{c|}{\makecell{EPSG:2157 \\ (ITM)}} \\ \hline
     
     \textbf{Siatka Badawcza} \newline (Rozdzielczość) & \multicolumn{6}{c|}{Jednolita 1~km $\times$ 1~km} \\ \hline
     \end{tabularx}
     
+    \vspace{3pt}
+    
+    \raggedright
+    \noindent\footnotesize (1) We wszystkich ośrodkach strefy emisyjne ($O_i$) wyznaczono na podstawie kryterium zamieszkania ($pop > 0$), natomiast strefy docelowe ($D_j$) --- na podstawie kryterium zatrudnienia ($employment > 0$). W Paryżu i Warszawie oba zbiory pokrywają się przestrzennie, natomiast dla Dublina rozmiar matrycy podano w formacie O\,/\,D, gdyż dane SAPS ujawniają obecność stref wyłącznie przemysłowych lub biurowych, nieposiadających stałych mieszkańców --- stanowią one cele podróży, lecz nie generują popytu emisyjnego.\normalsize
+
+    \centering
     \caption{Parametry siatek analitycznych}
     \label{tab:parametry_analizy}
 \end{table}
-
-\noindent\footnotesize\textit{We wszystkich ośrodkach strefy emisyjne ($O_i$) wyznaczono na podstawie kryterium zamieszkania ($pop > 0$), natomiast strefy docelowe ($D_j$) --- na podstawie kryterium zatrudnienia ($employment > 0$). W Paryżu i Warszawie oba zbiory pokrywają się przestrzennie, natomiast dla Dublina rozmiar matrycy podano w formacie O\,/\,D, gdyż dane SAPS ujawniają obecność stref wyłącznie przemysłowych lub biurowych, nieposiadających stałych mieszkańców --- stanowią one cele podróży, lecz nie generują popytu emisyjnego.}\normalsize
 
 \bigskip
 

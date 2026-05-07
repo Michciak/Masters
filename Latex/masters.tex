@@ -413,20 +413,18 @@ Aby zneutralizować wpływ zjawiska MAUP i zagwarantować matematyczną porówny
     % 1. Warszawa (Góra)
     \begin{subfigure}[b]{\textwidth}
         \centering
-        \includegraphics[width=0.97\textwidth,keepaspectratio]{Latex/images/chapter3/warsaw_gtfs_full_network_precise_clipped}
-        \caption{Warszawa}
+        \includegraphics[width=0.968\textwidth,keepaspectratio]{Latex/images/chapter3/warsaw_gtfs_full_network_precise_clipped}
+        \caption{Warszawa} % Automatycznie przyjmie (a)
     \end{subfigure}
-    
-    % \vspace{3em} % Większy odstęp między rysunkami
     
     % 2. Dublin (Dół)
     \begin{subfigure}[b]{\textwidth}
+        \setcounter{subfigure}{2} % Ustawiamy licznik na 2, więc następny caption to (c)
         \centering
-        \includegraphics[width=0.65\textwidth,keepaspectratio]{Latex/images/chapter3/dublin_gtfs_full_network_precise_clipped}
-        \caption{Dublin}
+        \includegraphics[width=0.645\textwidth,keepaspectratio]{Latex/images/chapter3/dublin_gtfs_full_network_precise_clipped}
+        \caption{Dublin} % Wyświetli się jako (c)
     \end{subfigure}
     
-    % Zwróć uwagę: brak \caption na tej stronie!
 \end{figure}
 
 % ==========================================
@@ -439,26 +437,24 @@ Aby zneutralizować wpływ zjawiska MAUP i zagwarantować matematyczną porówny
     \vspace{-6em}
     % 3. Paryż Extended (Góra)
     \begin{subfigure}[b]{\textwidth}
+        \setcounter{subfigure}{1} % Cofamy licznik na 1, więc następny caption to (b)
         \centering
         \includegraphics[width=0.85\textwidth,keepaspectratio]{Latex/images/chapter3/paris_gtfs_full_network_precise_clipped}
-        % \caption{Paryż --- wariant Extended}
+        % \caption{Paryż --- wariant Extended} % Wyświetli się jako (b)
     \end{subfigure}
-    
-    % \vspace{3em} % Większy odstęp
     
     % 4. Paryż Core (Dół)
     \begin{subfigure}[b]{\textwidth}
+        \setcounter{subfigure}{1} % Ustawiamy licznik na 3, więc następny caption to (d)
         \centering
         \includegraphics[width=0.65\textwidth,keepaspectratio]{Latex/images/chapter3/paris_core_gtfs_full_network_precise_clipped}
-        % \caption{Paryż --- wariant Core}
-        \caption{core}
+        \caption{Paryż --- wariant Core} % Wyświetli się jako (d)
     \end{subfigure}
     
     % Główny podpis dla obu stron ląduje tylko tutaj
     \caption{Siatka analityczna z~naniesioną siecią transportu zbiorowego z~podziałem na środki transportu dla analizowanych ośrodków. Ze względu na wysoką gęstość sieci, Paryż zaprezentowano osobno w~wariancie Extended i~Core. Granica administracyjna wariantu Core oznaczona czarną linią, wariantu Extended --- niebieską.}
     \label{fig:gtfs_networks}
 \end{figure}
-
 
 \subsubsection{Odwzorowania Kartograficzne}
 
@@ -522,7 +518,7 @@ Uzyskane centroidy komórek pełnią w strukturze modelu rolę wirtualnych węz�
 }
 
 
-\bigskip
+% \bigskip
 
 \section{Dekompozycja i Parametryzacja Danych Podażowych}
 
@@ -547,38 +543,46 @@ Mimo globalnej unifikacji formatu GTFS, jakość implementacji w poszczególnych
 \begin{itemize}
 \item[]\textbf{Dublin}\newline Ekosystem Dublina udostępniono na otwartej licencji CC BY 4.0. Cechował się on perfekcyjną architekturą tabel i obejmował bezprecedensowy horyzont ponad dwunastu miesięcy (od 16 kwietnia 2026 do 16 kwietnia 2027), pokrywając z zapasem zadeklarowaną dobę pomiarową.
 \item[]\textbf{Paryż}\newline Paryski zbiór dla Ile-de-France Mobilités, pozyskany 17 kwietnia 2026 r. na bazie "Licence Mobilités", liczył 14 tabel. Jego krytycznym brakiem informacyjnym była nieobecność wektorowych krzywych przebiegu linii, co wymusiło na algorytmach optymalizacyjnych rzutowanie tras na zewnętrzną sieć drogową (np. z OpenStreetMap), znacząco przedłużając generowanie grafów.
-\item[]\textbf{Warszawa}\newline Infrastruktura cyfrowa Warszawy odzwierciedlała strukturalne i historyczne podziały organizatorów transportu. Pakiet podażowy składał się z trzech niezależnych plików pobranych 17 kwietnia 2026 r. z archiwum ,,MKuran'': ZTM, WKD oraz Polskich Pociągów (Koleje Mazowieckie, PolRegio, ŁKA). Zjawisko nakładania się identyfikatorów zniwelowano autorską procedurą prefiksowania, która skutecznie usunęła konflikty indeksacyjne.
+\item[]\textbf{Warszawa}\newline Infrastruktura cyfrowa Warszawy odzwierciedlała strukturalne i historyczne podziały organizatorów transportu. Pakiet podażowy składał się z trzech niezależnych plików pobranych 17 kwietnia 2026 r. z archiwum ,,MKuran'': ZTM, WKD oraz Polskich Pociągów (Koleje Mazowieckie, PolRegio, ŁKA). 
 \end{itemize}
 
-\begin{table}[H]
-  \centering
-  \scriptsize
-  \renewcommand{\arraystretch}{1.35}
-  \setlength{\tabcolsep}{3.2pt}
+\afterpage{
+\begin{table}
+    \centering
+    \makebox[\textwidth][c]{
+    \begin{minipage}{1.1\textwidth}
+        \centering
+        \scriptsize
+        \renewcommand{\arraystretch}{1.8}
+        \setlength{\tabcolsep}{4pt} % Zwiększono nieznacznie dzięki nowej szerokości
+        
+        % KLUCZOWE: Podwójny znak hash chroniący przed błędem \afterpage
+        \renewcommand{\tabularxcolumn}[1]{m{##1}}
 
-  \renewcommand{\tabularxcolumn}[1]{m{#1}}
+        \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}m{2.3cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X}
 
-  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}m{2.9cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X}
+        \multirow{2}{2.3cm}{\textbf{Środek transportu}} & \multicolumn{3}{c|}{\textbf{Warszawa}} & \multicolumn{3}{c|}{\textbf{Paryż}} & \multicolumn{3}{c}{\textbf{Dublin}} \\ \cline{2-10}
+        
+         & Linie & \makecell{Przy-\\stanki} & \makecell{Stop\\times} & Linie & \makecell{Przy-\\stanki} & \makecell{Stop\\times} & Linie & \makecell{Przy-\\stanki} & \makecell{Stop\\times} \\ \hline
 
-  \textbf{Środek transportu} & \multicolumn{3}{c|}{\textbf{Warszawa}} & \multicolumn{3}{c|}{\textbf{Paryż}} & \multicolumn{3}{c}{\textbf{Dublin}} \\ \cline{2-10}
-   & \textit{Linie} & \textit{Przystanki} & \textit{Stop\_times} & \textit{Linie} & \textit{Przystanki} & \textit{Stop\_times} & \textit{Linie} & \textit{Przystanki} & \textit{Stop\_times} \\ \hline
+        \textbf{Autobus} & 303 & 6\,169 & 6\,301\,695 & 1\,949 & 33\,809 & 9\,988\,956 & 200 & 4\,624 & 4\,155\,851 \\ \hline
+        \textbf{Tramwaj} & 29 & 630 & 1\,708\,949 & 17 & 557 & 340\,542 & 2 & 128 & 60\,302 \\ \hline
+        \textbf{Metro} & 2 & 39 & 312 & 16 & 805 & 1\,415\,034 & 0 & 0 & 0 \\ \hline
+        \textbf{Kolej podmiejska} & 45 & 203 & 127\,013 & 24 & 473 & 704\,523 & 14 & 49 & 31\,841 \\ \hline
+        \textbf{Razem$^\text{(1)}$} & 379 & 6\,995 & 8\,137\,969 & 2\,008 & 53\,556 & 12\,493\,755 & 216 & 4\,801 & 4\,247\,994 \\ \hline
+        \end{tabularx}
 
-  \textbf{Autobus} & 303 & 6\,169 & 6\,301\,695 & 1\,949 & 33\,809 & 9\,988\,956 & 200 & 4\,624 & 4\,155\,851 \\ \hline
-  \textbf{Tramwaj} & 29 & 630 & 1\,708\,949 & 17 & 557 & 340\,542 & 2 & 128 & 60\,302 \\ \hline
-  \textbf{Metro} & 2 & 39 & 312 & 16 & 805 & 1\,415\,034 & 0 & 0 & 0 \\ \hline
-  \textbf{Kolej podmiejska} & 45 & 203 & 127\,013 & 24 & 473 & 704\,523 & 14 & 49 & 31\,841 \\ \hline
-  \textbf{Razem} & 379 & 6\,995 & 8\,137\,969 & 2\,008 & 53\,556 & 12\,493\,755 & 216 & 4\,801 & 4\,247\,994 \\ \hline
-  \end{tabularx}
+        \vspace{6pt}
 
-  \vspace{3pt}
-
-  \raggedright
-  \noindent\footnotesize Przystanki raportowane w~podziale modalnym oznaczają unikalne przystanki obsłużone przez co~najmniej jeden kurs danego środka transportu; wartości między trybami nie sumują się addytywnie z~uwagi na współdzielenie tych samych punktów zatrzymań przez różne gałęzie transportu. \normalsize
-
-  \centering
-  \caption{Struktura danych GTFS według miasta i~środka transportu}
-  \label{tab:gtfs_modal_summary}
+        \raggedright
+        \noindent\footnotesize (1) Przystanki raportowane w~podziale modalnym oznaczają unikalne przystanki obsłużone przez co~najmniej jeden kurs danego środka transportu; wartości między trybami nie sumują się addytywnie z~uwagi na współdzielenie tych samych punktów zatrzymań przez różne gałęzie transportu. \normalsize
+    \end{minipage}
+    }
+    \vspace{10pt}
+    \caption{Struktura danych GTFS według miasta i~środka transportu}
+    \label{tab:gtfs_modal_summary}
 \end{table}
+}
 
 \begin{figure}[p]
   \makebox[\textwidth][c]{%
@@ -698,6 +702,7 @@ Znacznie trudniejszym problemem metodologicznym okazało się przestrzenne wyizo
   \label{fig:emp_density}
 \end{figure}
 
+\clearpage 
 
 \section{Stratyfikacja Socjoekonomiczna}
 
@@ -742,6 +747,8 @@ Operacja ta ma za zadanie chronić ostateczny współczynnik zamożności przed 
   \caption{Przestrzenny rozkład wskaźnika statusu socjoekonomicznego (SES) w~siatce 1~km~$\times$~1~km. Wskaźnik dla Warszawy wyznaczono wyłącznie w~wariancie Core.}
   \label{fig:ses_maps}
 \end{figure}
+
+\clearpage
 
 \section{Ograniczenia Metodologiczne i Podsumowanie}
 

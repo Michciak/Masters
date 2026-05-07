@@ -550,7 +550,35 @@ Mimo globalnej unifikacji formatu GTFS, jakość implementacji w poszczególnych
 \item[]\textbf{Warszawa}\newline Infrastruktura cyfrowa Warszawy odzwierciedlała strukturalne i historyczne podziały organizatorów transportu. Pakiet podażowy składał się z trzech niezależnych plików pobranych 17 kwietnia 2026 r. z archiwum ,,MKuran'': ZTM, WKD oraz Polskich Pociągów (Koleje Mazowieckie, PolRegio, ŁKA). Zjawisko nakładania się identyfikatorów zniwelowano autorską procedurą prefiksowania, która skutecznie usunęła konflikty indeksacyjne.
 \end{itemize}
 
-% TODO: Tabela --- Charakterystyka zasilających baz GTFS dla każdego ośrodka: liczba linii, przystanków oraz rekordów stop\_times z podziałem na środek transportu (autobus, tramwaj, metro, kolej podmiejska, prom) i miasto (Paryż, Warszawa, Dublin).
+\begin{table}[H]
+  \centering
+  \scriptsize
+  \renewcommand{\arraystretch}{1.35}
+  \setlength{\tabcolsep}{3.2pt}
+
+  \renewcommand{\tabularxcolumn}[1]{m{#1}}
+
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}m{2.9cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X}
+
+  \textbf{Środek transportu} & \multicolumn{3}{c|}{\textbf{Warszawa}} & \multicolumn{3}{c|}{\textbf{Paryż}} & \multicolumn{3}{c}{\textbf{Dublin}} \\ \cline{2-10}
+   & \textit{Linie} & \textit{Przystanki} & \textit{Stop\_times} & \textit{Linie} & \textit{Przystanki} & \textit{Stop\_times} & \textit{Linie} & \textit{Przystanki} & \textit{Stop\_times} \\ \hline
+
+  \textbf{Autobus} & 303 & 6\,169 & 6\,301\,695 & 1\,949 & 33\,809 & 9\,988\,956 & 200 & 4\,624 & 4\,155\,851 \\ \hline
+  \textbf{Tramwaj} & 29 & 630 & 1\,708\,949 & 17 & 557 & 340\,542 & 2 & 128 & 60\,302 \\ \hline
+  \textbf{Metro} & 2 & 39 & 312 & 16 & 805 & 1\,415\,034 & 0 & 0 & 0 \\ \hline
+  \textbf{Kolej podmiejska} & 45 & 203 & 127\,013 & 24 & 473 & 704\,523 & 14 & 49 & 31\,841 \\ \hline
+  \textbf{Razem} & 379 & 6\,995 & 8\,137\,969 & 2\,008 & 53\,556 & 12\,493\,755 & 216 & 4\,801 & 4\,247\,994 \\ \hline
+  \end{tabularx}
+
+  \vspace{3pt}
+
+  \raggedright
+  \noindent\footnotesize Przystanki raportowane w~podziale modalnym oznaczają unikalne przystanki obsłużone przez co~najmniej jeden kurs danego środka transportu; wartości między trybami nie sumują się addytywnie z~uwagi na współdzielenie tych samych punktów zatrzymań przez różne gałęzie transportu. \normalsize
+
+  \centering
+  \caption{Struktura danych GTFS według miasta i~środka transportu}
+  \label{tab:gtfs_modal_summary}
+\end{table}
 
 \begin{figure}[p]
   \makebox[\textwidth][c]{%

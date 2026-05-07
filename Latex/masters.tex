@@ -403,25 +403,25 @@ Aby zneutralizować wpływ zjawiska MAUP i zagwarantować matematyczną porówny
   \centering
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/warsaw_gtfs_full_network_precise_clipped}
+    \includegraphics[height=0.24\textheight,keepaspectratio]{Latex/images/chapter3/warsaw_gtfs_full_network_precise_clipped}
     \caption{Warszawa}
   \end{subfigure}\hfill
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/dublin_gtfs_full_network_precise_clipped}
+    \includegraphics[height=0.24\textheight,keepaspectratio]{Latex/images/chapter3/dublin_gtfs_full_network_precise_clipped}
     \caption{Dublin}
   \end{subfigure}
 
-  \medskip
+  \vspace{0.8em}
 
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/paris_gtfs_full_network_precise_clipped}
+    \includegraphics[height=0.24\textheight,keepaspectratio]{Latex/images/chapter3/paris_gtfs_full_network_precise_clipped}
     \caption{Paryż --- wariant Extended}
   \end{subfigure}\hfill
   \begin{subfigure}[b]{0.48\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/paris_core_gtfs_full_network_precise_clipped}
+    \includegraphics[height=0.24\textheight,keepaspectratio]{Latex/images/chapter3/paris_core_gtfs_full_network_precise_clipped}
     \caption{Paryż --- wariant Core}
   \end{subfigure}
   \caption{Siatka analityczna z~naniesioną siecią transportu zbiorowego z~podziałem na środki transportu dla analizowanych ośrodków. Ze względu na wysoką gęstość sieci, Paryż zaprezentowano osobno w~wariancie Extended i~Core. Granica administracyjna wariantu Core oznaczona czarną linią, wariantu Extended --- niebieską.}
@@ -516,24 +516,30 @@ Mimo globalnej unifikacji formatu GTFS, jakość implementacji w poszczególnych
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[b]{0.47\textwidth}
+  \begin{minipage}[t]{0.58\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/1.12_stop_density_warsaw}
-    \caption{Warszawa}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.47\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/1.12_stop_density_paris}
-    \caption{Paryż}
-  \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.12_stop_density_warsaw}
+      \caption{Warszawa}
+    \end{subfigure}
 
-  \medskip
+    \vspace{0.7em}
 
-  \begin{subfigure}[b]{0.56\textwidth}
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.12_stop_density_paris}
+      \caption{Paryż}
+    \end{subfigure}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.40\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/1.12_stop_density_dublin}
-    \caption{Dublin}
-  \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.12_stop_density_dublin}
+      \caption{Dublin}
+    \end{subfigure}
+  \end{minipage}
   \caption{Gęstość przystanków transportu zbiorowego (siatka 1~km~$\times$~1~km). Granica wariantu Core oznaczona czarną linią, wariantu Extended --- niebieską.}
   \label{fig:stop_density}
 \end{figure}
@@ -548,24 +554,30 @@ Ludność \textit{De Jure} determinuje początkowy potencjał emisyjny, czyli st
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[b]{0.47\textwidth}
+  \begin{minipage}[t]{0.58\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/1.2_pop_density_warsaw}
-    \caption{Warszawa}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.47\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/1.2_pop_density_paris}
-    \caption{Paryż}
-  \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.2_pop_density_warsaw}
+      \caption{Warszawa}
+    \end{subfigure}
 
-  \medskip
+    \vspace{0.7em}
 
-  \begin{subfigure}[b]{0.56\textwidth}
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.2_pop_density_paris}
+      \caption{Paryż}
+    \end{subfigure}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.40\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/1.2_pop_density_dublin}
-    \caption{Dublin}
-  \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.2_pop_density_dublin}
+      \caption{Dublin}
+    \end{subfigure}
+  \end{minipage}
   \caption{Gęstość zaludnienia w~siatce 1~km~$\times$~1~km. Granica wariantu Core oznaczona czarną linią, wariantu Extended --- niebieską.}
   \label{fig:pop_density}
 \end{figure}
@@ -584,24 +596,30 @@ Znacznie trudniejszym problemem metodologicznym okazało się przestrzenne wyizo
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[b]{0.47\textwidth}
+  \begin{minipage}[t]{0.58\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/1.3_emp_density_warsaw}
-    \caption{Warszawa (tylko rdzeń)}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.47\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/1.3_emp_density_paris}
-    \caption{Paryż}
-  \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.3_emp_density_warsaw}
+      \caption{Warszawa (tylko rdzeń)}
+    \end{subfigure}
 
-  \medskip
+    \vspace{0.7em}
 
-  \begin{subfigure}[b]{0.56\textwidth}
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.3_emp_density_paris}
+      \caption{Paryż}
+    \end{subfigure}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.40\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/1.3_emp_density_dublin}
-    \caption{Dublin}
-  \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.3_emp_density_dublin}
+      \caption{Dublin}
+    \end{subfigure}
+  \end{minipage}
   \caption{Gęstość szacowanego zatrudnienia w~siatce 1~km~$\times$~1~km. Dane dla Warszawy dostępne wyłącznie w~wariancie Core (wariant Extended nie dysponuje warstwą zatrudnienia dla powiatów ościennych).}
   \label{fig:emp_density}
 \end{figure}
@@ -620,24 +638,30 @@ Operacja ta ma za zadanie chronić ostateczny współczynnik zamożności przed 
 
 \begin{figure}[H]
   \centering
-  \begin{subfigure}[b]{0.47\textwidth}
+  \begin{minipage}[t]{0.58\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/1.14_ses_map_warsaw}
-    \caption{Warszawa (proxy cen nieruchomości)}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.47\textwidth}
-    \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/1.14_ses_map_paris}
-    \caption{Paryż (mediana dochodu INSEE)}
-  \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.14_ses_map_warsaw}
+      \caption{Warszawa (proxy cen nieruchomości)}
+    \end{subfigure}
 
-  \medskip
+    \vspace{0.7em}
 
-  \begin{subfigure}[b]{0.56\textwidth}
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.14_ses_map_paris}
+      \caption{Paryż (mediana dochodu INSEE)}
+    \end{subfigure}
+  \end{minipage}\hfill
+  \begin{minipage}[t]{0.40\textwidth}
     \centering
-    \includegraphics[width=\linewidth]{Latex/images/chapter3/1.14_ses_map_dublin}
-    \caption{Dublin (HP Deprivation Index)}
-  \end{subfigure}
+    \begin{subfigure}[b]{\linewidth}
+      \centering
+      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.14_ses_map_dublin}
+      \caption{Dublin (HP Deprivation Index)}
+    \end{subfigure}
+  \end{minipage}
   \caption{Przestrzenny rozkład wskaźnika statusu socjoekonomicznego (SES) w~siatce 1~km~$\times$~1~km. Wskaźnik dla Warszawy wyznaczono wyłącznie w~wariancie Core.}
   \label{fig:ses_maps}
 \end{figure}

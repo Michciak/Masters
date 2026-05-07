@@ -42,6 +42,9 @@
 \usepackage{multirow}
 \usepackage{makecell}
 \usepackage{subcaption}
+\usepackage{algorithm2e}
+
+\usepackage{afterpage}
 
 % \usepackage{url}
 
@@ -399,34 +402,63 @@ Aby zneutralizować wpływ zjawiska MAUP i zagwarantować matematyczną porówny
 \item[]\textbf{Warszawa}\newline Miasto Stołeczne Warszawa oraz 7 sąsiednich powiatów (zachodni, piaseczyński, pruszkowski, legionowski, wołomiński, miński, otwocki).
 \end{itemize}
 
-\begin{figure}[H]
-  \centering
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[height=0.24\textheight,keepaspectratio]{Latex/images/chapter3/warsaw_gtfs_full_network_precise_clipped}
-    \caption{Warszawa}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[height=0.24\textheight,keepaspectratio]{Latex/images/chapter3/dublin_gtfs_full_network_precise_clipped}
-    \caption{Dublin}
-  \end{subfigure}
 
-  \vspace{0.8em}
+% ==========================================
+% CZĘŚĆ 1: Strona pierwsza (Warszawa i Dublin)
+% ==========================================
+\begin{figure}[p]
+    \centering
 
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[height=0.24\textheight,keepaspectratio]{Latex/images/chapter3/paris_gtfs_full_network_precise_clipped}
-    \caption{Paryż --- wariant Extended}
-  \end{subfigure}\hfill
-  \begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[height=0.24\textheight,keepaspectratio]{Latex/images/chapter3/paris_core_gtfs_full_network_precise_clipped}
-    \caption{Paryż --- wariant Core}
-  \end{subfigure}
-  \caption{Siatka analityczna z~naniesioną siecią transportu zbiorowego z~podziałem na środki transportu dla analizowanych ośrodków. Ze względu na wysoką gęstość sieci, Paryż zaprezentowano osobno w~wariancie Extended i~Core. Granica administracyjna wariantu Core oznaczona czarną linią, wariantu Extended --- niebieską.}
-  \label{fig:gtfs_networks}
+    \vspace{-6em}
+    % 1. Warszawa (Góra)
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=0.97\textwidth,keepaspectratio]{Latex/images/chapter3/warsaw_gtfs_full_network_precise_clipped}
+        \caption{Warszawa}
+    \end{subfigure}
+    
+    % \vspace{3em} % Większy odstęp między rysunkami
+    
+    % 2. Dublin (Dół)
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=0.65\textwidth,keepaspectratio]{Latex/images/chapter3/dublin_gtfs_full_network_precise_clipped}
+        \caption{Dublin}
+    \end{subfigure}
+    
+    % Zwróć uwagę: brak \caption na tej stronie!
 \end{figure}
+
+% ==========================================
+% CZĘŚĆ 2: Strona druga (Paryż)
+% ==========================================
+\begin{figure}[p]
+    \ContinuedFloat % KLUCZOWE: Mówi LaTeXowi, że to kontynuacja poprzedniego rysunku!
+    \centering
+
+    \vspace{-6em}
+    % 3. Paryż Extended (Góra)
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=0.85\textwidth,keepaspectratio]{Latex/images/chapter3/paris_gtfs_full_network_precise_clipped}
+        % \caption{Paryż --- wariant Extended}
+    \end{subfigure}
+    
+    % \vspace{3em} % Większy odstęp
+    
+    % 4. Paryż Core (Dół)
+    \begin{subfigure}[b]{\textwidth}
+        \centering
+        \includegraphics[width=0.65\textwidth,keepaspectratio]{Latex/images/chapter3/paris_core_gtfs_full_network_precise_clipped}
+        % \caption{Paryż --- wariant Core}
+        \caption{core}
+    \end{subfigure}
+    
+    % Główny podpis dla obu stron ląduje tylko tutaj
+    \caption{Siatka analityczna z~naniesioną siecią transportu zbiorowego z~podziałem na środki transportu dla analizowanych ośrodków. Ze względu na wysoką gęstość sieci, Paryż zaprezentowano osobno w~wariancie Extended i~Core. Granica administracyjna wariantu Core oznaczona czarną linią, wariantu Extended --- niebieską.}
+    \label{fig:gtfs_networks}
+\end{figure}
+
 
 \subsubsection{Odwzorowania Kartograficzne}
 
@@ -438,51 +470,57 @@ Rygorystyczna ewaluacja komponentu transportowego (odległości fizyczne, zasię
 \item[]\textbf{Warszawa}\newline Analizy na obszarze Warszawy przeprowadzono w polskim systemie legislacyjnym EPSG:2180 (ETRS89 / Polska CS92). Pozwala to na dokładne nakładanie na siebie struktur takich jak działki ewidencyjne czy obrysy geometryczne budynków.
 \end{itemize}
 
-\subsubsection{Budowa Macierzy Czasu Podróży i Uzupełnianie Brakujących Par OD}
+\subsection{Budowa Macierzy Czasu Podróży i Uzupełnianie Brakujących Par~O-D}
 
 Uzyskane centroidy komórek pełnią w strukturze modelu rolę wirtualnych węzłów popytu i podaży, stanowiąc punkty źródłowe (O) i docelowe (D) dla stochastycznych algorytmów optymalizacyjnych, na ich podstawie wyznaczana jest macierz czasu podróży, a liczba relacji O-D wynika wprost z iloczynu liczby zakwalifikowanych komórek po stronie źródeł i celów. W obu wariantach analizy (Core i Extended) do wyznaczenia macierzy czasu podróży zastosowano zunifikowaną logikę filtrowania: tylko komórki, których centroid leży w odległości nie większej niż 3~000~m od przystanku sieci transportu zbiorowego, są włączane do obliczeń (wariant Extended); komórki w wariancie rdzeniowym (Core) nie podlegają filtrowi bliskości i są w całości uwzględniane w granicach administracyjnego rdzenia. Filtr ten eliminuje strefy pozbawione obsługi sieciowej, dla których silnik routingowy zwróciłby wyłącznie wartości puste lub czasy zdominowane przez składnik pieszy.
 % W przypadku macierzy o rozmiarze przekraczającym 4 miliony par O-D, zastosowano technikę przesyłania strumieniowego (ang. streaming fill), w której braki par OD uzupełniane są czasami marszu w pakietach (batch size: 24 wiersze pochodzenia), a wyniki zapisywane bezpośrednio do pliku parquet w celu minimalizacji zużycia pamięci operacyjnej.
 
-\begin{table}[H]
+\afterpage{
+\begin{table} % [p] sprawi, że tabela wyląduje na osobnej stronie, co przy afterpage jest optymalne
     \centering
-    \small
-    \renewcommand{\arraystretch}{1.4}
-    \setlength{\tabcolsep}{4pt}
-    
-    % Zmiana zachowania kolumn X na wyśrodkowane w pionie
-    \renewcommand{\tabularxcolumn}[1]{m{#1}}
-    
-    % Zmiana p{...} na m{...} w pierwszej kolumnie
-    \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}m{3.2cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
-    
-     & \multicolumn{2}{c|}{\textbf{Paryż}} & \multicolumn{2}{c|}{\textbf{Warszawa}} & \multicolumn{2}{c|}{\textbf{Dublin}} \\ \cline{2-7}
-     & \textit{Core} & \textit{Extended} & \textit{Core} & \textit{Extended} & \textit{Core} & \textit{Extended} \\ \hline
+    \makebox[\textwidth][c]{ % Centrowanie zawartości względem środka strony, nawet jeśli wystaje poza marginesy
+    \begin{minipage}{1.1\textwidth} % Ustalenie nowej, większej szerokości (np. 110% szerokości tekstu)
+        \centering
+        \small
+        \renewcommand{\arraystretch}{1.4}
+        \setlength{\tabcolsep}{5pt} % Można nieco zwiększyć odstępy między kolumnami przy szerszej tabeli
+        
+        \renewcommand{\tabularxcolumn}[1]{m{##1}}
+        
+        % Używamy 1.0\linewidth, aby tabularx wypełnił całą szerokość minipage (czyli nasze 1.1\textwidth)
+        \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}m{3.2cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+        
+         & \multicolumn{2}{c|}{\textbf{Paryż}} & \multicolumn{2}{c|}{\textbf{Warszawa}} & \multicolumn{2}{c|}{\textbf{Dublin}} \\ \cline{2-7}
+         & \textit{Core} & \textit{Extended} & \textit{Core} & \textit{Extended} & \textit{Core} & \textit{Extended} \\ \hline
 
-    \textbf{Analizowany Obszar} & Métropole du Grand Paris & Île-de-France & Miasto Stołeczne Warszawa & MSW + 7~powiatów & Dublin City & Hrabstwo Dublin \\ \hline
+        \textbf{Analizowany Obszar} & Métropole du Grand Paris & Île-de-France & Miasto Stołeczne Warszawa & MSW + 7~powiatów & Dublin City & Hrabstwo Dublin \\ \hline
 
-    \textbf{Powierzchnia} & $\sim$814~km$^2$ & $\sim$12~000~km$^2$ & $\sim$517~km$^2$ & $\sim$5~043~km$^2$ & $\sim$115~km$^2$ & $\sim$921~km$^2$ \\ \hline
+        \textbf{Powierzchnia} & $\sim$814~km$^2$ & $\sim$12~000~km$^2$ & $\sim$517~km$^2$ & $\sim$5~043~km$^2$ & $\sim$115~km$^2$ & $\sim$921~km$^2$ \\ \hline
+        
+        \textbf{Filtr bliskości przystanków} & brak & 3~000~m & brak & 3~000~m & brak & 3~000~m \\ \hline
+        
+        \textbf{Rozmiar Matrycy Analitycznej}$^{\text{(1)}}$ & 814 kom. & 12\,019 kom. & 515 kom. & 3\,022 kom. & 110\,/\,129 kom. & 757\,/\,850 kom. \\ \hline
+        
+        \textbf{Wolumen Par O-D} (Przepływy) & 662\,596 & 144\,456\,361 & 265\,225 & 9\,132\,484 & 14\,190 & 643\,450 \\ \hline
+        
+        \textbf{Metryczny Układ Współrzędnych} & \multicolumn{2}{c|}{\makecell{EPSG:2154 \\ (Lambert-93)}} & \multicolumn{2}{c|}{\makecell{EPSG:2180 \\ (Polska CS92)}} & \multicolumn{2}{c|}{\makecell{EPSG:2157 \\ (ITM)}} \\ \hline
+        
+        \textbf{Siatka Badawcza} \newline (Rozdzielczość) & \multicolumn{6}{c|}{Jednolita 1~km $\times$ 1~km} \\ \hline
+        \end{tabularx}
+     \end{minipage}
+    }
+    \vspace{6pt}
     
-    \textbf{Filtr bliskości przystanków} & brak & 3~000~m & brak & 3~000~m & brak & 3~000~m \\ \hline
-    
-    \textbf{Rozmiar Matrycy Analitycznej}$^{\text{(1)}}$ & 814 kom. & 12\,019 kom. & 515 kom. & 3\,022 kom. & 110\,/\,129 kom. & 757\,/\,850 kom. \\ \hline
-    
-    \textbf{Wolumen Par O-D} (Przepływy) & 662\,596 & 144\,456\,361 & 265\,225 & 9\,132\,484 & 14\,190 & 643\,450 \\ \hline
-    
-    % Tutaj zwykłe makecell bez [t], bo reszta tabeli jest już wyśrodkowana w pionie
-    \textbf{Metryczny Układ Współrzędnych} & \multicolumn{2}{c|}{\makecell{EPSG:2154 \\ (Lambert-93)}} & \multicolumn{2}{c|}{\makecell{EPSG:2180 \\ (Polska CS92)}} & \multicolumn{2}{c|}{\makecell{EPSG:2157 \\ (ITM)}} \\ \hline
-    
-    \textbf{Siatka Badawcza} \newline (Rozdzielczość) & \multicolumn{6}{c|}{Jednolita 1~km $\times$ 1~km} \\ \hline
-    \end{tabularx}
-    
-    \vspace{3pt}
-    
+    % Przypis teraz będzie wyrównany do krawędzi poszerzonej tabeli
     \raggedright
     \noindent\footnotesize (1) We wszystkich ośrodkach strefy emisyjne ($O_i$) wyznaczono na podstawie kryterium zamieszkania ($pop > 0$), natomiast strefy docelowe ($D_j$) --- na podstawie kryterium zatrudnienia ($employment > 0$). W Paryżu i Warszawie oba zbiory pokrywają się przestrzennie, natomiast dla Dublina rozmiar matrycy podano w formacie O\,/\,D, gdyż dane SAPS ujawniają obecność stref wyłącznie przemysłowych lub biurowych, nieposiadających stałych mieszkańców --- stanowią one cele podróży, lecz nie generują popytu emisyjnego.\normalsize
-
-    \centering
+   
+    \vspace{10pt}
     \caption{Parametry siatek analitycznych}
     \label{tab:parametry_analizy}
 \end{table}
+}
+
 
 \bigskip
 
@@ -514,32 +552,34 @@ Mimo globalnej unifikacji formatu GTFS, jakość implementacji w poszczególnych
 
 % TODO: Tabela --- Charakterystyka zasilających baz GTFS dla każdego ośrodka: liczba linii, przystanków oraz rekordów stop\_times z podziałem na środek transportu (autobus, tramwaj, metro, kolej podmiejska, prom) i miasto (Paryż, Warszawa, Dublin).
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[t]{0.58\textwidth}
-    \centering
-    \begin{subfigure}[b]{\linewidth}
+\begin{figure}[p]
+  \makebox[\textwidth][c]{%
+    \begin{minipage}[c]{0.72\textwidth}
       \centering
-      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.12_stop_density_warsaw}
-      \caption{Warszawa}
-    \end{subfigure}
+      \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter3/1.12_stop_density_warsaw}
+        \caption{Warszawa}
+      \end{subfigure}
 
-    \vspace{0.7em}
+      \vspace{0.7em}
 
-    \begin{subfigure}[b]{\linewidth}
+      \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter3/1.12_stop_density_paris}
+        \caption{Paryż}
+      \end{subfigure}
+    \end{minipage}%
+    \hspace{-0.01\textwidth}% Fixed spacing instead of \hfill for overfull boxes
+    \begin{minipage}[c]{0.52\textwidth}
       \centering
-      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.12_stop_density_paris}
-      \caption{Paryż}
-    \end{subfigure}
-  \end{minipage}\hfill
-  \begin{minipage}[t]{0.40\textwidth}
-    \centering
-    \begin{subfigure}[b]{\linewidth}
-      \centering
-      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.12_stop_density_dublin}
-      \caption{Dublin}
-    \end{subfigure}
-  \end{minipage}
+      \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter3/1.12_stop_density_dublin}
+        \caption{Dublin}
+      \end{subfigure}
+    \end{minipage}%
+  }
   \caption{Gęstość przystanków transportu zbiorowego (siatka 1~km~$\times$~1~km). Granica wariantu Core oznaczona czarną linią, wariantu Extended --- niebieską.}
   \label{fig:stop_density}
 \end{figure}
@@ -552,35 +592,39 @@ Matematyczne jądro podwójnie ograniczonego modelu grawitacyjnego Wilsona opier
 
 Ludność \textit{De Jure} determinuje początkowy potencjał emisyjny, czyli strefy generowania podróży (popyt źródłowy), które utożsamiane są ze stałym miejscem zamieszkania użytkowników sieci (parametr $O_i$ we wzorze modelu interakcji). Parametryzacja tych stref bazowała na oficjalnych wskaźnikach gęstości zaludnienia. Pozyskanie statystyk we wszystkich trzech badanych aglomeracjach wymagało pobrania publicznych siatek populacyjnych publikowanych przez krajowe urzędy statystyczne. Głównym wyzwaniem na etapie inżynierii danych w tym segmencie było wyłącznie zagwarantowanie, aby natywne obrysy urzędowych siatek emisyjnych bezstratnie pokryły się przestrzennie z ustaloną uprzednio matrycą analityczną o rozdzielczości 1~km $\times$ 1~km.
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[t]{0.58\textwidth}
-    \centering
-    \begin{subfigure}[b]{\linewidth}
-      \centering
-      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.2_pop_density_warsaw}
-      \caption{Warszawa}
-    \end{subfigure}
 
-    \vspace{0.7em}
+\begin{figure}[p]
+  \makebox[\textwidth][c]{%
+    \begin{minipage}[c]{0.72\textwidth}
+      \centering
+      \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter3/1.2_pop_density_warsaw}
+        \caption{Warszawa}
+      \end{subfigure}
 
-    \begin{subfigure}[b]{\linewidth}
+      \vspace{0.7em}
+
+      \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter3/1.2_pop_density_paris}
+        \caption{Paryż}
+      \end{subfigure}
+    \end{minipage}%
+    \hspace{-0.01\textwidth}% Fixed spacing instead of \hfill for overfull boxes
+    \begin{minipage}[c]{0.52\textwidth}
       \centering
-      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.2_pop_density_paris}
-      \caption{Paryż}
-    \end{subfigure}
-  \end{minipage}\hfill
-  \begin{minipage}[t]{0.40\textwidth}
-    \centering
-    \begin{subfigure}[b]{\linewidth}
-      \centering
-      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.2_pop_density_dublin}
-      \caption{Dublin}
-    \end{subfigure}
-  \end{minipage}
+      \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter3/1.2_pop_density_dublin}
+        \caption{Dublin}
+      \end{subfigure}
+    \end{minipage}%
+  }
   \caption{Gęstość zaludnienia w~siatce 1~km~$\times$~1~km. Granica wariantu Core oznaczona czarną linią, wariantu Extended --- niebieską.}
   \label{fig:pop_density}
 \end{figure}
+
 
 \subsection{Potencjał Docelowy}
 
@@ -594,35 +638,38 @@ Znacznie trudniejszym problemem metodologicznym okazało się przestrzenne wyizo
 % Narzuciło to jednak pewne rygory badawcze – dokumentacja wskazuje na brak pełnego wglądu w algorytmy czarnej skrzynki, które generowały tę warstwę, a jej udostępnienie objęto klauzulą poufności wobec oryginalnych struktur źródłowych. 
 \end{itemize}
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[t]{0.58\textwidth}
-    \centering
-    \begin{subfigure}[b]{\linewidth}
+\begin{figure}[p]
+  \makebox[\textwidth][c]{%
+    \begin{minipage}[c]{0.72\textwidth}
       \centering
-      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.3_emp_density_warsaw}
-      \caption{Warszawa (tylko rdzeń)}
-    \end{subfigure}
+      \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter3/1.3_emp_density_warsaw}
+        \caption{Warszawa}
+      \end{subfigure}
 
-    \vspace{0.7em}
+      \vspace{0.7em}
 
-    \begin{subfigure}[b]{\linewidth}
+      \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter3/1.3_emp_density_paris}
+        \caption{Paryż}
+      \end{subfigure}
+    \end{minipage}%
+    \hspace{-0.01\textwidth}% Fixed spacing instead of \hfill for overfull boxes
+    \begin{minipage}[c]{0.52\textwidth}
       \centering
-      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.3_emp_density_paris}
-      \caption{Paryż}
-    \end{subfigure}
-  \end{minipage}\hfill
-  \begin{minipage}[t]{0.40\textwidth}
-    \centering
-    \begin{subfigure}[b]{\linewidth}
-      \centering
-      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.3_emp_density_dublin}
-      \caption{Dublin}
-    \end{subfigure}
-  \end{minipage}
+      \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter3/1.3_emp_density_dublin}
+        \caption{Dublin}
+      \end{subfigure}
+    \end{minipage}%
+  }
   \caption{Gęstość szacowanego zatrudnienia w~siatce 1~km~$\times$~1~km. Dane dla Warszawy dostępne wyłącznie w~wariancie Core (wariant Extended nie dysponuje warstwą zatrudnienia dla powiatów ościennych).}
   \label{fig:emp_density}
 \end{figure}
+
 
 \section{Stratyfikacja Socjoekonomiczna}
 
@@ -636,32 +683,34 @@ $$wealth\_index_i = median\_price\_m2_i \cdot \ln(1 + jrc\_volume\_proxy_i)$$
 Operacja ta ma za zadanie chronić ostateczny współczynnik zamożności przed nienaturalną dominacją samej kubatury biurowej względem wskaźnika stricte finansowego. Analogicznie jak w przypadku danych zatrudnienia, wskaźnik zamożności wyznaczono wyłącznie w granicach administracyjnego rdzenia (wariant Core); wariant Extended dla Warszawy pozostaje bez sparametryzowanego wskaźnika SES dla powiatów ościennych.
 \end{itemize}
 
-\begin{figure}[H]
-  \centering
-  \begin{minipage}[t]{0.58\textwidth}
-    \centering
-    \begin{subfigure}[b]{\linewidth}
+\begin{figure}[p]
+  \makebox[\textwidth][c]{%
+    \begin{minipage}[c]{0.72\textwidth}
       \centering
-      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.14_ses_map_warsaw}
+      \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter3/1.14_ses_map_warsaw}
       \caption{Warszawa (proxy cen nieruchomości)}
-    \end{subfigure}
+      \end{subfigure}
 
-    \vspace{0.7em}
+      \vspace{0.7em}
 
-    \begin{subfigure}[b]{\linewidth}
-      \centering
-      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.14_ses_map_paris}
+      \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter3/1.14_ses_map_paris}
       \caption{Paryż (mediana dochodu INSEE)}
-    \end{subfigure}
-  \end{minipage}\hfill
-  \begin{minipage}[t]{0.40\textwidth}
-    \centering
-    \begin{subfigure}[b]{\linewidth}
+      \end{subfigure}
+    \end{minipage}%
+    \hspace{-0.01\textwidth}% Fixed spacing instead of \hfill for overfull boxes
+    \begin{minipage}[c]{0.52\textwidth}
       \centering
-      \includegraphics[height=0.226\textheight,keepaspectratio]{Latex/images/chapter3/1.14_ses_map_dublin}
+      \begin{subfigure}[b]{\linewidth}
+        \centering
+        \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter3/1.14_ses_map_dublin}
       \caption{Dublin (HP Deprivation Index)}
-    \end{subfigure}
-  \end{minipage}
+      \end{subfigure}
+    \end{minipage}%
+  }
   \caption{Przestrzenny rozkład wskaźnika statusu socjoekonomicznego (SES) w~siatce 1~km~$\times$~1~km. Wskaźnik dla Warszawy wyznaczono wyłącznie w~wariancie Core.}
   \label{fig:ses_maps}
 \end{figure}

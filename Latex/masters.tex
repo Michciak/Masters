@@ -41,6 +41,7 @@
 \usepackage{array}
 \usepackage{multirow}
 \usepackage{makecell}
+\usepackage{subcaption}
 
 % \usepackage{url}
 
@@ -398,7 +399,34 @@ Aby zneutralizować wpływ zjawiska MAUP i zagwarantować matematyczną porówny
 \item[]\textbf{Warszawa}\newline Miasto Stołeczne Warszawa oraz 7 sąsiednich powiatów (zachodni, piaseczyński, pruszkowski, legionowski, wołomiński, miński, otwocki).
 \end{itemize}
 
-% TODO: Rysunek --- Siatka analityczna z naniesioną siecią transportu zbiorowego, z podziałem na środki transportu (autobus, tramwaj, metro, kolej podmiejska). Osobne panele dla wariantu Core i Extended każdego ośrodka: Warszawa Core, Warszawa Extended, Paryż Core, Paryż Extended, Dublin. Wariant Core Warszawy i Paryża prezentowany oddzielnie ze względu na wysoką gęstość komórek. Komórki wyłączone z analizy (brak obsługi TZ w zasięgu 3~000~m) wyróżnione odrębną barwą.
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/warsaw_gtfs_full_network_precise_clipped}
+    \caption{Warszawa}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/dublin_gtfs_full_network_precise_clipped}
+    \caption{Dublin}
+  \end{subfigure}
+
+  \vspace{0.8em}
+
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/paris_gtfs_full_network_precise_clipped}
+    \caption{Paryż --- wariant Extended}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/paris_core_gtfs_full_network_precise_clipped}
+    \caption{Paryż --- wariant Core}
+  \end{subfigure}
+  \caption{Siatka analityczna z~naniesioną siecią transportu zbiorowego z~podziałem na środki transportu dla analizowanych ośrodków. Ze względu na wysoką gęstość sieci, Paryż zaprezentowano osobno w~wariancie Extended i~Core. Granica administracyjna wariantu Core oznaczona czarną linią, wariantu Extended --- niebieską.}
+  \label{fig:gtfs_networks}
+\end{figure}
 
 \subsubsection{Odwzorowania Kartograficzne}
 
@@ -486,7 +514,26 @@ Mimo globalnej unifikacji formatu GTFS, jakość implementacji w poszczególnych
 
 % TODO: Tabela --- Charakterystyka zasilających baz GTFS dla każdego ośrodka: liczba linii, przystanków oraz rekordów stop\_times z podziałem na środek transportu (autobus, tramwaj, metro, kolej podmiejska, prom) i miasto (Paryż, Warszawa, Dublin).
 
-% TODO: Rysunek --- Mapa gęstości przystanków TZ (kernel density estimate, siatka 1~km $\times$ 1~km) dla Paryża, Warszawy i Dublina; podział na środki transportu.
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.31\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/1.12_stop_density_warsaw}
+    \caption{Warszawa}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/1.12_stop_density_paris}
+    \caption{Paryż}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/1.12_stop_density_dublin}
+    \caption{Dublin}
+  \end{subfigure}
+  \caption{Gęstość przystanków transportu zbiorowego (siatka 1~km~$\times$~1~km). Granica wariantu Core oznaczona czarną linią, wariantu Extended --- niebieską.}
+  \label{fig:stop_density}
+\end{figure}
 
 \section{Dane demograficzne / popytowe} % przeredagować sekcję
 
@@ -496,7 +543,26 @@ Matematyczne jądro podwójnie ograniczonego modelu grawitacyjnego Wilsona opier
 
 Ludność \textit{De Jure} determinuje początkowy potencjał emisyjny, czyli strefy generowania podróży (popyt źródłowy), które utożsamiane są ze stałym miejscem zamieszkania użytkowników sieci (parametr $O_i$ we wzorze modelu interakcji). Parametryzacja tych stref bazowała na oficjalnych wskaźnikach gęstości zaludnienia. Pozyskanie statystyk we wszystkich trzech badanych aglomeracjach wymagało pobrania publicznych siatek populacyjnych publikowanych przez krajowe urzędy statystyczne. Głównym wyzwaniem na etapie inżynierii danych w tym segmencie było wyłącznie zagwarantowanie, aby natywne obrysy urzędowych siatek emisyjnych bezstratnie pokryły się przestrzennie z ustaloną uprzednio matrycą analityczną o rozdzielczości 1~km $\times$ 1~km.
 
-% TODO: Rysunek --- Siatka gęstości populacji (liczba mieszkańców/km$^2$) dla Paryża, Warszawy i Dublina w rozdzielczości 1~km $\times$ 1~km; wariant Core i Extended.
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.31\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/1.2_pop_density_warsaw}
+    \caption{Warszawa}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/1.2_pop_density_paris}
+    \caption{Paryż}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/1.2_pop_density_dublin}
+    \caption{Dublin}
+  \end{subfigure}
+  \caption{Gęstość zaludnienia w~siatce 1~km~$\times$~1~km. Granica wariantu Core oznaczona czarną linią, wariantu Extended --- niebieską.}
+  \label{fig:pop_density}
+\end{figure}
 
 \subsection{Potencjał Docelowy}
 
@@ -510,7 +576,26 @@ Znacznie trudniejszym problemem metodologicznym okazało się przestrzenne wyizo
 % Narzuciło to jednak pewne rygory badawcze – dokumentacja wskazuje na brak pełnego wglądu w algorytmy czarnej skrzynki, które generowały tę warstwę, a jej udostępnienie objęto klauzulą poufności wobec oryginalnych struktur źródłowych. 
 \end{itemize}
 
-% TODO: Rysunek --- Siatka gęstości zatrudnienia (liczba etatów/km$^2$) dla Paryża, Warszawy i Dublina w rozdzielczości 1~km $\times$ 1~km; wariant Core i Extended. Dla Warszawy wariant Extended bez danych zatrudnienia.
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.31\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/1.3_emp_density_warsaw}
+    \caption{Warszawa (tylko rdzeń)}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/1.3_emp_density_paris}
+    \caption{Paryż}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/1.3_emp_density_dublin}
+    \caption{Dublin}
+  \end{subfigure}
+  \caption{Gęstość szacowanego zatrudnienia w~siatce 1~km~$\times$~1~km. Dane dla Warszawy dostępne wyłącznie w~wariancie Core (wariant Extended nie dysponuje warstwą zatrudnienia dla powiatów ościennych).}
+  \label{fig:emp_density}
+\end{figure}
 
 \section{Stratyfikacja Socjoekonomiczna}
 
@@ -524,7 +609,26 @@ $$wealth\_index_i = median\_price\_m2_i \cdot \ln(1 + jrc\_volume\_proxy_i)$$
 Operacja ta ma za zadanie chronić ostateczny współczynnik zamożności przed nienaturalną dominacją samej kubatury biurowej względem wskaźnika stricte finansowego. Analogicznie jak w przypadku danych zatrudnienia, wskaźnik zamożności wyznaczono wyłącznie w granicach administracyjnego rdzenia (wariant Core); wariant Extended dla Warszawy pozostaje bez sparametryzowanego wskaźnika SES dla powiatów ościennych.
 \end{itemize}
 
-% TODO: Rysunek --- Siatka wskaźnika socjoekonomicznego (SES) dla Paryża (mediana dochodu INSEE Filosofi), Warszawy (proxy cen nieruchomości) i Dublina (Haase-Pratschke Deprivation Index) w rozdzielczości 1~km $\times$ 1~km.
+\begin{figure}[H]
+  \centering
+  \begin{subfigure}[t]{0.31\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/1.14_ses_map_warsaw}
+    \caption{Warszawa (proxy cen nieruchomości)}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/1.14_ses_map_paris}
+    \caption{Paryż (mediana dochodu INSEE)}
+  \end{subfigure}\hfill
+  \begin{subfigure}[t]{0.31\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{Latex/images/chapter3/1.14_ses_map_dublin}
+    \caption{Dublin (HP Deprivation Index)}
+  \end{subfigure}
+  \caption{Przestrzenny rozkład wskaźnika statusu socjoekonomicznego (SES) w~siatce 1~km~$\times$~1~km. Wskaźnik dla Warszawy wyznaczono wyłącznie w~wariancie Core.}
+  \label{fig:ses_maps}
+\end{figure}
 
 \section{Ograniczenia Metodologiczne i Podsumowanie}
 

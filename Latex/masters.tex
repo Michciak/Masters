@@ -370,7 +370,7 @@ Wskaźnik ten przyjmuje wartości z przedziału $[0, 1]$, gdzie $0$~oznacza peł
 % Należy zauważyć, że stosowanie globalnego Współczynnika Giniego oraz klasycznej Krzywej Lorenza w inżynierii transportowej niesie za sobą niebezpieczeństwo wystąpienia tzw. zjawiska ,,ślepoty przestrzenne'' (ang. \textit{Spatial Blindness}). Uśredniony dla aglomeracji wynik, oscylujący wokół bezpiecznych granic rzędu $0.35$, jest w stanie statystycznie zamaskować odizolowane przestrzennie ,,pustynie transportowe'', gubiąc topologię deficytu. Z tego powodu ewaluacja sprawiedliwości rozkładu miar ($A_i$) modelu grawitacyjnego została poddana strukturalnej dekompozycji. 
 
 
-\chapter{Akwizycja, Przetwarzanie i Reprezentacja Zasobów Przestrzennych}
+\chapter{Akwizycja, Przetwarzanie i Reprezentacja Zasobów Danych}
 
 Zastosowanie wielowymiarowego, podwójnie ograniczonego modelu grawitacyjnego oraz wyznaczanie ścieżek minimalizujących uogólniony koszt podróży (GTC) uwarunkowane jest dostępem do wysoce precyzyjnych i odpowiednio ustrukturyzowanych danych empirycznych. Najbardziej zaawansowane koncepcje z zakresu analityki topologicznej czy stochastycznego modelowania całego łańcucha podróży (WTC) tracą na wartości, jeżeli środowisko wejściowe obciążone jest szumem informacyjnym lub niekompatybilnością formatów. Z tego względu głównym celem badawczym niniejszego rozdziału jest weryfikacja elastyczności, a także uniwersalności opracowanego aparatu matematycznego poprzez jego zderzenie z radykalnie zróżnicowanymi układami metropolitalnymi w warunkach rzeczywistych.
 
@@ -412,7 +412,7 @@ Rygorystyczna ewaluacja komponentu transportowego (odległości fizyczne, zasię
 
 \subsubsection{Budowa Macierzy Czasu Podróży i Uzupełnianie Brakujących Par OD}
 
-Uzyskane centroidy komórek pełnią w strukturze modelu rolę wirtualnych węzłów popytu i podaży, stanowiąc punkty źródłowe (O) i docelowe (D) dla stochastycznych algorytmów optymalizacyjnych, na ich podstawie wyznaczana jest macierz czasu podróży, a liczba relacji OD wynika wprost z iloczynu liczby zakwalifikowanych komórek po stronie źródeł i celów. W wariancie rozszerzonym (Extended) do analizy włączono wyłącznie komórki, których centroid leży w odległości nie większej niż 3~000~m od najbliższego przystanku sieci transportu zbiorowego. Filtr ten eliminuje strefy pozbawione obsługi sieciowej, dla których silnik routingowy zwróciłby wyłącznie wartości puste lub czasy zdominowane przez składnik pieszy. W wariancie rdzeniowym (Core) filtr bliskości nie jest stosowany --- wszystkie komórki w granicach rdzenia są uwzględnione.
+Uzyskane centroidy komórek pełnią w strukturze modelu rolę wirtualnych węzłów popytu i podaży, stanowiąc punkty źródłowe (O) i docelowe (D) dla stochastycznych algorytmów optymalizacyjnych, na ich podstawie wyznaczana jest macierz czasu podróży, a liczba relacji O-D wynika wprost z iloczynu liczby zakwalifikowanych komórek po stronie źródeł i celów. W wariancie rozszerzonym (Extended) do analizy włączono wyłącznie komórki, których centroid leży w odległości nie większej niż 3~000~m od najbliższego przystanku sieci transportu zbiorowego. Filtr ten eliminuje strefy pozbawione obsługi sieciowej, dla których silnik routingowy zwróciłby wyłącznie wartości puste lub czasy zdominowane przez składnik pieszy. W wariancie rdzeniowym (Core) filtr bliskości nie jest stosowany --- wszystkie komórki w granicach rdzenia są uwzględnione.
 
 \begin{table}[H]
     \centering
@@ -512,7 +512,7 @@ Ewaluacja układu przez pryzmat sprawiedliwości transportowej zmusza do odejśc
 \item[]\textbf{Paryż}\newline Rozwarstwienie komórek dla Paryża uzyskano poprzez zaimplementowanie danych z bazy INSEE Filosofi z 2021 r.. Poziom zamożności bazował na wyliczonej terytorialnej medianie dochodu, którą wsparto decylami $D_1$ i $D_9$. Utajnione poprzez mechanizmy ochronne (flagi \texttt{"s"}, \texttt{"nd"}) statystyki gmin wiejskich i peryferyjnych zmieniono na wartości puste (\texttt{NaN}), świadomie rezygnując z imputacji, która w tym przypadku, gdy braki te można zklasyfikować jak MNAR (ang. \textit{Missing Not At Random}), sztucznie podnosiłaby progi w strefach kluczowych dla diagnoz equity.
 \item[]\textbf{Warszawa}\newline Braki analityczne polskiej statystyki publicznej wokół dochodów dla Warszawy narzuciły konieczność skonstruowania autorskiego wskaźnika zastępczego (proxy) z wykorzystaniem danych z Rejestru Cen Nieruchomości z lat 2024-2026. W celu usunięcia szumu rynkowego, zastosowano filtry dyskryminacyjne: do analizy dopuszczano wyłącznie wyodrębnione lokale o przeznaczeniu czysto mieszkalnym, wprowadzając jednoczesne cięcie progowe dla transakcji oscylujących poniżej granicy 1000 PLN/m². Zmienną połączono na poziomie logarytmicznym z wektorem gęstości kubaturowej za pomocą sformułowanego algorytmu:
 $$wealth\_index_i = median\_price\_m2_i \cdot \ln(1 + jrc\_volume\_proxy_i)$$
-Operacja ta chroniła ostateczny współczynnik zamożności przed nienaturalną dominacją samej kubatury biurowej względem wskaźnika stricte finansowego.
+Operacja ta ma za zadanie chronić ostateczny współczynnik zamożności przed nienaturalną dominacją samej kubatury biurowej względem wskaźnika stricte finansowego.
 \end{itemize}
 
 \section{Ograniczenia Metodologiczne i Podsumowanie}

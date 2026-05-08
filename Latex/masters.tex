@@ -43,6 +43,8 @@
 \usepackage{makecell}
 \usepackage{subcaption}
 \usepackage{algorithm2e}
+\usepackage{longtable}
+\usepackage{xurl}
 
 \usepackage{afterpage}
 
@@ -552,18 +554,23 @@ Mimo globalnej unifikacji formatu GTFS, jakość implementacji w~poszczególnych
     \makebox[\textwidth][c]{
     \begin{minipage}{1.1\textwidth}
         \centering
-        \scriptsize
+        
+        % 1. Ustawiamy główną czcionkę tabeli na \small (nagłówki, pierwsza kolumna)
+        \small 
+        
         \renewcommand{\arraystretch}{1.8}
-        \setlength{\tabcolsep}{4pt} % Zwiększono nieznacznie dzięki nowej szerokości
+        \setlength{\tabcolsep}{4pt} 
         
         % KLUCZOWE: Podwójny znak hash chroniący przed błędem \afterpage
         \renewcommand{\tabularxcolumn}[1]{m{##1}}
 
-        \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}m{2.3cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X}
+        % 2. Wstrzykujemy \footnotesize do każdej z 9 kolumn X
+        \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}m{2.3cm}|>{\centering\arraybackslash\footnotesize}X|>{\centering\arraybackslash\footnotesize}X|>{\centering\arraybackslash\footnotesize}X|>{\centering\arraybackslash\footnotesize}X|>{\centering\arraybackslash\footnotesize}X|>{\centering\arraybackslash\footnotesize}X|>{\centering\arraybackslash\footnotesize}X|>{\centering\arraybackslash\footnotesize}X|>{\centering\arraybackslash\footnotesize}X}
 
-        \multirow{2}{2.3cm}{\textbf{Środek transportu}} & \multicolumn{3}{c|}{\textbf{Warszawa}} & \multicolumn{3}{c|}{\textbf{Paryż}} & \multicolumn{3}{c}{\textbf{Dublin}} \\ \cline{2-10}
+        % 3. Zabezpieczamy nagłówki powrotem do \small, aby ignorowały \footnotesize z definicji kolumny
+        \multirow{2}{2.3cm}{\textbf{Środek transportu}} & \multicolumn{3}{c|}{\small\textbf{Warszawa}} & \multicolumn{3}{c|}{\small\textbf{Paryż}} & \multicolumn{3}{c}{\small\textbf{Dublin}} \\ \cline{2-10}
         
-         & Linie & \makecell{Przy-\\stanki} & \makecell{Stop\\times} & Linie & \makecell{Przy-\\stanki} & \makecell{Stop\\times} & Linie & \makecell{Przy-\\stanki} & \makecell{Stop\\times} \\ \hline
+         & \small Linie & \makecell{\small Przy-\\\small stanki} & \makecell{\small Stop\\\small times} & \small Linie & \makecell{\small Przy-\\\small stanki} & \makecell{\small Stop\\\small times} & \small Linie & \makecell{\small Przy-\\\small stanki} & \makecell{\small Stop\\\small times} \\ \hline
 
         \textbf{Autobus} & 303 & 6\,169 & 6\,301\,695 & 1\,949 & 33\,809 & 9\,988\,956 & 200 & 4\,624 & 4\,155\,851 \\ \hline
         \textbf{Tramwaj} & 29 & 630 & 1\,708\,949 & 17 & 557 & 340\,542 & 2 & 128 & 60\,302 \\ \hline
@@ -760,46 +767,79 @@ Zintegrowanie tak heterogenicznych struktur źródłowych opisujących wymiar tr
 
 \subsection{Zestawienie wykorzystanych zbiorów danych}
 
-\begin{table}[p]
-\centering
-\scriptsize
-\renewcommand{\arraystretch}{1.25}
+% 1. Definiujemy URL z hashem POZA tabelą
+\urldef{\inseeURL}\url{https://www.insee.fr/fr/statistiques/7756855?sommaire=7756859#consulter}
+
+\begingroup % Ograniczamy zmiany czcionki i marginesów tylko do tej tabeli
+\footnotesize
+\renewcommand{\arraystretch}{1.4}
 \setlength{\tabcolsep}{4pt}
-\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{4.1cm}|>{\raggedright\arraybackslash}p{4.3cm}|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{2.3cm}}
-\textbf{Zbiór danych} & \textbf{Instytucja / źródło} & \textbf{URL} & \textbf{Data akwizycji} & \textbf{Licencja} \\
-\hline
-\textbf{Paryż -- GTFS} \\ \texttt{tdg-80921-202604170039.zip} & Île-de-France Mobilités / Mobility Database & \url{https://mobilitydatabase.org/feeds/gtfs/tdg-80921}; \url{https://www.data.gouv.fr/api/1/datasets/r/413988ed-d340-467b-8be2-7b999fcd207a} & 2026-04-17 & Licence Mobilités \\
-\hline
-\textbf{Paryż -- SIRENE} \\ (Base Sirene) & Insee / data.gouv.fr & \url{https://www.data.gouv.fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & Open Licence / Licence Ouverte 2.0 \\
-\hline
-\textbf{Paryż -- dochody INSEE} \\ \texttt{indic-struct-distrib-revenu-2021-COMMUNES\_csv.zip} & INSEE & \url{https://www.insee.fr/fr/statistiques/7756855?sommaire=7756859#consulter} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & Open Licence / Licence Ouverte 2.0 (CC BY 4.0 compatible) \\
-\hline
-\textbf{Paryż -- populacja 1 km} \\ \texttt{fra\_pd\_2020\_1km\_ASCII\_XYZ.csv} & Instytucja statystyczna (warstwa lokalna projektu) & [lokalny plik projektu] & [DO UZUPEŁNIENIA: data pobrania/snapshot] & CC BY 4.0 \\
-\hline
-\textbf{Paryż -- OSM PBF} \\ \texttt{ile-de-france-260111.osm.pbf} & Geofabrik / OpenStreetMap contributors & \url{https://download.geofabrik.de/europe/france/ile-de-france.html} & 2026-01-11 (snapshot z nazwy pliku) & ODbL 1.0 \\
-\hline
-\textbf{Dublin -- GTFS} \\ \texttt{GTFS\_Realtime2.zip} & National Transport Authority (Transport for Ireland) & \url{https://www.transportforireland.ie/transitData/Data/GTFS_Realtime.zip} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & CC BY 4.0 \\
-\hline
-\textbf{Dublin -- Workplace Zones / SAPS} & CSO Ireland & \url{https://www.cso.ie/en/census/census2016reports/workplacezonesand1kmpopulationgrids/} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & CC BY 4.0 \\
-\hline
-\textbf{Dublin -- deprywacja} \\ \texttt{hp-deprivation-index-scores-2022.csv} & Pobal / data.gov.ie & \url{https://data.gov.ie/dataset/pobal-hp-deprivation-index-scores-2022} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & CC BY 4.0 \\
-\hline
-\textbf{Dublin -- OSM PBF} \\ \texttt{ireland-and-northern-ireland-latest.osm.pbf} & Geofabrik / OpenStreetMap contributors & \url{https://download.geofabrik.de/europe/ireland-and-northern-ireland.html} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & ODbL 1.0 \\
-\hline
-\textbf{Warszawa -- GTFS (merge)} \\ \texttt{warsaw.zip, polish\_trains.zip, wkd.zip} / \texttt{warsaw\_merged.zip} & mkuran.pl (feedy operatorów) & \url{https://mkuran.pl/gtfs/} & 2026-04-17 (feedy wejściowe) & Licencje mieszane: ZTM Terms + ODbL / CC BY 4.0 / CC0 1.0 \\
-\hline
-\textbf{Warszawa -- miejsca pracy} \\ \texttt{waw\_miejsca\_pracy.zip} & Data Wise (przekazanie bezpośrednie) & [brak publicznego URL] & [DO UZUPEŁNIENIA: data pozyskania od dostawcy] & Dane niepubliczne (bez otwartej redystrybucji) \\
-\hline
-\textbf{Warszawa -- populacja} \\ NSP 2021 (siatka 1 km) & GUS / GeoStat & \url{https://portal.geo.stat.gov.pl/aktualnosci/dane-o-ludnosci-krajowej-w-siatce-kilometrowej-nsp-2021/} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & Warunki otwartych danych GUS (z atrybucją źródła) \\
-\hline
-\textbf{Warszawa -- SES proxy} \\ \texttt{RCN\_Lokal.gml} + JRC raster & COI/GIS (RCN, przez dostawcę danych) + Joint Research Centre (EC) & [brak publicznego URL dla RCN], \url{https://publications.jrc.ec.europa.eu/repository/} & RCN: [DO UZUPEŁNIENIA], JRC: [DO UZUPEŁNIENIA] & RCN: dane semi-publiczne (ograniczona redystrybucja), JRC: CC BY 4.0 \\
-\hline
-\textbf{Warszawa -- OSM PBF} \\ \texttt{18-warsaw.osm.pbf}, \texttt{mazowieckie-260111.osm.pbf} & Geofabrik / OpenStreetMap contributors & \url{https://download.geofabrik.de/europe/poland.html} & 2026-01-11 (dla \texttt{mazowieckie-260111.osm.pbf}), [DO UZUPEŁNIENIA] dla \texttt{18-warsaw.osm.pbf} & ODbL 1.0 \\
-\hline
-\end{tabularx}
+
+% 2. Zezwalamy tabeli wyjść poza marginesy (symetrycznie po ok. 1.2 cm)
+\setlength{\LTleft}{-0.7cm}
+\setlength{\LTright}{-0.7cm}
+
+% 3. Używamy longtable ze sztywno zdefiniowanymi szerokościami kolumn
+\begin{longtable}{
+    >{\raggedright\arraybackslash}p{3.1cm}|
+    >{\raggedright\arraybackslash}p{2.8cm}|
+    >{\raggedright\arraybackslash}p{4.8cm}|
+    >{\raggedright\arraybackslash}p{2.0cm}|
+    >{\raggedright\arraybackslash}p{3.0cm}
+}
+
+% === NAGŁÓWEK NA PIERWSZEJ STRONIE ===
 \caption{Zbiorcze zestawienie źródeł danych wykorzystanych w~badaniu (instytucja, URL, data akwizycji i~warunki licencyjne).}
-\label{tab:datasets_sources_licenses}
-\end{table}
+\label{tab:datasets_sources_licenses} \\
+\hline
+\textbf{Zbiór danych} & \textbf{Instytucja / źródło} & \textbf{URL} & \textbf{Data akwizycji} & \textbf{Licencja} \\ \hline
+\endfirsthead
+
+% === NAGŁÓWEK NA KOLEJNYCH STRONACH ===
+\multicolumn{5}{c}{\tablename\ \thetable{} -- Ciąg dalszy ze strony poprzedniej} \\
+\hline
+\textbf{Zbiór danych} & \textbf{Instytucja / źródło} & \textbf{URL} & \textbf{Data akwizycji} & \textbf{Licencja} \\ \hline
+\endhead
+
+% === STOPKA NA KOŃCU STRONY (JEŚLI TABELA SIĘ ŁAMIE) ===
+\hline
+\multicolumn{5}{r}{\textit{Ciąg dalszy na następnej stronie...}} \\
+\endfoot
+
+% === STOPKA NA SAMYM KOŃCU TABELI ===
+\hline
+\endlastfoot
+
+% === DANE ===
+\textbf{Paryż -- GTFS} & Île-de-France Mobilités / Mobility Database & \url{https://mobilitydatabase.org/feeds/gtfs/tdg-80921}; \newline \url{https://www.data.gouv.fr/api/1/datasets/r/413988ed-d340-467b-8be2-7b999fcd207a} & 17-04-2026 & Licence Mobilités \\ \hline
+
+\textbf{Paryż -- SIRENE} \newline (Base Sirene) & INSEE / data.gouv.fr & \url{https://www.data.gouv.fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret} & 10-03-2026 & Open Licence / Licence Ouverte 2.0 \\ \hline
+
+\textbf{Paryż -- dochody INSEE} & INSEE & \inseeURL & 5-04-2026 & Open Licence / Licence Ouverte 2.0 (CC BY 4.0 compatible) \\ \hline
+
+\textbf{Paryż -- populacja 1 km} & EUROSTAT & \url{https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Population_and_housing_census_2021_-_population_grids} & 11-01-2026 & CC BY 4.0 \\ \hline
+
+\textbf{Paryż -- OSM PBF}  & Geofabrik / OpenStreetMap contributors & \url{https://download.geofabrik.de/europe/france/ile-de-france.html} & 2026-01-11 & ODbL 1.0 \\ \hline
+
+\textbf{Dublin -- GTFS}  & National Transport Authority (Transport for Ireland) & \url{https://www.transportforireland.ie/transitData/Data/GTFS_Realtime.zip} & 22-04-2026 & CC BY 4.0 \\ \hline
+
+\textbf{Dublin -- Workplace Zones / SAPS} & CSO Ireland & \url{https://www.cso.ie/en/census/census2016reports/workplacezonesand1kmpopulationgrids/} & 15-11-2025 & CC BY 4.0 \\ \hline
+
+\textbf{Dublin -- deprywacja} & Pobal / data.gov.ie & \url{https://data.gov.ie/dataset/pobal-hp-deprivation-index-scores-2022} & 31-03-2026 & CC BY 4.0 \\ \hline
+
+\textbf{Dublin -- OSM PBF}  & Geofabrik / OpenStreetMap contributors & \url{https://download.geofabrik.de/europe/ireland-and-northern-ireland.html} & 9-02-2026 & ODbL 1.0 \\ \hline
+
+\textbf{Warszawa -- GTFS} & mkuran.pl (feedy operatorów) & \url{https://mkuran.pl/gtfs/} & 2026-04-17 \newline (feedy wejściowe) & Licencje mieszane: ZTM Terms + ODbL / CC BY 4.0 / CC0 1.0 \\ \hline
+
+\textbf{Warszawa -- miejsca pracy} & Data Wise \newline (przekazanie bezpośrednie) & [brak publicznego URL] & 9-04-2026 & Dane niepubliczne (bez otwartej redystrybucji) \\ \hline
+
+\textbf{Warszawa -- populacja} \newline NSP 2021 (siatka 1 km) & GUS / GeoStat & \url{https://portal.geo.stat.gov.pl/aktualnosci/dane-o-ludnosci-krajowej-w-siatce-kilometrowej-nsp-2021/} & 15-11-2025 & Warunki otwartych danych GUS (z atrybucją źródła) \\ \hline
+
+\textbf{Warszawa -- SES proxy} \ \newline + JRC raster & COI/GIS (RCN) \newline + Joint Research Centre (EC) & \url{https://architektura.um.warszawa.pl/udostepniane-dane-rcn1}, \newline \url{https://publications.jrc.ec.europa.eu/repository/} & RCN: 5-04-2026, \newline JRC: 5-04-2026 & RCN: dane semi-publiczne, \newline JRC: CC BY 4.0 \\ \hline
+
+\textbf{Warszawa -- OSM PBF} & Geofabrik / OpenStreetMap contributors & \url{https://download.geofabrik.de/europe/poland.html} &  9-02-2026 & ODbL 1.0 \\ 
+\end{longtable}
+\endgroup
 
 \printbibliography
 

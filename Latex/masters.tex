@@ -758,6 +758,49 @@ Odrębnym ograniczeniem przestrzennym jest zasięg danych socjoekonomicznych dla
 
 Zintegrowanie tak heterogenicznych struktur źródłowych opisujących wymiar transportowy, demograficzny, rynkowy oraz socjoekonomiczny dla trzech badanych metropolii, przy jednoczesnej świadomości wynikających z~tego ograniczeń, otwiera drogę do właściwej ewaluacji wzorców dostępności przestrzennej.
 
+\subsection{Zestawienie wykorzystanych zbiorów danych}
+
+\begin{table}[p]
+\centering
+\scriptsize
+\renewcommand{\arraystretch}{1.25}
+\setlength{\tabcolsep}{4pt}
+\begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}p{4.1cm}|>{\raggedright\arraybackslash}p{4.3cm}|>{\raggedright\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{2.3cm}}
+\textbf{Zbiór danych} & \textbf{Instytucja / źródło} & \textbf{URL} & \textbf{Data akwizycji} & \textbf{Licencja} \\
+\hline
+\textbf{Paryż -- GTFS} \\ \texttt{tdg-80921-202604170039.zip} & Île-de-France Mobilités / Mobility Database & \url{https://mobilitydatabase.org/feeds/gtfs/tdg-80921}; \url{https://www.data.gouv.fr/api/1/datasets/r/413988ed-d340-467b-8be2-7b999fcd207a} & 2026-04-17 & Licence Mobilités \\
+\hline
+\textbf{Paryż -- SIRENE} \\ (Base Sirene) & Insee / data.gouv.fr & \url{https://www.data.gouv.fr/datasets/base-sirene-des-entreprises-et-de-leurs-etablissements-siren-siret} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & Open Licence / Licence Ouverte 2.0 \\
+\hline
+\textbf{Paryż -- dochody INSEE} \\ \texttt{indic-struct-distrib-revenu-2021-COMMUNES\_csv.zip} & INSEE & \url{https://www.insee.fr/fr/statistiques/7756855?sommaire=7756859#consulter} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & Open Licence / Licence Ouverte 2.0 (CC BY 4.0 compatible) \\
+\hline
+\textbf{Paryż -- populacja 1 km} \\ \texttt{fra\_pd\_2020\_1km\_ASCII\_XYZ.csv} & Instytucja statystyczna (warstwa lokalna projektu) & [lokalny plik projektu] & [DO UZUPEŁNIENIA: data pobrania/snapshot] & CC BY 4.0 \\
+\hline
+\textbf{Paryż -- OSM PBF} \\ \texttt{ile-de-france-260111.osm.pbf} & Geofabrik / OpenStreetMap contributors & \url{https://download.geofabrik.de/europe/france/ile-de-france.html} & 2026-01-11 (snapshot z nazwy pliku) & ODbL 1.0 \\
+\hline
+\textbf{Dublin -- GTFS} \\ \texttt{GTFS\_Realtime2.zip} & National Transport Authority (Transport for Ireland) & \url{https://www.transportforireland.ie/transitData/Data/GTFS_Realtime.zip} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & CC BY 4.0 \\
+\hline
+\textbf{Dublin -- Workplace Zones / SAPS} & CSO Ireland & \url{https://www.cso.ie/en/census/census2016reports/workplacezonesand1kmpopulationgrids/} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & CC BY 4.0 \\
+\hline
+\textbf{Dublin -- deprywacja} \\ \texttt{hp-deprivation-index-scores-2022.csv} & Pobal / data.gov.ie & \url{https://data.gov.ie/dataset/pobal-hp-deprivation-index-scores-2022} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & CC BY 4.0 \\
+\hline
+\textbf{Dublin -- OSM PBF} \\ \texttt{ireland-and-northern-ireland-latest.osm.pbf} & Geofabrik / OpenStreetMap contributors & \url{https://download.geofabrik.de/europe/ireland-and-northern-ireland.html} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & ODbL 1.0 \\
+\hline
+\textbf{Warszawa -- GTFS (merge)} \\ \texttt{warsaw.zip, polish\_trains.zip, wkd.zip} / \texttt{warsaw\_merged.zip} & mkuran.pl (feedy operatorów) & \url{https://mkuran.pl/gtfs/} & 2026-04-17 (feedy wejściowe) & Licencje mieszane: ZTM Terms + ODbL / CC BY 4.0 / CC0 1.0 \\
+\hline
+\textbf{Warszawa -- miejsca pracy} \\ \texttt{waw\_miejsca\_pracy.zip} & Data Wise (przekazanie bezpośrednie) & [brak publicznego URL] & [DO UZUPEŁNIENIA: data pozyskania od dostawcy] & Dane niepubliczne (bez otwartej redystrybucji) \\
+\hline
+\textbf{Warszawa -- populacja} \\ NSP 2021 (siatka 1 km) & GUS / GeoStat & \url{https://portal.geo.stat.gov.pl/aktualnosci/dane-o-ludnosci-krajowej-w-siatce-kilometrowej-nsp-2021/} & [DO UZUPEŁNIENIA: data pobrania/snapshot] & Warunki otwartych danych GUS (z atrybucją źródła) \\
+\hline
+\textbf{Warszawa -- SES proxy} \\ \texttt{RCN\_Lokal.gml} + JRC raster & COI/GIS (RCN, przez dostawcę danych) + Joint Research Centre (EC) & [brak publicznego URL dla RCN], \url{https://publications.jrc.ec.europa.eu/repository/} & RCN: [DO UZUPEŁNIENIA], JRC: [DO UZUPEŁNIENIA] & RCN: dane semi-publiczne (ograniczona redystrybucja), JRC: CC BY 4.0 \\
+\hline
+\textbf{Warszawa -- OSM PBF} \\ \texttt{18-warsaw.osm.pbf}, \texttt{mazowieckie-260111.osm.pbf} & Geofabrik / OpenStreetMap contributors & \url{https://download.geofabrik.de/europe/poland.html} & 2026-01-11 (dla \texttt{mazowieckie-260111.osm.pbf}), [DO UZUPEŁNIENIA] dla \texttt{18-warsaw.osm.pbf} & ODbL 1.0 \\
+\hline
+\end{tabularx}
+\caption{Zbiorcze zestawienie źródeł danych wykorzystanych w~badaniu (instytucja, URL, data akwizycji i~warunki licencyjne).}
+\label{tab:datasets_sources_licenses}
+\end{table}
+
 \printbibliography
 
 \end{document}

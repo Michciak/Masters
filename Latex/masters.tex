@@ -236,6 +236,12 @@ Kompleksowa ocena publicznych systemów transportowych, wykraczająca poza ramy 
 
 Weryfikacja tego zjawiska na poziomie modelowania matematycznego wymusza zastosowanie segmentacji demograficznej. We wprowadzonych wcześniej podwójnie ograniczonych modelach grawitacyjnych kluczową rolę odgrywa współczynnik zaniku oporu przestrzennego. Empiryczne analizy przepływów wskazują, że wartość tego parametru wykazuje silną korelację ze statusem materialnym badanej grupy~\cite{capetown, gravity2}. Z~tego względu konieczna staje się jego odrębna kalibracja w~zależności od profilu dochodowego. Osoby o~niższym statusie materialnym, dysponujące ograniczonym budżetem rozporządzalnym, wykazują wyższą wrażliwość na koszty finansowe podróży~–~co bezpośrednio wpisuje się w problematykę przystępności cenowej~–~zmuszając je nierzadko do akceptacji dłuższego czasu dojazdu w~celu optymalizacji wydatków. Z~kolei grupy zamożniejsze charakteryzują się odmienną krzywą popytu~–~ich wrażliwość na straty czasowe jest wyższa, co modyfikuje skłonność do pokonywania oporu przestrzeni~\cite{capetown}.
 
+\section{Luka badawcza i~cele niniejszej pracy}\label{section:luka_badawcza}
+
+\subsection{Motywacja badawcza na tle dotychczasowego stanu wiedzy}
+W~świetle przeprowadzonego przeglądu literatury zarysowuje się wyraźna luka badawcza w~zakresie kompleksowej ewaluacji systemów transportowych. Choć istnieją liczne prace analizujące dostępność transportową, w~przeważającej mierze koncentrują się one na pojedynczych organizmach miejskich, co uniemożliwia szerszą walidację proponowanych metod. Z~kolei nieliczne analizy o~charakterze międzymiejskim często opierają się na uproszczonych miarach wektorowych, rezygnując z~zaimplementowania pełnego uogólnionego kosztu podróży oraz zaawansowanych, dwustronnie ograniczonych modeli grawitacyjnych. Ponadto, ewaluacja sprawiedliwości transportowej (equity) w~dotychczasowych badaniach najczęściej polega na statycznym parametrze oporu i~silnie zależy od idealnych, lokalnych danych socjoekonomicznych, co drastycznie utrudnia rzetelne porównania na poziomie międzynarodowym.
+
+Odpowiadając na fundamentalne pytanie o~to, czego dotychczasowe badania nie realizują wystarczająco dobrze: brakuje w~nich zintegrowania w~jednym ustandaryzowanym narzędziu rozproszonych dotąd elementów. Elementami tymi są: oddzielenie topologii L-space i~P-space, wykorzystanie kosztów WTC bazujących na danych GTFS, implementacja dwustronnie ograniczonych modeli grawitacyjnych oraz wdrożenie analiz zróżnicowania społecznego (parametru $\beta$). Niniejsza praca wypełnia tę lukę, proponując unikalną i~nowatorską syntezę tych zjawisk. Zamiast tworzyć kolejne proste wskaźniki rankingowe oceniające „kto ma lepszą sieć”, praca ta dostarcza wysoce przenaszalny ciąg analityczny (ang. \textit{pipeline}). Jednocześnie świadomie eksponuje ona granice tej przenaszalności, obnażając, jak zróżnicowanie i~jakość ekosystemów Open Data wpływa na możliwości badawcze.
 
 
 \chapter{Architektura Modelu Analitycznego i~Metodologia Badań Przestrzennych}\label{chapter:metodologia}
@@ -841,9 +847,128 @@ Zintegrowanie tak heterogenicznych struktur źródłowych opisujących wymiar tr
 \end{longtable}
 \endgroup
 
-\printbibliography
+  \subsection*{Charakterystyka metodologiczna zbiorów danych}
 
-\end{document}
+  \begingroup
+  \footnotesize
+  \renewcommand{\arraystretch}{1.4}
+  \setlength{\tabcolsep}{4pt}
+
+  \setlength{\LTleft}{-0.7cm}
+  \setlength{\LTright}{-0.7cm}
+
+  \begin{longtable}{
+      >{\raggedright\arraybackslash}p{2.8cm}|
+      >{\raggedright\arraybackslash}p{3.5cm}|
+      >{\raggedright\arraybackslash}p{2.4cm}|
+      >{\raggedright\arraybackslash}p{2.0cm}|
+      >{\raggedright\arraybackslash}p{4.0cm}
+  }
+
+  \caption{Sposób agregacji, rozdzielczość przestrzenna, horyzont czasowy i~implikowane ograniczenia metodologiczne poszczególnych zbiorów danych.}
+  \label{tab:datasets_aggregation_resolution} \\
+  \hline
+  \textbf{Zbiór danych} & \textbf{Sposób agregacji} & \textbf{Rozdzielczość przestrzenna} & \textbf{Horyzont czasowy} & \textbf{Implikowane ograniczenia} \\ \hline
+  \endfirsthead
+
+  \multicolumn{5}{c}{\tablename\ \thetable{} -- Ciąg dalszy ze strony poprzedniej} \\
+  \hline
+  \textbf{Zbiór danych} & \textbf{Sposób agregacji} & \textbf{Rozdzielczość przestrzenna} & \textbf{Horyzont czasowy} & \textbf{Implikowane ograniczenia} \\ \hline
+  \endhead
+
+  \hline
+  \multicolumn{5}{r}{\textit{Ciąg dalszy na następnej stronie...}} \\
+  \endfoot
+
+  \hline
+  \endlastfoot
+
+  \textbf{Paryż -- GTFS} &
+  Agregacja rozkładowa (schedule-based); budowa grafów L/P-space i~macierzy TTM; estymacja czasu oczekiwania jako połowa headway &
+  Przystanek i~linia &
+  Snapshot 2026-04-13 -- 2026-05-15 &
+  Statyczny snapshot nie odwzorowuje zmian sezonowych ani rzeczywistych odchyleń kursów; brak danych o~faktycznym napełnieniu pojazdów \\ \hline
+
+  \textbf{Paryż -- SIRENE} &
+  Zliczanie aktywnych jednostek lokalnych metodą punkt-w-poligonie do siatki 1~km; zmienna \texttt{workplace\_count} jako proxy $D_j$ &
+  Punkt (zakład) $\rightarrow$ siatka 1~km &
+  Stan rejestru ~2026-03 &
+  Liczba podmiotów $\neq$ liczba etatów; brak danych o~wielkości zatrudnienia na poziomie zakładu; brak filtrowania sektorowego po klasyfikacji NAF \\ \hline
+
+  \textbf{Paryż -- dochody INSEE} &
+  Interpolacja wagowana powierzchnią (areal-weighted) ze szczebla gmin do siatki 1~km; zmienne: mediana, $D_1$, $D_9$ &
+  Gmina (commune) $\rightarrow$ siatka 1~km &
+  Rok 2021 &
+  Efekt MAUP przy interpolacji między niezgodnymi geometriami; zakłada jednorodny rozkład dochodu wewnątrz gminy; 5-letni lag względem GTFS \\ \hline
+
+  \textbf{Paryż -- populacja 1~km} &
+  Siatka centroidalna XYZ snapowana do GEOSTAT 1~km (EPSG:3035); sumowanie wartości w~komórce po deduplikacji &
+  Siatka 1~km $\times$ 1~km (GEOSTAT) &
+  Rok 2020 &
+  6-letni lag względem GTFS (2026) oraz 1-letni lag względem danych dochodowych INSEE (2021) \\ \hline
+
+  \textbf{Paryż -- OSM PBF} &
+  Budowa grafu pieszej sieci ulicznej; routing do wyznaczania czasu first/last mile w~modelu WTC &
+  Sieć ulic (węzły i~krawędzie grafu) &
+  Snapshot 2026-01-11 &
+  Dane wolontariackie o~zmiennej jakości przestrzennej; możliwe braki w~pokryciu chodnikami i~ścieżkami pieszo-rowerowymi \\ \hline
+
+  \textbf{Dublin -- GTFS} &
+  Agregacja rozkładowa; budowa grafów L/P-space i~macierzy TTM &
+  Przystanek i~linia &
+  2026-04-15 -- 2026-12-12 &
+  Statyczny snapshot; brak odwzorowania opóźnień i~zmian operacyjnych; feed obejmuje Irlandię, wymaga filtracji do granic obszaru analitycznego \\ \hline
+
+  \textbf{Dublin -- Workplace Zones / SAPS} &
+  Złączenie tabelaryczne SAPS na kluczu Electoral Division; przeniesienie atrybutów do siatki 1~km przez centroidy komórek &
+  Strefa zatrudnieniowa (100--500 os.) $\rightarrow$ siatka 1~km &
+  Census 2016 &
+  10-letni lag względem GTFS; zmiany struktury zatrudnienia i~demografii po 2016~r. niezarejestrowane; granularność stref zmienna przestrzennie \\ \hline
+
+  \textbf{Dublin -- deprywacja HP} &
+  Wskaźnik kompozytowy Haase-Pratschke; wartości z~poziomu Electoral Divisions przypisywane do komórek 1~km przez centroid (reguła dominacji) &
+  Electoral Division (~1400 os.) $\rightarrow$ siatka 1~km &
+  Rok 2022 &
+  Reguła centroidu wprowadza błąd przy granicach stref; wskaźnik HP jest miarą pośrednią deprywacji, nie bezpośrednim pomiarem dochodu \\ \hline
+
+  \textbf{Dublin -- OSM PBF} &
+  Budowa grafu pieszej sieci ulicznej; routing first/last mile &
+  Sieć ulic &
+  Snapshot 2026-02-09 &
+  Dane wolontariackie; jakość pokrycia chodnikami zmienna; plik obejmuje całą Irlandię i~Irlandię Północną \\ \hline
+
+  \textbf{Warszawa -- GTFS} \newline (scalony) &
+  Scalenie trzech feedów z~prefiksowaniem przestrzeni nazw ID; przycięcie kalendarzy do wspólnego przekroju dat; wygenerowanie transferów pieszych ($\leq$200~m) &
+  Przystanek i~linia &
+  2026-04-22 -- 2026-05-22 &
+  Heterogeniczne warunki licencyjne składowych feedów; kolizje ID wymagają prefiksowania; potencjalne luki w~pokryciu transferów między operatorami \\ \hline
+
+  \textbf{Warszawa -- miejsca pracy} &
+  Modelowe oszacowanie dostawcy (Data Wise); agregacja do siatki 1~km; dostępne wyłącznie dla wariantu Core &
+  Siatka (rozdzielczość modelu dostawcy) $\rightarrow$ siatka 1~km &
+  Dane modelowe ~2024 &
+  Brak pełnej dokumentacji metody estymacji; ograniczona audytowalność; dane niepubliczne bez otwartej redystrybucji; niedostępne dla wariantu Extended \\ \hline
+
+  \textbf{Warszawa -- populacja NSP 2021} &
+  Siatka centroidalna NSP snapowana do GEOSTAT 1~km; sumowanie wartości w~komórce &
+  Siatka 1~km $\times$ 1~km &
+  NSP 2021 &
+  Dane dostępne wyłącznie dla granic administracyjnych Warszawy (wariant Core); brak siatki dla 7 powiatów ościennych wariantu Extended \\ \hline
+
+  \textbf{Warszawa -- SES proxy} \newline (RCN + JRC) &
+  Mediana ceny transakcyjnej $\times$ $\log(\text{wolumen})$ z~RCN; mnożnik gęstości zabudowy z~rastra JRC; agregacja do siatki 1~km; dostępne wyłącznie dla wariantu Core &
+  Transakcja punktowa (RCN) + raster JRC $\rightarrow$ siatka 1~km &
+  Transakcje RCN 2024--2026; raster JRC ~2018 &
+  Dane semi-publiczne (RCN); proxy pośredni nie jest bezpośrednim pomiarem zamożności; rozbieżność temporalna komponentów (RCN vs.\ JRC); wyłącznie wariant Core \\ \hline
+
+  \textbf{Warszawa -- OSM PBF} &
+  Budowa grafu pieszej sieci ulicznej; routing first/last mile &
+  Sieć ulic &
+  Snapshot 2026-02-09 &
+  Dane wolontariackie o~zmiennej jakości; plik obejmuje całą Polskę \\ 
+  \end{longtable}
+  \endgroup
+
 
 % %%% Local Variables:
 % %%% mode: latex

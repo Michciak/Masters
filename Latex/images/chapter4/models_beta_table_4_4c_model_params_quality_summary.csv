@@ -1,0 +1,5 @@
+check,pass_rate
+IPF converged,0.8888888888888888
+ipf_iterations >= 0,1.0
+ipf_marginal_err_p95 >= 0,1.0
+ipf_marginal_err_wmean >= 0,1.0

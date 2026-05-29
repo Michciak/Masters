@@ -1,0 +1,25 @@
+stage,stage_label,city_variant,city,extent,base_dir_exists,file_count,artifact_coverage_pct,req_edges_l,req_edges_p,req_metrics_csv_any,req_ttm_parquet_any,req_wtc_matrix,req_origins_geojson,req_destinations_geojson,req_accessibility_grid,req_flows_A,req_flows_B,req_flows_C,req_beta_params,req_maps_png_any,req_gini_png_any
+etap2,Etap II (topologia),dublin_core,dublin,core,True,16,100.0,True,True,True,,,,,,,,,,,
+etap2,Etap II (topologia),dublin_extended,dublin,extended,True,16,100.0,True,True,True,,,,,,,,,,,
+etap2,Etap II (topologia),paris_core,paris,core,True,17,100.0,True,True,True,,,,,,,,,,,
+etap2,Etap II (topologia),paris_extended,paris,extended,True,17,100.0,True,True,True,,,,,,,,,,,
+etap2,Etap II (topologia),warsaw_core,warsaw,core,True,16,100.0,True,True,True,,,,,,,,,,,
+etap2,Etap II (topologia),warsaw_extended,warsaw,extended,True,16,100.0,True,True,True,,,,,,,,,,,
+etap3,Etap III (WTC/GTC),dublin_core,dublin,core,True,17,75.0,,,,False,True,True,True,,,,,,,
+etap3,Etap III (WTC/GTC),dublin_extended,dublin,extended,True,17,75.0,,,,False,True,True,True,,,,,,,
+etap3,Etap III (WTC/GTC),paris_core,paris,core,True,20,75.0,,,,False,True,True,True,,,,,,,
+etap3,Etap III (WTC/GTC),paris_extended,paris,extended,True,19,75.0,,,,False,True,True,True,,,,,,,
+etap3,Etap III (WTC/GTC),warsaw_core,warsaw,core,True,20,75.0,,,,False,True,True,True,,,,,,,
+etap3,Etap III (WTC/GTC),warsaw_extended,warsaw,extended,True,20,75.0,,,,False,True,True,True,,,,,,,
+etap4,Etap IV (modele beta),dublin_core,dublin,core,True,5,100.0,,,,,,,,True,True,True,True,True,,
+etap4,Etap IV (modele beta),dublin_extended,dublin,extended,True,5,100.0,,,,,,,,True,True,True,True,True,,
+etap4,Etap IV (modele beta),paris_core,paris,core,True,5,100.0,,,,,,,,True,True,True,True,True,,
+etap4,Etap IV (modele beta),paris_extended,paris,extended,True,5,100.0,,,,,,,,True,True,True,True,True,,
+etap4,Etap IV (modele beta),warsaw_core,warsaw,core,True,5,100.0,,,,,,,,True,True,True,True,True,,
+etap4,Etap IV (modele beta),warsaw_extended,warsaw,extended,True,5,100.0,,,,,,,,True,True,True,True,True,,
+etap5,Etap V (equity),dublin_core,dublin,core,True,2,100.0,,,,,,,,,,,,,True,True
+etap5,Etap V (equity),dublin_extended,dublin,extended,True,2,100.0,,,,,,,,,,,,,True,True
+etap5,Etap V (equity),paris_core,paris,core,True,2,100.0,,,,,,,,,,,,,True,True
+etap5,Etap V (equity),paris_extended,paris,extended,True,2,100.0,,,,,,,,,,,,,True,True
+etap5,Etap V (equity),warsaw_core,warsaw,core,True,2,100.0,,,,,,,,,,,,,True,True
+etap5,Etap V (equity),warsaw_extended,warsaw,extended,True,2,100.0,,,,,,,,,,,,,True,True

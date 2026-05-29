@@ -1,0 +1,4 @@
+check,pass_rate
+"gini in [0, 1]",1.0
+p95 >= p50,1.0
+max >= p95,1.0

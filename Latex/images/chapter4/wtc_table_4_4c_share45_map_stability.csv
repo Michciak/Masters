@@ -1,0 +1,7 @@
+city_variant,support_min_pairs,n_cells_total,n_cells_with_share_before_mask,n_cells_masked_low_support,n_cells_with_share_after_mask,masked_share_of_valid_before
+dublin_core,20.0,129,107,0,107,0.0
+dublin_extended,20.0,984,706,68,638,0.09631728045325778
+paris_core,20.0,814,808,0,808,0.0
+paris_extended,29.89,12075,11819,928,10891,0.07851764108638633
+warsaw_core,20.0,515,513,0,513,0.0
+warsaw_extended,20.0,5040,2901,559,2342,0.19269217511203032

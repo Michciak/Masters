@@ -1,7 +1,0 @@
-city,city_variant,extent,n_origins,income_nonnull_share,wealth_nonnull_share,jobs_or_employment_nonnull_share
-dublin,dublin_core,core,110,,0.990909090909091,1.0
-dublin,dublin_extended,extended,757,,0.9986789960369881,1.0
-paris,paris_core,core,814,1.0,,
-paris,paris_extended,extended,12019,0.9926782594225809,,
-warsaw,warsaw_core,core,515,,0.8097087378640777,1.0
-warsaw,warsaw_extended,extended,3022,,0.14394440767703506,1.0

@@ -1,7 +1,0 @@
-city_variant,support_min_pairs,n_cells_total,n_cells_with_share_before_mask,n_cells_masked_low_support,n_cells_with_share_after_mask,masked_share_of_valid_before,qa_support_floor_ge_20,qa_has_valid_cells_after_mask,qa_mask_ratio_reasonable
-dublin_core,20.0,129,107,0,107,0.0,True,True,True
-dublin_extended,20.0,984,706,68,638,0.0963172804532577,True,True,True
-paris_core,20.0,814,808,0,808,0.0,True,True,True
-paris_extended,29.89,12075,11819,928,10891,0.0785176410863863,True,True,True
-warsaw_core,20.0,515,513,0,513,0.0,True,True,True
-warsaw_extended,20.0,5040,2901,559,2342,0.1926921751120303,True,True,True

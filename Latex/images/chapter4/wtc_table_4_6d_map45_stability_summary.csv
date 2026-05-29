@@ -1,4 +1,0 @@
-check,pass_rate
-support floor >= 20 pairs,1.0
-valid cells remain after mask,1.0
-mask ratio <= 50%,1.0

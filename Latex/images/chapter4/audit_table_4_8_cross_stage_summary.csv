@@ -1,7 +1,0 @@
-city_variant,city,extent,l_degree_median,l_betweenness_median,p_degree_median,p_betweenness_median,wtc_p50_median,wtc_p90_median,share_under_60_mean,n_od_pairs_mean,n_origins_active,accessibility_c_median,n_access_cells,gini_c,kakwani,ipf_converged_A,ipf_converged_B,ipf_converged_C,ipf_status,metadata_coverage_pct_mean
-paris_core,paris,core,2.0,1.6895300862873087e-05,48.0,0.0,,,,,,121125.73256805305,809.0,,-0.692571063002159,True,True,True,all_converged,
-paris_extended,paris,extended,2.0,3.632673086689085e-06,43.0,0.0,,,,,,287.952367695514,11526.0,,-0.6734872001537612,True,False,False,partial_or_failed,
-dublin_core,dublin,core,2.0,0.0025421875297916,102.0,1.930231230538065e-05,,,,,,15154.961524338578,109.0,,-0.4189829215250531,True,True,True,all_converged,
-dublin_extended,dublin,extended,2.0,0.0011467500080975,158.0,1.874746456887839e-05,,,,,,2315.517223973892,751.0,,-1.5884866306155985,True,True,True,all_converged,
-warsaw_core,warsaw,core,2.0,0.0005117943844858,152.0,2.9226612772379687e-05,,,,,,23921.867984610544,485.0,,-0.3709463811241218,True,True,True,all_converged,
-warsaw_extended,warsaw,extended,2.0,0.0004440246488364,115.0,7.563983439186353e-06,,,,,,1711.979843560124,2127.0,,-0.3443303488001561,True,True,True,all_converged,

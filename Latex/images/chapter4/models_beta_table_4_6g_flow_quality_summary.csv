@@ -1,8 +1,0 @@
-check,pass_rate
-p90 >= p50,1.0
-p95 >= p90,1.0
-p99 >= p95,1.0
-flow min >= 0,1.0
-ipf iterations >= 0,1.0
-ipf err p95 >= 0,1.0
-ipf_converged == True,0.8888888888888888

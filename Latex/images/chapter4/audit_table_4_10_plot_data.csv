@@ -1,9 +1,0 @@
-stage,stage_label,coverage_type,coverage_pct
-etap2,Etap II (topologia),Artifacts,100.0
-etap3,Etap III (WTC/GTC),Artifacts,75.0
-etap4,Etap IV (modele beta),Artifacts,100.0
-etap5,Etap V (equity),Artifacts,100.0
-etap2,Etap II (topologia),Metadata,50.0
-etap3,Etap III (WTC/GTC),Metadata,0.0
-etap4,Etap IV (modele beta),Metadata,0.0
-etap5,Etap V (equity),Metadata,0.0

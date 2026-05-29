@@ -1,7 +1,0 @@
-city_variant,city,extent,n_total_rows,n_sample_rows,beta_min,beta_q05,beta_median,beta_q95,beta_max,qa_beta_min_ge_003,qa_beta_max_le_015
-dublin_core,dublin,core,13191,1500,0.03,0.03,0.09,0.15,0.15,True,True
-dublin_extended,dublin,extended,428928,1500,0.03,0.03,0.09,0.15,0.15,True,True
-paris_core,paris,core,590728,3000,0.03,0.03,0.09,0.15,0.15,True,True
-paris_extended,paris,extended,24758016,75000,0.03,0.03,0.09,0.15,0.15,True,True
-warsaw_core,warsaw,core,247685,1500,0.03,0.03,0.08,0.15,0.15,True,True
-warsaw_extended,warsaw,extended,1202651,4500,0.03,0.06,0.08,0.12,0.15,True,True

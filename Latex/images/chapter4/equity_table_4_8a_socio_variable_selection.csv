@@ -1,7 +1,0 @@
-city_variant,city,extent,socio_variable_used,n_cells_mapped,acc_median,soc_median
-dublin_core,dublin,core,wealth_index,108,17088.704723434006,3.06
-dublin_extended,dublin,extended,wealth_index,750,2311.823072369255,1.3450000000000002
-paris_core,paris,core,income_median,809,121125.73256805305,23920.0
-paris_extended,paris,extended,income_median,11441,295.4918174911146,26830.0
-warsaw_core,warsaw,core,wealth_index,413,28222.8828103196,90501.05631446955
-warsaw_extended,warsaw,extended,wealth_index,431,40546.61313047707,89142.06124794403

@@ -1,7 +1,0 @@
-city_variant,city,extent,mean_share_under_30,mean_share_under_45,mean_share_under_60,n_origins,n_cells_with_data,n_cells_low_support_masked,support_threshold_pairs,hard_mask_threshold_pairs,grid_id_col,summary_cost_col,center_method
-dublin_core,dublin,core,0.1276095336864214,0.18676577984550383,0.5169904612834029,110,107,3,120.0,5.0,ITM1KM,cost_min_strict,median_exact
-dublin_extended,dublin,extended,0.04029705760741121,0.050663234132268004,0.11655329213939523,757,706,51,137.0,5.0,ITM1KM,cost_min_strict,median_exact
-paris_core,paris,core,0.02776731713319945,0.04635892537349243,0.20314810286823418,814,808,6,161.60000000000002,5.0,cell_id,cost_min_strict,median_exact
-paris_extended,paris,extended,0.014134253685273587,0.01734361011246083,0.02780891538561189,12019,11819,200,597.8000000000001,5.0,cell_id,cost_min_strict,mean_streaming
-warsaw_core,warsaw,core,0.04553301183148312,0.0753875801808776,0.297288896195553,515,513,2,120.0,5.0,code,cost_min_strict,median_exact
-warsaw_extended,warsaw,extended,0.03876680939518178,0.046489173179509714,0.07797285999786792,3022,2901,121,375.40000000000003,5.0,code,cost_min_strict,mean_streaming

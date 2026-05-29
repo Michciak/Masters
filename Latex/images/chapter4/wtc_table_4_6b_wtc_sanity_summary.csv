@@ -1,7 +1,0 @@
-check,pass_rate
-p90 >= p50,1.0
-p95 >= p90,1.0
-"share_under_30 in [0,1]",1.0
-"share_under_45 in [0,1]",1.0
-"share_under_60 in [0,1]",1.0
-"unreachable_share in [0,1]",1.0

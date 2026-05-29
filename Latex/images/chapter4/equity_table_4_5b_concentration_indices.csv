@@ -1,0 +1,7 @@
+city,variant,city_variant,socio_variable_used,n_cells,concentration_accessibility,gini_ses,share_Q5,share_Q1,ratio_Q5_Q1
+dublin,core,dublin_core,wealth_index,0,-0.4189829215250531,0.0,,,
+dublin,extended,dublin_extended,wealth_index,0,-0.5884866306155985,1.0,,,
+paris,core,paris_core,income_median,805,-0.5665402921460216,0.12603077085613734,0.03475497800624013,0.5038843705891785,0.0689741139730174
+paris,extended,paris_extended,income_median,9569,-0.5542292982213319,0.11925790193242924,0.11015853359077492,0.1387193191742669,0.7941109734858752
+warsaw,core,warsaw_core,wealth_index,0,-0.24232886891000072,0.1286175122141211,,,
+warsaw,extended,warsaw_extended,wealth_index,0,-0.2135472939484815,0.13078305485167463,,,

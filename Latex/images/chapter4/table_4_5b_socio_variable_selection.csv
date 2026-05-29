@@ -1,0 +1,7 @@
+city,variant,city_variant,socio_variable_used,non_null_share_before_filter,n_cells_after_filter
+dublin,core,dublin_core,wealth_index,0.990909090909091,108
+dublin,extended,dublin_extended,wealth_index,0.9986789960369881,750
+paris,core,paris_core,income_median,1.0,809
+paris,extended,paris_extended,income_median,0.9926782594225809,11441
+warsaw,core,warsaw_core,wealth_index,0.8097087378640777,413
+warsaw,extended,warsaw_extended,wealth_index,0.1451935914552737,431

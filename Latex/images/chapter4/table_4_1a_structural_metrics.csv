@@ -1,0 +1,13 @@
+Wariant,Miasto,Przestrzeń,Węzły,Krawędzie,Komponenty,Udział LCC
+Core,Paryż,L-space,20609,17588,6758,0.602
+Core,Paryż,P-space,20609,610410,6712,0.606
+Core,Dublin,L-space,1998,2579,6,0.952
+Core,Dublin,P-space,1998,122623,5,0.952
+Core,Warszawa,L-space,4523,7080,9,0.967
+Core,Warszawa,P-space,4523,412244,6,0.967
+Extended,Paryż,L-space,53556,52040,17965,0.627
+Extended,Paryż,P-space,53556,1499240,17940,0.631
+Extended,Dublin,L-space,4801,6073,5,0.963
+Extended,Dublin,P-space,4801,462134,4,0.963
+Extended,Warszawa,L-space,6995,10017,7,0.963
+Extended,Warszawa,P-space,6995,559631,6,0.963

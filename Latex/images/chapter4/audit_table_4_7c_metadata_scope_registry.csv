@@ -1,0 +1,13 @@
+stage,stage_label,scope,scope_dir_exists,metadata_coverage_pct,run_info_json,summary_md,inventory_csv,artifacts_index_json
+etap2,Etap II (topologia),core,True,100.0,True,True,True,True
+etap2,Etap II (topologia),extended,True,100.0,True,True,True,True
+etap2,Etap II (topologia),global,True,100.0,True,True,True,True
+etap3,Etap III (WTC/GTC),core,True,0.0,False,False,False,False
+etap3,Etap III (WTC/GTC),extended,True,0.0,False,False,False,False
+etap3,Etap III (WTC/GTC),global,True,100.0,True,True,True,True
+etap4,Etap IV (modele beta),core,True,0.0,False,False,False,False
+etap4,Etap IV (modele beta),extended,True,0.0,False,False,False,False
+etap4,Etap IV (modele beta),global,True,0.0,False,False,False,False
+etap5,Etap V (equity),core,True,0.0,False,False,False,False
+etap5,Etap V (equity),extended,True,0.0,False,False,False,False
+etap5,Etap V (equity),global,True,0.0,False,False,False,False

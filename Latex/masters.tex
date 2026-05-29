@@ -461,7 +461,7 @@ Aby zneutralizować wpływ zjawiska MAUP i~zagwarantować matematyczną porówny
         \setcounter{subfigure}{1} % Ustawiamy licznik na 3, więc następny caption to (d)
         \centering
         \includegraphics[width=0.65\textwidth,keepaspectratio]{Latex/images/chapter3/paris_core_gtfs_full_network_precise_clipped}
-        \caption{Paryż --- wariant Core} % Wyświetli się jako (d)
+        \caption{Paryż} % Wyświetli się jako (d)
     \end{subfigure}
     
     % Główny podpis dla obu stron ląduje tylko tutaj
@@ -900,6 +900,396 @@ Snapshot 2026-02-09 &
 Dane wolontariackie o~zmiennej jakości; plik obejmuje całą Polskę \\ 
 \end{longtable}
 \endgroup
+
+
+\chapter{Prezentacja Materiału Empirycznego}\label{chapter:wyniki}
+
+Niniejszy rozdział pełni funkcję rygorystycznej, neutralnej prezentacji materiału empirycznego uzyskanego w~toku realizacji pięcioetapowego potoku analitycznego opisanego w~rozdziale poprzednim. Jego zadaniem jest zebranie w~jednym miejscu trzech komplementarnych warstw dowodowych: skondensowanego opisu sposobu uzyskania wyników, bezpośredniej prezentacji zestawień tabelarycznych, wykresów oraz map, a~także odniesień do artefaktów zdeponowanych w~repozytorium projektu. Konwencja redakcyjna przyjęta w~rozdziale pozostaje opisowo-prezentacyjna~--- nie zawiera ona ani interpretacji przyczynowo-skutkowej, ani odpowiedzi na sformułowane wcześniej pytania badawcze; jej rola sprowadza się do uporządkowania pełnego materiału dowodowego, który zostanie poddany interpretacji w~rozdziale kolejnym.
+
+Zakres prezentowanych wyników obejmuje cztery zasadnicze warstwy analityczne potoku: analizę topologiczną sieci, estymację uogólnionego kosztu podróży, kalibrację modeli grawitacyjnych oraz ocenę sprawiedliwości przestrzennej dostępności. Etap wstępny, dotyczący przetwarzania i~unifikacji zasobów danych, został wyczerpująco omówiony w~rozdziale poprzednim jako warunek brzegowy dalszych analiz i~nie jest tu powielany.
+
+W~celu uniknięcia powielania treści z~wcześniejszych części pracy przyjęto kilka spójnych zasad redakcyjnych. Po pierwsze, nie powtarza się podstaw teoretycznych, definicji ani uzasadnień metodologicznych, ograniczając się do krótkich odwołań do odpowiednich sekcji pracy. Po drugie, każda sekcja wynikowa zachowuje dwuczęściową strukturę: zwięzły opis procedury obliczeniowej (bez nazw narzędzi programistycznych w~znaczeniu szczegółów implementacyjnych, lecz ze~wskazaniem zastosowanych transformacji, parametrów uruchomień i~kryteriów kontroli jakości) oraz prezentację samego materiału empirycznego. Po trzecie, skale legend oraz schematy klasyfikacji dobierane są~--- co do zasady~--- per kombinacja \mbox{miasto--wariant}; zrezygnowano ze~wspólnej skali międzymiastowej, ponieważ przy dużych różnicach wartości powodowała ona zlewanie się wyników na mapach. Po czwarte, komórki i~warianty pozbawione warstwy źródłowej (np.~Warszawa w~wariancie Extended bez warstwy społeczno-ekonomicznej i~zatrudnienia) oznaczane są jednolitym kolorem braku, z~odpowiednim komentarzem w~podpisie, bez ich cichego usuwania z~map ani tabel.
+
+% =====================================================================
+\section{Wyniki Analizy Topologicznej Sieci}\label{section:wyniki_topologia}
+
+\subsection*{Procedura obliczeniowa}
+
+Warstwę topologiczną oparto na dualizmie reprezentacji L-space oraz P-space, zdefiniowanych formalnie w~sekcjach~\ref{subsection:l-space} oraz~\ref{subsection:p-space}. Wejściem do procedury budowy grafów są znormalizowane tabele rozkładowe w~formacie GTFS, przefiltrowane kaskadowo do dwóch wariantów granicy administracyjnej: rdzeniowego oraz rozszerzonego z~filtrem bliskości przystanków na poziomie 3\,000~m. Specyfika dwóch ośrodków wymusiła dodatkowe interwencje na etapie wejścia: w~przypadku Warszawy konieczne było scalenie trzech niezależnych feedów rozkładowych z~prefiksowaniem identyfikatorów w~celu uniknięcia kolizji, w~przypadku Paryża zaś~--- pominięcie ścieżek geometrycznych linii z~powodu braku tabeli kształtów w~źródle.
+
+Obliczenia metryk centralności przeprowadzono na pojedynczym wątku procesora, natomiast operacje przestrzenne (filtracja do granicy administracyjnej, reprojekcja, agregacja do siatki) wykonano w~lokalnym układzie metrycznym każdego ośrodka (EPSG:2157 dla Dublina, EPSG:2154 dla Paryża oraz EPSG:2180 dla Warszawy). Wszystkie identyfikatory rozkładowe odczytywane są jako łańcuchy znaków, co zabezpiecza wiodące zera identyfikatorów przystanków przed utratą w~procesie przetwarzania liczbowego.
+
+Dla każdej reprezentacji obliczono trzy klasyczne miary centralności: pośrednictwa (\textit{betweenness}), bliskości (\textit{closeness}) oraz wektora własnego (\textit{eigenvector}), zgodnie z~definicjami formalnymi przedstawionymi w~sekcji~\ref{section:analiza_topologiczna}. Centralność bliskości i~harmoniczna wyznaczane są wyłącznie na największej spójnej składowej grafu, a~węzły leżące poza nią pozbawione są wartości tych miar i~zostają wyraźnie oznaczone w~wynikach. Dla bliskości zastosowano korektę Wassermana--Fausta, polegającą na skalowaniu miary przez stosunek rozmiaru komponentu do rozmiaru pełnego grafu.
+
+Z~uwagi na koszt obliczeniowy centralności pośrednictwa, rosnący kwadratowo z~liczbą węzłów, oraz na ograniczenia dostępnego sprzętu obliczeniowego, dla grafów przekraczających przyjęty próg liczebności zastosowano próbkowany estymator Brandesa: pośrednictwo wyznaczano na losowo dobranym podzbiorze 1\,200 węzłów źródłowych dla reprezentacji infrastruktury, 1\,000 dla reprezentacji usług oraz 800 dla miar opartych na ścieżkach najkrótszych, z~ustalonym ziarnem generatora liczb losowych. Aproksymacja próbkowa zachowuje uporządkowanie rangowe węzłów przy dostatecznie dużym podzbiorze~\cite{graph,centrality}, co uzasadnia jej zastosowanie w~analizach porównawczych rangi, nie zaś wartości bezwzględnych. Dla najliczniejszego grafu w~zbiorze (Paryż, P-space w~wariancie rozszerzonym: ponad 20~tys.\ węzłów) pełne obliczenie pośrednictwa nie było wykonalne w~akceptowalnym czasie.
+
+Wartości węzłowe agregowane są do kanonicznej siatki 1~km~$\times$~1~km poprzez przypisanie każdej komórce statystyki agregującej węzły wewnątrz: mediany dla miar reagujących na pojedyncze huby (pośrednictwo, harmoniczna) oraz wartości średniej dla miar lokalnych (stopień). Wybór mediany zamiast średniej podyktowany jest lewo-skośnymi rozkładami centralności~--- nieliczne węzły-huby koncentrują nieproporcjonalnie wysokie wartości pośrednictwa i~dominowałyby nad średnią komórki. Procedurę uruchomiono sześciokrotnie (trzy ośrodki~$\times$~dwa warianty), a~metryki zapisano w~jednolitym schemacie tabelarycznym, co umożliwia bezpośrednie zestawienia per kombinację \mbox{miasto--wariant}.
+
+\subsection*{Materiał empiryczny}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_figure_4_1_centrality_violin_faceted}
+    \caption{Rozkład trzech miar centralności (\textit{betweenness}, \textit{closeness}, \textit{eigenvector}) w~reprezentacjach L-space i~P-space, w~układzie facet \mbox{miasto~$\times$~wariant}. Klasyfikacja: skala liniowa w~obrębie każdej miary; każda miara skalowana niezależnie.}
+    \label{fig:topo_centrality_violin}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_figure_4_2_global_metrics_comparison}
+    \caption{Porównanie metryk globalnych grafów L-space i~P-space pomiędzy miastami i~wariantami: liczba węzłów i~krawędzi, średnia długość ścieżki w~największym spójnym komponencie, średnica komponentu oraz gęstość. Prezentacja graficzna zastępuje tabelaryczne zestawienie statystyk strukturalnych.}
+    \label{fig:topo_global_metrics}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_figure_4_1b_quintile_heatmap}
+    \caption{Heatmapa kwintyli pośrednictwa w~układzie L-space (oś~$x$, infrastruktura) $\times$ P-space (oś~$y$, oferta), panel $3 \times 2$ \mbox{miasto~$\times$~wariant}. Diagonala $L = P$ oznacza zgodność warstwy fizycznej i~operacyjnej; dominacja komórek poniżej diagonali (wysokie~L, niskie~P) wskazuje na infrastrukturę nieobsłużoną ofertowo, powyżej diagonali (niskie~L, wysokie~P)~--- na ofertę nieznajdującą pokrycia w~warstwie fizycznej.}
+    \label{fig:topo_quintile_heatmap}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_figure_4_1d_zero_share_by_city_variant}
+    \caption{Udział węzłów o~zerowej wartości pośrednictwa w~obu reprezentacjach, per kombinacja \mbox{miasto--wariant}. Wykres ilościowo dokumentuje rozmiar peryferii topologicznej i~uzupełnia rozkłady z~Rys.~\ref{fig:topo_centrality_violin} o~informację o~ogonie zerowym, niewidocznym na wykresach typu violin.}
+    \label{fig:topo_zero_share}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_figure_4_1b_bis_loglog_kde}
+    \caption{Estymata gęstości jądrowej (KDE) par (pośrednictwo L-space, pośrednictwo P-space) per węzeł w~skali logarytmicznej, panel \mbox{miasto~$\times$~wariant}. Stanowi rozszerzenie kwintylowej Rys.~\ref{fig:topo_quintile_heatmap} o~ciągłe wartości surowe~--- pozwala oszacować gęstość punktów w~obrębie każdego pola heatmapy oraz zaobserwować ogony rozkładu (węzły skrajnie wysokiej centralności).}
+    \label{fig:topo_loglog_kde}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_map_4_1_betweenness_L_grid}
+    \caption{Przestrzenny rozkład pośrednictwa w~reprezentacji L-space, zagregowany do siatki 1~km~$\times$~1~km. Klasyfikacja: kwantyle dobierane per kombinacja \mbox{miasto--wariant}. Mapa lokalizuje obszary o~wysokim znaczeniu tranzytowym w~warstwie fizycznej infrastruktury sieci.}
+    \label{fig:topo_map_L_betweenness}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_map_4_2_betweenness_P_grid}
+    \caption{Przestrzenny rozkład pośrednictwa w~reprezentacji P-space, zagregowany do siatki 1~km~$\times$~1~km. Klasyfikacja: kwantyle dobierane per kombinacja \mbox{miasto--wariant}. Mapa lokalizuje obszary o~wysokim znaczeniu tranzytowym w~warstwie operacyjnej (siatka linii bez konieczności przesiadek).}
+    \label{fig:topo_map_P_betweenness}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_map_4_1c_diagnostic_diff_P_minus_L}
+    \caption{Mapa różnicowa $\log_{1+x}(\mathrm{betweenness}_P) - \log_{1+x}(\mathrm{betweenness}_L)$ w~siatce 1~km. Klasyfikacja: dwustronna skala wokół zera. Mapa redukuje obciążenie poznawcze związane z~bezpośrednim porównywaniem pary map Rys.~\ref{fig:topo_map_L_betweenness}--\ref{fig:topo_map_P_betweenness} i~lokalizuje obszary, w~których organizacja oferty wyprzedza fizyczną infrastrukturę (wartości dodatnie) lub pozostaje za nią (wartości ujemne).}
+    \label{fig:topo_diff_P_L}
+\end{figure}
+
+% =====================================================================
+\section{Wyniki Estymacji Uogólnionego Kosztu Podróży}\label{section:wyniki_wtc}
+
+\subsection*{Procedura obliczeniowa}
+
+Operacjonalizacja Uogólnionego Kosztu Podróży opiera się na czteroskładnikowej formie Whole Travel Chain zdefiniowanej w~sekcji~\ref{subsection:gtc}; ani wzoru, ani definicji składowych $t^{\text{IVT}}$, $t^{\text{wait}}$, $t^{\text{walk}}$, $p^{\text{transfer}}$ nie powtarza się w~tym miejscu. W~warstwie wynikowej obowiązuje jeden warunek brzegowy: odległość euklidesowa nie jest dopuszczalnym przybliżeniem $c_{ij}$~--- wszystkie składowe wyznaczane są z~sieci.
+
+Macierze czasów podróży wyznaczono z~użyciem silnika routingowego Conveyal~R5, operującego na danych rozkładowych w~formacie GTFS oraz na sieci pieszej OpenStreetMap i~integrującego planowanie rozkładowe z~modelowaniem dojścia pieszego do przystanków. Jednostki pochodzenia i~celu przekazywane do silnika stanowią reprojekcję kanonicznej siatki~1~km do układu WGS84~--- jest to wymóg twardy zastosowanego silnika. Zachowanie identyczności identyfikatorów komórek między tą warstwą a~warstwą modeli grawitacyjnych zapewnia bezpośrednią kompatybilność przestrzenną macierzy uogólnionego kosztu z~warstwami popytu i~atrakcyjności, bez konieczności dodatkowych operacji łączenia przestrzennego.
+
+Routing wykonano dla daty 6~maja 2026~r.\ (wtorek roboczy, poza świętami narodowymi we~wszystkich trzech krajach) w~trzech przedziałach czasowych odjazdu: 06:00--07:30 (szczyt poranny), 11:00--12:30 (dolina międzyszczytowa) oraz 19:00--20:30 (szczyt wieczorny). Wewnątrz każdego okna silnik próbkuje czasy odjazdu w~przedziale~$\pm$5~minut, zamiast domyślnych~$\pm$30~minut~--- decyzja ta redukuje wariancję wyniku względem dokładności czasu odjazdu, zachowując reprezentatywność dla całego okna. Ograniczenia routingu obejmują: maksymalny czas podróży 180~minut, prędkość chodu 1{,}25~m/s oraz maksymalną odległość dojścia pieszego 2\,000~m. Dla każdej kombinacji \mbox{miasto--wariant} próbkowano 750~par pochodzenie--cel z~ustalonym ziarnem generatora liczb losowych~--- jest to kompromis między pokryciem przestrzennym a~budżetem obliczeniowym; pełna macierz dla wariantu rozszerzonego Paryża obejmowałaby rząd wielkości $10^9$ par. Przyjęte wartości graniczne sytuują się w~zakresach raportowanych w~analizach dostępności transportu zbiorowego: prędkość chodu zbliżona do empirycznie obserwowanych 1{,}22--1{,}24~m/s~\cite{metropolitan}, okna czasowe odpowiadające szczytom porannym i~wieczornym oraz dolinie międzyszczytowej, stosowanym w~analizach fluktuacji uogólnionych kosztów~\cite{literature_review,characteristics}, a~maksymalny czas podróży w~rzędzie wielkości odcięć typowo używanych w~symulacjach dostępności~\cite{capetown,gravity2}. Dokładne wartości progowe (2\,000~m, 180~min, 1{,}25~m/s) oraz liczebność próby (750~par) stanowią założenia operacyjne pracy, dobrane jako kompromis pokrycia przestrzennego i~budżetu obliczeniowego.
+
+Czas w~pojeździe oraz całkowity czas podróży zwracane są bezpośrednio przez silnik routingowy na podstawie rozkładu GTFS. Estymator czasu oczekiwania odzwierciedla zatem rzeczywistą częstotliwość kursów, a~nie aproksymację analityczną $T_{\text{wait}} \approx \mathrm{headway}/2$ z~uproszczonej definicji metodologii~--- jest to ulepszenie wobec dotychczasowych podejść opartych na stałym ryczałcie. Kara transferowa szacowana jest \mbox{post-hoc} jako funkcja łącznego czasu podróży: przyjęto próg 15~minut dla podróży krótszych niż 45~minut, z~narzutem 10~minut za każdy szacowany transfer, oraz analogicznie 5~minut na transfer dla podróży dłuższych. Asymetria wag odzwierciedla wyższą relatywną uciążliwość transferu w~krótkich podróżach, w~których czas oczekiwania na peronie stanowi większy udział kosztu łącznego. Sam mechanizm doliczania ekwiwalentu czasowego za przesiadkę do uogólnionego kosztu podróży jest konwencją ugruntowaną w~literaturze~\cite{LUO2019102505,disabilities1}; konkretne wartości progu 15~minut oraz narzutów 10 i~5~minut na transfer przyjęte zostały jako założenie operacyjne pracy, dobrane na podstawie obserwowanej asymetrii uciążliwości w~krótkich i~długich podróżach. Dla relacji, w~których routing sieciowy nie zwrócił wyniku (cel poza zasięgiem w~horyzoncie 180~minut), zastosowano awaryjny estymator oparty na odległości euklidesowej między centroidami komórek z~korektą objazdu 1{,}3 oraz prędkością chodu 1{,}25~m/s, z~górnym ograniczeniem 90~minut; wartości uzyskane tym sposobem stanowią marginalną część zbioru i~są identyfikowalne w~wynikach.
+
+Pełne macierze czasów podróży i~uogólnionego kosztu pozostają artefaktami technicznymi i~nie są publikowane w~tekście głównym z~powodu skali. W~treści rozdziału prezentowane są wyłącznie agregaty: percentyle, krzywe ECDF, mapy mediany oraz mapy udziału relacji w~progu czasowym. Komórki bez aktywnych przystanków w~zasięgu albo osierocone po filtrach administracyjnych oznaczane są wartością pustą i~utrzymywane w~wynikach.
+
+\subsection*{Materiał empiryczny}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{l|c|c|c|c|c}
+        \hline
+        \textbf{Wariant} & \textbf{Okna odjazdu} & \makecell{\textbf{Prędkość} \\ \textbf{chodu [m/s]}} & \makecell{\textbf{Maks.\ dojście} \\ \textbf{[m]}} & \makecell{\textbf{Maks.\ podróż} \\ \textbf{[min]}} & \makecell{\textbf{Próba} \\ \textbf{par OD}} \\ \hline
+        Dublin~Core & 06:00--07:30 / 11:00--12:30 / 19:00--20:30 & 1{,}25 & 2\,000 & 180 & 750 \\ \hline
+        Dublin~Extended & j.w. & 1{,}25 & 2\,000 & 180 & 750 \\ \hline
+        Paryż~Core & j.w. & 1{,}25 & 2\,000 & 180 & 750 \\ \hline
+        Paryż~Extended & j.w. & 1{,}25 & 2\,000 & 180 & 750 \\ \hline
+        Warszawa~Core & j.w. & 1{,}25 & 2\,000 & 180 & 750 \\ \hline
+        Warszawa~Extended & j.w. & 1{,}25 & 2\,000 & 180 & 750 \\ \hline
+    \end{tabular}
+    \caption{Parametry uruchomień warstwy uogólnionego kosztu podróży determinujące porównywalność macierzy pomiędzy ośrodkami i~wariantami. Filtr bliskości przystanków: 0~m dla wariantu rdzeniowego, 3\,000~m dla wariantu rozszerzonego.}
+    \label{tab:wtc_run_parameters}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_2_ecdf_wtc_faceted_city_variant}
+    \caption{Krzywe ECDF uogólnionego kosztu podróży w~trzech oknach czasowych, w~układzie facet \mbox{miasto~$\times$~wariant}. Wykres pokazuje cały rozkład $c_{ij}$ i~umożliwia odczyt udziału relacji poniżej dowolnego progu czasu w~każdym oknie. Klasyfikacja: skala liniowa w~minutach, oś~$y$ od~0 do~1.}
+    \label{fig:wtc_ecdf}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_3_violin_wtc_faceted_city_variant}
+    \caption{Rozkłady uogólnionego kosztu w~układzie violin per kombinacja \mbox{miasto--wariant}. Wykres ujawnia wielomodalność oraz położenie jądra rozkładu kosztu w~obrębie wariantu.}
+    \label{fig:wtc_violin}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_4_cost_components_profile_proxy}
+    \caption{Profil procentowego udziału składowych kosztu podróży (czas w~pojeździe, czas oczekiwania, czas dojścia, kara transferowa) w~formie stacked bar per \mbox{miasto~$\times$~wariant~$\times$~okno czasowe}. Wykres stanowi bezpośredni dowód metodyczny, że uogólniony koszt nie został zredukowany do czasu w~pojeździe~--- ujawnia udział każdej składowej zgodnie z~logiką Whole Travel Chain.}
+    \label{fig:wtc_components}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_5_counterfactual_ivt_vs_wtc_uplift}
+    \caption{Porównanie kontrfaktyczne wartości tych samych statystyk wyznaczonych dla samego czasu w~pojeździe oraz dla pełnego uogólnionego kosztu podróży. Wykres kwantyfikuje narzut metodyczny pełnego łańcucha podróży w~stosunku do redukcyjnego podejścia \mbox{supply-only}.}
+    \label{fig:wtc_counterfactual}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_map_4_3_median_travel_time_panel_3x2}
+    \caption{Przestrzenny rozkład mediany czasu podróży w~siatce 1~km~$\times$~1~km, panel $3 \times 2$ \mbox{miasto~$\times$~wariant}. Klasyfikacja: kwantyle per kombinacja \mbox{miasto--wariant}.}
+    \label{fig:wtc_map_median}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_map_4_4_share_within_45min_panel_3x2}
+    \caption{Udział relacji spełniających próg 45~minut, w~siatce 1~km~$\times$~1~km, panel $3 \times 2$ \mbox{miasto~$\times$~wariant}. Klasyfikacja: kwantyle per kombinacja \mbox{miasto--wariant}.}
+    \label{fig:wtc_map_share45}
+\end{figure}
+
+% =====================================================================
+\section{Wyniki Kalibracji Modeli Grawitacyjnych}\label{section:wyniki_grawitacyjne}
+
+\subsection*{Procedura obliczeniowa}
+
+Wyniki dostępności wygenerowano w~trzech wariantach podwójnie ograniczonego modelu grawitacyjnego, uruchomionych na tej samej macierzy kosztów $c_{ij}$ oraz tej samej warstwie atrakcyjności miejsc pracy: \textbf{Model~A} ze~stałym parametrem oporu $\beta = 0{,}03$, \textbf{Model~B} ze~stałym parametrem $\beta = 0{,}15$ oraz \textbf{Model~C} z~dynamicznym parametrem $\beta = \beta(\mathrm{wealth\_index})$ w~przedziale $[0{,}03;\,0{,}15]$. Trzy modele różnią się wyłącznie wartością parametru $\beta$, przy niezmienionej macierzy kosztów i~warstwach popytu $P_i$ oraz atrakcyjności $E_j$. Parametr $\beta$ kontroluje szybkość zaniku funkcji oporu $f(c_{ij}) = e^{-\beta c_{ij}}$~--- im wyższe $\beta$, tym gwałtowniejszy spadek atrakcyjności celów z~odległością. W~konsekwencji Model~A generuje rozkłady dostępności relatywnie równomierne przestrzennie: duże odległości mają niewielki wpływ na wartość indeksu, a~dostępność odleglejszych celów utrzymuje wysoką wagę. Model~B skupia dostępność wokół krótkich, dostępnych relacji: różnica między centrum aglomeracji a~peryferią jest silnie wzmocniona. Model~C łączy oba profile: obszary zamożne odzwierciedlają profil Modelu~B, uboższe~--- profil Modelu~A. Zestawienie trzech modeli w~tym samym układzie wizualizacji pozwala ocenić, w~jakim stopniu interpretacja dostępności zależy od przyjętego profilu wrażliwości na czas podróży.
+
+Postać funkcji oporu jako negatywnej funkcji wykładniczej oraz uzasadnienie literaturowe wyboru tej rodziny względem rodziny potęgowej zawarte są w~sekcjach~\ref{section:modele_grawitacyjne} oraz~\ref{subsection:gtc} i~nie są tu powtarzane. Granice przedziału $[0{,}03;\,0{,}15]$ wynikają z~przeglądu literatury empirycznej dotyczącej dostępności transportu zbiorowego: wartość $\beta = 0{,}03$ odpowiada profilowi niskiej wrażliwości na czas podróży (długie tolerowane dojazdy, charakterystyczne dla relacji praca--dom w~aglomeracjach o~rozległych obszarach dojazdowych), natomiast $\beta = 0{,}15$~--- profilowi wysokiej wrażliwości (krótkie tolerowane dojazdy, typowe dla podróży nieobowiązkowych lub grup o~niskiej dostępności samochodu). Skrajne wartości tego samego przedziału wykorzystano bezpośrednio jako parametry modeli referencyjnych~A i~B, aby uzyskać dwa graniczne warianty na tej samej macierzy $c_{ij}$. Rząd wielkości przyjętych granic odpowiada wartościom raportowanym w~badaniach kalibracyjnych modeli grawitacyjnych dla transportu zbiorowego~--- statycznie zakładanej wartości $\beta = 0{,}1$~\cite{gravity2} oraz wartości $\beta \approx 0{,}02$ uzyskanej przez dopasowanie krzywej wykładniczej do danych empirycznych~\cite{capetown}. Dokładne granice przedziału $[0{,}03;\,0{,}15]$, liczba pięciu kwintyli oraz liniowa postać mapowania stanowią decyzję analityczną pracy.
+
+W~Modelu~C zmienna zamożności dzielona jest na pięć kwintyli w~obrębie każdego ośrodka, a~następnie kwintyle mapowane są liniowo na przedział $[0{,}03;\,0{,}15]$, przy czym \textbf{wyższa zamożność~$\rightarrow$~wyższe~$\beta$} (większy opór wobec długich dojazdów, odpowiadający wyższej wartości czasu i~szerszemu wyborowi alternatyw modalnych) oraz \textbf{niższa zamożność~$\rightarrow$~niższe~$\beta$} (większa tolerancja długich dojazdów wynikająca z~ograniczonych alternatyw i~charakteru relacji \textit{transit captives}). Dla komórek bez przypisanej zmiennej zamożności (dotyczy przede wszystkim wariantu rozszerzonego Warszawy) przyjęto wartość neutralną $\beta = 0{,}08$, odpowiadającą środkowi przedziału. Jako miarę zamożności wykorzystano medianę dochodów rozporządzalnych z~bazy INSEE Filosofi 2021 dla Paryża oraz syntetyczny wskaźnik zamożności (oparty na wskaźniku deprywacji \mbox{Haase--Pratschke} dla Dublina i~na proxy z~cen nieruchomości dla Warszawy) dla pozostałych ośrodków. Kierunek mapowania (rosnące $\beta$ wraz ze~wzrostem zamożności) jest zgodny z~konwencją literatury empirycznej opisaną w~sekcji~\ref{section:sprawiedliwość}.
+
+Model podwójnie ograniczony kalibrowano iteracyjną procedurą bilansowania (Iterative Proportional Fitting), naprzemiennie aktualizującą czynniki normalizacyjne $A_i$ (równoważące popyt $P_i$) oraz $B_j$ (równoważące pojemność celów $E_j$). Procedurę zaopatrzono w~zabezpieczenia numeryczne (sprzężone skalowanie czynników w~każdej iteracji, adaptacyjne tłumienie kroku przy detekcji oscylacji oraz przycięcie czynników do dziedziny numerycznie stabilnej). Kryterium zbieżności sprawdzane jest cyklicznie i~opiera się na 95.~percentylu względnego błędu marginesów (próg poniżej~2{\,}\%) oraz średniej ważonej błędu marginesów (próg poniżej~0{,}5{\,}\%), przy górnym limicie 1\,500~iteracji. Sama procedura iteracyjnego bilansowania czynników $A_i$ i~$B_j$ aż do spadku odchyleń marginesów poniżej zadanego progu tolerancji jest standardem w~modelach grawitacyjnych dwustronnie ograniczonych~\cite{gravity2,ipf}; konkretne wartości progów 2{\,}\% i~0{,}5{\,}\% oraz limit 1\,500~iteracji stanowią autorskie założenia operacyjne fazy kalibracji. Dla wariantu rozszerzonego Paryża modele~B i~C nie osiągnęły zbieżności w~tym limicie~--- wyniki tych kombinacji oznaczone są w~tabelach i~mapach jako nieskonwergowane i~wyłączone z~porównań ilościowych.
+
+Warstwa atrakcyjności $E_j$ opracowana jest z~danych o~zatrudnieniu w~różnych rozdzielczościach przestrzennych. Dla Dublina dostępna była pełna siatka 1~km~$\times$~1~km z~podziałem na strefy zatrudnienia. Dla Paryża dane obejmują 39~stref funkcjonalnych, dezagregowanych do siatki 1~km poprzez ważenie proporcjonalne strukturą populacyjną. Dla Warszawy zastosowano modelowane proxy zatrudnienia (dane semi-publiczne), dostępne wyłącznie dla wariantu rdzeniowego; ograniczenie to jest expressis verbis odnotowane w~rozdziale metodycznym (sekcja stratyfikacji socjoekonomicznej).
+
+\subsection*{Materiał empiryczny}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{l|c|c|c|c}
+        \hline
+        \textbf{Kombinacja miasto--wariant} & \textbf{Model} & \textbf{$\beta$} & \textbf{Zbieżność} & \textbf{Iteracje} \\ \hline
+        Dublin~Core & A / B / C & 0{,}03 / 0{,}15 / dyn. & T / T / T & 20 / 20 / 20 \\ \hline
+        Dublin~Extended & A / B / C & 0{,}03 / 0{,}15 / dyn. & T / T / T & 20 / 80 / 40 \\ \hline
+        Paryż~Core & A / B / C & 0{,}03 / 0{,}15 / dyn. & T / T / T & 20 / 20 / 20 \\ \hline
+        \textbf{Paryż~Extended} & A / B / C & 0{,}03 / 0{,}15 / dyn. & T / \textbf{N} / \textbf{N} & 20 / 1\,500\textsuperscript{*} / 1\,500\textsuperscript{*} \\ \hline
+        Warszawa~Core & A / B / C & 0{,}03 / 0{,}15 / dyn. & T / T / T & 6 / 60 / 20 \\ \hline
+        Warszawa~Extended & A / B / C & 0{,}03 / 0{,}15 / dyn. & T / T / T & 20 / 20 / 20 \\ \hline
+    \end{tabular}
+    \caption{Status zbieżności procedury iteracyjnego bilansowania dla trzech modeli grawitacyjnych. Wartość T~--- spełnione kryterium zbieżności; \textbf{N}~--- limit iteracji osiągnięty bez spełnienia kryterium. \textsuperscript{*}Wyniki wariantu Paryż~Extended dla modeli~B i~C oznaczone na mapach jako nieskonwergowane.}
+    \label{tab:gravity_ipf_status}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_figure_4_5_beta_distribution}
+    \caption{Rozkład skalibrowanych wartości parametru $\beta$ per kombinacja \mbox{miasto--wariant} dla Modelu~C. Wykres dokumentuje stopień zróżnicowania dynamicznego $\beta$ oraz zakres, w~którym mieszczą się kwantyle: dla większości wariantów rozkład obejmuje pełen przedział $[0{,}03;\,0{,}15]$; dla wariantu rozszerzonego Warszawy zakres między 5.~i~95.~percentylem jest węższy ($\approx$0{,}06--0{,}12) z~powodu większego udziału komórek z~przypisaniem domyślnym.}
+    \label{fig:beta_distribution}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_map_4_6_core_accessibility_ABC_panel_3x3}
+    \caption{Indeks dostępności w~triadzie modeli A/B/C, panel $3 \times 3$ \mbox{miasto~$\times$~model}, wariant rdzeniowy. Klasyfikacja: kwantyle per kombinacja \mbox{miasto--model}. Mapa wizualizuje efekt przyjętej wartości $\beta$ na tym samym profilu kosztów.}
+    \label{fig:gravity_map_core}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_map_4_6_extended_accessibility_ABC_panel_3x3}
+    \caption{Indeks dostępności w~triadzie modeli A/B/C, panel $3 \times 3$ \mbox{miasto~$\times$~model}, wariant rozszerzony. Komórki Paryża w~modelach~B i~C oznaczone są neutralnie zgodnie z~notą z~Tabeli~\ref{tab:gravity_ipf_status} (brak zbieżności procedury bilansowania).}
+    \label{fig:gravity_map_extended}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_map_4_6b_diff_A_minus_C_panel_3x2}
+    \caption{Mapa różnicowa indeksu dostępności Modelu~A względem Modelu~C, panel $3 \times 2$ \mbox{miasto~$\times$~wariant}. Klasyfikacja: dwustronna skala wokół zera. Mapa lokalizuje obszary, w~których wprowadzenie dynamicznego $\beta$ (Model~C) najsilniej redukuje albo zwiększa wartość indeksu względem stałego $\beta = 0{,}03$ (Model~A).}
+    \label{fig:gravity_diff_AC}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_figure_4_6d_accessibility_distribution_boxplot}
+    \caption{Rozkłady indeksu dostępności dla modeli A/B/C w~formie boxplot per kombinacja \mbox{miasto--wariant}. Wykres izoluje efekt modelowania od geografii: pokazuje, jak ten sam parametr $\beta$ przekłada się na położenie i~rozrzut rozkładu wartości indeksu.}
+    \label{fig:gravity_box}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_figure_4_6_model_differences}
+    \caption{Rozkłady różnic między parami modeli (A$-$B, B$-$C, A$-$C) w~skali symlog, panel per kombinacja \mbox{miasto~$\times$~wariant}. Wykres kwantyfikuje wartości różnic komórka po komórce, eksponując zarówno znak (przesunięcie w~górę vs.\ w~dół), jak i~skalę efektu zmiany parametru $\beta$. Próg liniowej części skali symlog ustawiono na wartość~1~--- odpowiada to jednej jednostce indeksu dostępności (interpretowalnej jako wkład jednego celu zatrudnienia przy pełnej sile funkcji oporu) i~zachowuje czytelność znaku dla małych efektów, kompresując jednocześnie ogony rozkładu sięgające 3--4 rzędów wielkości.}
+    \label{fig:gravity_differences}
+\end{figure}
+
+% =====================================================================
+\section{Wyniki Analizy Sprawiedliwości Transportowej}\label{section:wyniki_equity}
+
+\subsection*{Procedura obliczeniowa}
+
+Warstwa dostępności wygenerowana w~Modelu~C powiązana jest per komórkę z~warstwą społeczno-ekonomiczną, z~zachowaniem topologii kanonicznej siatki~1~km. Wybór konkretnych źródeł i~pochodne ograniczenia (INSEE Filosofi 2021 dla Paryża, indeks deprywacji \mbox{Haase--Pratschke} 2022 dla Dublina, proxy z~Rejestru Cen Nieruchomości dla Warszawy) opisane są w~sekcji~\ref{section:sprawiedliwość} i~nie są tu powtarzane. Wybór zmiennej społeczno-ekonomicznej per kombinacja \mbox{miasto--wariant} realizowany jest według priorytetu: wskaźnik zamożności lub mediana dochodów rozporządzalnych w~pierwszej kolejności; w~przypadku niewystarczającego pokrycia przestrzennego wybierana jest zmienna o~najwyższym pokryciu spośród dostępnych proxy.
+
+Indeks Giniego wyznaczono ważony populacją komórki, oddzielnie dla każdego z~trzech modeli i~każdej kombinacji \mbox{miasto--wariant}. Zestawienie wartości Giniego dla modeli~A, B i~C na tej samej populacji pozwala oddzielić wpływ przyjętego $\beta$ na koncentrację dostępności od czynników przestrzennych. Oprócz Giniego obliczono wskaźnik koncentracji (Concentration Index), odnoszący rozkład dostępności do rangi zmiennej socjoekonomicznej~--- ujemne wartości tego wskaźnika świadczą o~progresywności rozkładu, czyli o~wyższym udziale dostępności w~grupach o~niższej zamożności~--- oraz stosunek sumarycznej dostępności ważonej populacją w~najwyższym kwintylu (Q5) do najniższego (Q1). Wybór pięciu kwintyli podyktowany jest kompromisem między rozdzielczością klasy socjoekonomicznej a~liczebnością obserwacji per klasa: przy 109~komórkach w~wariancie rdzeniowym Dublina podział decylowy dawałby około 11~obserwacji na klasę, co ograniczałoby stabilność rozkładów warunkowych; pięć kwintyli zapewnia minimalną liczebność około 22~komórek na klasę. Stratyfikacja socjoekonomiczna w~badaniach dostępności transportu zbiorowego wykorzystuje różne schematy podziału (np.\ podział na cztery klasy zamożności lub ciągłe krzywe Lorenza~\cite{capetown}); wybór pięciu kwintyli w~niniejszej pracy ma charakter pragmatycznej decyzji analitycznej.
+
+Komórki bez przypisanej zmiennej socjoekonomicznej nie są usuwane z~obliczeń indeksu Giniego i~wskaźnika koncentracji~--- uczestniczą w~nich z~wagą wynikającą z~populacji, lecz nie wnoszą wkładu do rangowania socjoekonomicznego. Decyzja ta wynika z~konsekwentnej zasady zachowania komórek o~brakujących warstwach: usunięcie ich po cichu prowadziłoby do sztucznego zawyżenia wskaźników koncentracji dla wariantów o~niekompletnym pokryciu warstwy społeczno-ekonomicznej, w~szczególności dla wariantu rozszerzonego Warszawy i~peryferyjnej części wariantu rozszerzonego Dublina. W~mapach biwariantowych komórki te oznaczane są jednolitym kolorem braku.
+
+Wizualizacja jednoczesna dwóch wymiarów (dostępność~$\times$~zmienna społeczno-ekonomiczna) opiera się na schemacie $3 \times 3$ tercili; legenda mapy biwariantowej ma postać kwadratu $3 \times 3$, nie zaś pojedynczego gradientu. Dla wybranego ośrodka generowana jest dodatkowo mapa różnicowa profilu sprawiedliwości (wariant rozszerzony$-$rdzeniowy), pozwalająca zlokalizować obszary najsilniejszej zmiany profilu przy zmianie delimitacji.
+
+\subsection*{Materiał empiryczny}
+
+\begin{table}[H]
+    \centering
+    \small
+    \renewcommand{\arraystretch}{1.3}
+    \begin{tabular}{l|r|r|r|r}
+        \hline
+        \textbf{Kombinacja miasto--wariant} & \textbf{$n_{\text{komórek}}$} & \textbf{Gini (Model~A)} & \textbf{Gini (Model~B)} & \textbf{Gini (Model~C)} \\ \hline
+        Dublin~Core & 109 & 0{,}17 & 0{,}52 & 0{,}51 \\ \hline
+        Dublin~Extended & 751 & 0{,}25 & 0{,}63 & 0{,}66 \\ \hline
+        Paryż~Core & 809 & 0{,}21 & 0{,}59 & 0{,}64 \\ \hline
+        Paryż~Extended & 11\,526 & 0{,}35 & 0{,}73 & 0{,}67 \\ \hline
+        Warszawa~Core & 485 & 0{,}17 & 0{,}49 & 0{,}47 \\ \hline
+        Warszawa~Extended & 2\,127 & 0{,}31 & 0{,}66 & 0{,}57 \\ \hline
+    \end{tabular}
+    \caption{Indeks Giniego wyznaczony dla trzech modeli grawitacyjnych, ważony populacją komórki. Wartości raportowane jednolicie dla wszystkich kombinacji \mbox{miasto--wariant} na tej samej populacji par pochodzenie--cel.}
+    \label{tab:equity_gini}
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/equity_figure_4_7_lorenz_curves_panel_3x2}
+    \caption{Krzywe Lorenza dla Modelu~C, panel $3 \times 2$ \mbox{miasto~$\times$~wariant}. Oś~$x$~--- skumulowany udział populacji uporządkowanej rosnąco wg wartości dostępności; oś~$y$~--- skumulowany udział sumarycznej dostępności. Im większe odchylenie krzywej od przekątnej, tym wyższa koncentracja dostępności w~ośrodku.}
+    \label{fig:equity_lorenz}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth,keepaspectratio]{Latex/images/chapter4/equity_figure_4_8_city_distribution_comparison}
+    \caption{Porównanie rozkładów indeksu dostępności Modelu~C między ośrodkami w~obu wariantach. Wykres oddziela kwestię rozkładu od geometrii map i~ułatwia porównanie median, rozstępu międzykwartylowego oraz ogonów rozkładu.}
+    \label{fig:equity_distribution}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/equity_map_4_8_bivariate_accessibility_socio_panel_3x2}
+    \caption{Mapa biwariantowa dostępność~$\times$~zmienna socjoekonomiczna (Model~C), panel $3 \times 2$ \mbox{miasto~$\times$~wariant}. Klasyfikacja: tercile per oś (legenda $3 \times 3$). Komórki bez warstwy społeczno-ekonomicznej (w~szczególności wariant rozszerzony Warszawy) oznaczone są jednolitym kolorem braku.}
+    \label{fig:equity_bivariate}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth,keepaspectratio]{Latex/images/chapter4/equity_figure_4_9b_access_vs_ses_scatter}
+    \caption{Wykres rozrzutu indeksu dostępności Modelu~C względem zmiennej socjoekonomicznej per komórka, panel per ośrodek. Wykres umożliwia bezpośredni odczyt kierunku i~siły zależności na poziomie komórki, bez przechodzenia w~formalny test korelacji.}
+    \label{fig:equity_scatter}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/equity_figure_4_9c_access_by_ses_quintile}
+    \caption{Rozkłady indeksu dostępności w~kwintylach zmiennej socjoekonomicznej per kombinacja \mbox{miasto--wariant}. Wykres pokazuje rozkład warunkowy dostępności w~obrębie kolejnych kwintyli zamożności i~stanowi operacyjne uzupełnienie krzywych Lorenza z~Rys.~\ref{fig:equity_lorenz}.}
+    \label{fig:equity_quintiles}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth,keepaspectratio]{Latex/images/chapter4/equity_map_4_8b_bivariate_difference_core_extended}
+    \caption{Mapa różnicowa profilu biwariantowego (wariant rozszerzony$-$rdzeniowy) dla wybranego ośrodka. Klasyfikacja: dwustronna skala wokół zera, lokalizująca obszary o~największej zmianie profilu sprawiedliwości przy zmianie wariantu delimitacji.}
+    \label{fig:equity_bivariate_diff}
+\end{figure}
+
+% % =====================================================================
+% \section{Synteza Przekrojowa i~Kompletność Materiału Dowodowego}\label{section:wyniki_audit}
+
+% \subsection*{Procedura obliczeniowa}
+
+% Po każdej z~warstw analitycznych potoku wykonywany jest pełny inwentarz artefaktów wraz z~towarzyszącymi plikami metadanych (rejestr uruchomień, podsumowanie, indeks artefaktów, inwentarz), z~zaznaczeniem pozycji brakujących. W~szczególności należy odnotować, że dla warstw modeli grawitacyjnych oraz sprawiedliwości transportowej rejestr uruchomień jest dotychczas niekompletny~--- jest to znana luka dokumentacyjna, niewpływająca na replikowalność wyników (parametry są odzyskiwalne z~tabel kalibracyjnych i~z~nazw artefaktów wynikowych).
+
+% Aby zestawienia w~sekcji wynikowej były interpretowalne, wszystkie statystyki sprowadzane są do trzech wspólnych jednostek odniesienia: po pierwsze, do wspólnej topologii siatki 1~km~$\times$~1~km w~układzie EPSG:3035 (GEOSTAT); po drugie, do tej samej daty referencyjnej rozkładu (6~maja 2026~r., wtorek roboczy) oraz tych samych trzech okien czasowych; po trzecie, do tych samych progów percentyli oraz progu czasu (45~minut) dla wskaźnika udziału relacji.
+
+% Heterogeniczność źródeł danych pomiędzy ośrodkami odnotowywana jest w~postaci rejestru ograniczeń: brak warstwy społeczno-ekonomicznej dla wariantu rozszerzonego Warszawy, brak tabeli kształtów geometrycznych w~rozkładzie GTFS Paryża, charakter modelowanych danych zatrudnienia dla Warszawy (proxy z~ograniczoną dokumentacją metody estymacji). Rejestr pełni rolę informacyjną i~metodologiczną~--- nie zaś wartościującą.
+
+% \subsection*{Materiał empiryczny}
+
+% Sekcja ma charakter syntetyczno-opisowy: prezentuje skondensowany materiał porównawczy obejmujący wszystkie warstwy analityczne potoku w~jednym układzie oraz raportuje stan kompletności artefaktów i~zakres różnic między wariantami delimitacji. Z~uwagi na to, że dwie odrębne wizualizacje audytowe (heatmapa pokrycia oraz panel delt wariantów) powielają informacje już zawarte w~tabelach źródłowych poszczególnych warstw, zrezygnowano z~ich osadzania na rzecz prezentacji tabelarycznej oraz opisu w~prozie.
+
+% \begin{table}[H]
+%     \centering
+%     \small
+%     \renewcommand{\arraystretch}{1.3}
+%     \begin{tabular}{l|r|r|r|r|c}
+%         \hline
+%         \textbf{Kombinacja miasto--wariant} & \textbf{$c_{ij}$~$p_{50}$ [min]} & \textbf{$\leq$~45 min [\%]} & \textbf{$A^{(C)}$ mediana} & \textbf{Gini $A^{(C)}$} & \textbf{Zbieżność A/B/C} \\ \hline
+%         Paryż~Core & 92 & 4{,}5 & 121\,126 & 0{,}64 & T~/~T~/~T \\ \hline
+%         Paryż~Extended & 166 & 0{,}6 & 288 & 0{,}67 & T~/~\textbf{N}~/~\textbf{N} \\ \hline
+%         Dublin~Core & 65 & 18{,}1 & 15\,155 & 0{,}51 & T~/~T~/~T \\ \hline
+%         Dublin~Extended & 119 & 2{,}8 & 2\,316 & 0{,}66 & T~/~T~/~T \\ \hline
+%         Warszawa~Core & 79 & 7{,}1 & 23\,922 & 0{,}47 & T~/~T~/~T \\ \hline
+%         Warszawa~Extended & 144 & 1{,}1 & 1\,712 & 0{,}57 & T~/~T~/~T \\ \hline
+%     \end{tabular}
+%     \caption{Syntetyczne zestawienie wyników między ośrodkami i~wariantami: mediana uogólnionego kosztu podróży, udział relacji w~progu 45~minut, mediana indeksu dostępności Modelu~C, indeks Giniego ważony populacją (Model~C) oraz status zbieżności procedury bilansowania dla trzech modeli. Próg 45~minut spójny z~progiem zastosowanym na Rys.~\ref{fig:wtc_map_share45}. Wartości kosztu oraz udziału $\leq$~45~min uśrednione po trzech oknach czasowych. Pogrubienie~\textbf{N} oznacza brak zbieżności (limit 1\,500~iteracji).}
+%     \label{tab:cross_stage_summary}
+% \end{table}
+
+% \paragraph{Pokrycie materiału dowodowego.} Pokrycie artefaktów mierzone jest na dwóch osiach: obecność wymaganych plików wynikowych oraz obecność towarzyszących metadanych (rejestr uruchomień, podsumowanie, indeks artefaktów, inwentarz). Wskaźnik łączony stanowi średnią obu osi.
+
+% \begin{table}[H]
+%     \centering
+%     \small
+%     \renewcommand{\arraystretch}{1.3}
+%     \begin{tabular}{l|r|r|r}
+%         \hline
+%         \textbf{Warstwa analityczna} & \textbf{Artefakty [\%]} & \textbf{Metadane [\%]} & \textbf{Pokrycie łączne [\%]} \\ \hline
+%         Analiza topologiczna & 100 & 50 & 75{,}0 \\ \hline
+%         Uogólniony koszt podróży & 75 & 0 & 37{,}5 \\ \hline
+%         Modele grawitacyjne & 100 & 0 & 50{,}0 \\ \hline
+%         Sprawiedliwość transportowa & 100 & 0 & 50{,}0 \\ \hline
+%     \end{tabular}
+%     \caption{Pokrycie materiału dowodowego w~rozbiciu na cztery warstwy analityczne. Luka 25~punktów procentowych w~pokryciu artefaktów warstwy uogólnionego kosztu wynika ze~świadomej decyzji metodologicznej (pełne macierze czasów podróży pozostają plikami technicznymi); zerowe pokrycie metadanych dla trzech ostatnich warstw odzwierciedla znaną lukę dokumentacyjną.}
+%     \label{tab:audit_coverage}
+% \end{table}
+
+% \paragraph{Efekt zmiany wariantu delimitacji.} Przejście z~wariantu rdzeniowego do rozszerzonego skutkuje w~każdym z~trzech ośrodków spójnym, kierunkowo identycznym profilem zmian. Mediana kosztu podróży rośnie silnie (Paryż~+80{,}4{\,}\%, Dublin~+83{,}1{\,}\%, Warszawa~+82{,}3{\,}\%). Udział relacji w~progu 45~minut spada gwałtownie (odpowiednio $-86{,}2$, $-84{,}4$ oraz $-83{,}8$ punktu procentowego względnego). Mediana indeksu dostępności Modelu~C ulega wielokrotnemu zmniejszeniu (Paryż~$-99{,}8{\,}\%$, Dublin~$-84{,}7{\,}\%$, Warszawa~$-92{,}8{\,}\%$). Indeks Giniego ważony populacją rośnie monotonicznie we~wszystkich trzech przypadkach (Paryż~$+3{,}4{\,}\%$, Dublin~$+30{,}8{\,}\%$, Warszawa~$+19{,}7{\,}\%$), wskazując na większą koncentrację dostępności w~wariancie rozszerzonym. Pełen zestaw delt jest dostępny jako artefakt pomocniczy w~repozytorium projektu.
+
+% % =====================================================================
+% \section{Macierz Robocza do Rozdziału Interpretacyjnego}\label{section:wyniki_macierz}
+% 
+% Poniższe zestawienie porządkuje zakres materiału dowodowego zgromadzonego w~niniejszym rozdziale, wskazując odpowiadające mu warstwy analityczne potoku oraz odsyłając do sekcji rozdziału, w~których prezentowane są właściwe artefakty wynikowe. Macierz ta nie odpowiada na pytania badawcze; jej rolą jest jedynie uporządkowanie materiału, który zostanie wykorzystany w~rozdziale kolejnym.
+% 
+% \begin{table}[H]
+%     \centering
+%     \small
+%     \renewcommand{\arraystretch}{1.4}
+%     \begin{tabular}{c|p{5.5cm}|c|p{4.5cm}}
+%         \hline
+%         \textbf{Id pakietu} & \textbf{Zakres wyników} & \textbf{Sekcja} & \textbf{Warstwa potoku} \\ \hline
+%         R-01 & Topologia sieci (L/P-space, trzy miary centralności) & \ref{section:wyniki_topologia} & Analiza topologiczna \\ \hline
+%         R-02 & Uogólniony koszt podróży & \ref{section:wyniki_wtc} & Routing rozkładowy i~estymacja $c_{ij}$ \\ \hline
+%         R-03 & Modele grawitacyjne A/B/C oraz kalibracja $\beta$ & \ref{section:wyniki_grawitacyjne} & Modele interakcji przestrzennych \\ \hline
+%         R-04 & Sprawiedliwość transportowa, Gini/Lorenz, mapy biwariantowe & \ref{section:wyniki_equity} & Analiza sprawiedliwości \\ \hline
+%         R-05 & Porównywalność wyników i~kompletność artefaktów & \ref{section:wyniki_audit} & Audyt przekrojowy \\ \hline
+%     \end{tabular}
+%     \caption{Macierz robocza zakresu wyników wykorzystanych do interpretacji w~rozdziale kolejnym.}
+%     \label{tab:results_matrix}
+% \end{table}
+% 
+% Reguła końcowa rozdziału: prezentacja wyników pozostaje neutralna i~opisowa; interpretacja oraz odpowiedzi na pytania badawcze zostają sformułowane dopiero w~rozdziale następnym.
+
+
 
 
 \chapter*{Zestawienie wykorzystanych zbiorów danych}

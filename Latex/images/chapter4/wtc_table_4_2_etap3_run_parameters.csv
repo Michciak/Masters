@@ -1,0 +1,7 @@
+city_variant,city,extent,analysis_date,departure_time_window,walk_speed_mps,max_walk_distance_m,max_trip_duration_min,od_sample_k,seed,stops_proximity_buffer_m,matrix_rows_sum_from_qc
+dublin_core,dublin,core,,06:00:00 - 7:30:00 | 11:00:00 - 12:30:00 | 19:00:00 - 20:30:00,1.25,2000,180,750,,0,42570.0
+dublin_extended,dublin,extended,,06:00:00 - 7:30:00 | 11:00:00 - 12:30:00 | 19:00:00 - 20:30:00,1.25,2000,180,750,,3000,1930350.0
+paris_core,paris,core,,06:00:00 - 7:30:00 | 11:00:00 - 12:30:00 | 19:00:00 - 20:30:00,1.25,2000,180,750,,0,1987788.0
+paris_extended,paris,extended,,06:00:00 - 7:30:00 | 11:00:00 - 12:30:00 | 19:00:00 - 20:30:00,1.25,2000,180,750,,3000,433369083.0
+warsaw_core,warsaw,core,,06:00:00 - 7:30:00 | 11:00:00 - 12:30:00 | 19:00:00 - 20:30:00,1.25,2000,180,750,,0,795675.0
+warsaw_extended,warsaw,extended,,06:00:00 - 7:30:00 | 11:00:00 - 12:30:00 | 19:00:00 - 20:30:00,1.25,2000,180,750,,3000,27397452.0

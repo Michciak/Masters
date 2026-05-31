@@ -232,6 +232,8 @@ Kolejnym istotnym elementem łańcucha podróży jest skumulowany czas oczekiwan
 \subsection{Penalizacja przesiadek}\label{subsection:przesiadki}
 Proces przesiadania się stanowi dla użytkownika dodatkowe obciążenie. Poza fizyczną stratą czasu na przemieszczenie się między przystankami i~oczekiwanie na kolejny pojazd, wprowadza on dyskomfort psychologiczny i~wymaga nakładu dodatkowego wysiłku. W~celu wiarygodnego odzwierciedlenia tego oporu w~algorytmach wyznaczania najkrótszych ścieżek, stosuje się penalizację transferów. Sprowadza się to zazwyczaj do zaimplementowania tzw. kary przesiadkowej (ang. \textit{transfer penalty cost}), przybierającej postać ekwiwalentu czasu doliczanego do całkowitego kosztu podróży za każdą zmianę linii. W~badaniach empirycznych nad sieciami transportowymi często przyjmuje się zryczałtowaną wartość karną (np. 5~minut dodatkowego obciążenia) za sam fakt wymuszenia na pasażerze transferu~\cite{LUO2019102505}.
 
+% W~niniejszej pracy kara przesiadkowa traktowana jest jednak jako element ram teoretycznych, a~nie jako osobny składnik doliczany do empirycznych macierzy kosztu. Decyzja ta wynika z~dwóch ograniczeń operacyjnych. Po pierwsze, silnik routingowy wykorzystany zwraca już całkowity czas podróży obejmujący dojścia piesze, oczekiwanie oraz transfery wynikające z~rozkładu jazdy, dlatego arbitralne doliczenie dodatkowego narzutu mogłoby prowadzić do częściowego podwójnego liczenia uciążliwości przesiadek. Po drugie, porównanie Paryża, Dublina i~Warszawy wymaga zachowania możliwie jednolitej definicji impedancji, podczas gdy liczba i~charakter przesiadek nie są dostępne z~jednakową wiarygodnością dla wszystkich wariantów przestrzennych. Z~tego względu w~warstwie obliczeniowej przyjęto konserwatywne rozwiązanie: transfery uwzględniane są przez rzeczywisty czas przejścia i~oczekiwania w~łańcuchu podróży, bez dodatkowej, ryczałtowej kary behawioralnej.
+
 \subsection{Uogólniony Koszt Podróży (GTC)}\label{subsection:gtc}
 Agregacja omówionych wyżej składowych pozwala na wyznaczenie kompleksowej miary syntetycznej, jaką jest Uogólniony Koszt Podróży (ang. \textit{Generalized Travel Cost}~–~GTC). W analityce układów transportowych dopiero tak wyliczony koszt stanowi poprawną metodologicznie bazę do estymacji parametru impedancji w~modelach grawitacyjnych, ponieważ obiektywnie odwzorowuje faktyczną barierę wysiłku pokonywania przestrzeni przez człowieka. Bez wdrożenia modelu całego łańcucha podróży i~funkcji GTC do analiz interakcji, pomiary dostępności rynków pracy czy usług mogą prowadzić do błędnych wniosków, oderwanych od logiki funkcjonowania systemów operacyjnych i~rzeczywistych zachowań przestrzennych podróżnych~\cite{LUO2019102505}.
 
@@ -819,22 +821,22 @@ Zintegrowanie tak heterogenicznych struktur źródłowych opisujących wymiar tr
 Agregacja rozkładowa (schedule-based); budowa grafów L/P-space i~macierzy TTM; estymacja czasu oczekiwania jako połowa headway &
 Przystanek i~linia &
 Snapshot 2026-04-13 -- 2026-05-15 &
-Statyczny snapshot nie odwzorowuje zmian sezonowych ani rzeczywistych odchyleń kursów; brak danych o~faktycznym napełnieniu pojazdów \\ \hline
+Statyczny snapshot nie odwzorowuje zmian sezonowych ani rzeczywistych odchyleń kursów; brak danych o~faktycznym napełnieniu pojazdów; brak odwzorowania opóźnień i~zmian operacyjnych \\ \hline
 
 \textbf{Paryż -- SIRENE} &
 Zliczanie aktywnych jednostek lokalnych metodą punkt-w-poligonie do siatki 1~km; zmienna \texttt{workplace\_count} jako proxy $D_j$ &
 Punkt (zakład) $\rightarrow$ siatka 1~km &
 Stan rejestru ~2026-03 &
-Liczba podmiotów $\neq$ liczba etatów; brak danych o~wielkości zatrudnienia na poziomie zakładu; brak filtrowania sektorowego po klasyfikacji NAF \\ \hline
+Brak danych o~wielkości zatrudnienia na poziomie zakładu; brak filtrowania sektorowego po klasyfikacji NAF \\ \hline
 
 \textbf{Paryż -- dochody INSEE} &
 Interpolacja wagowana powierzchnią (areal-weighted) ze szczebla gmin do siatki 1~km; zmienne: mediana, $D_1$, $D_9$ &
 Gmina (commune) $\rightarrow$ siatka 1~km &
 Rok 2021 &
-Efekt MAUP przy interpolacji między niezgodnymi geometriami; zakłada jednorodny rozkład dochodu wewnątrz gminy; 5-letni lag względem GTFS \\ \hline
+Zakłada jednorodny rozkład dochodu wewnątrz gminy; 5-letni lag względem GTFS \\ \hline
 
 \textbf{Paryż -- populacja 1~km} &
-Siatka centroidalna XYZ snapowana do GEOSTAT 1~km (EPSG:3035); sumowanie wartości w~komórce po deduplikacji &
+Siatka centroidalna XYZ snapowana do GEOSTAT 1~km; sumowanie wartości w~komórce po deduplikacji &
 Siatka 1~km $\times$ 1~km (GEOSTAT) &
 Rok 2020 &
 6-letni lag względem GTFS (2026) oraz 1-letni lag względem danych dochodowych INSEE (2021) \\ \hline
@@ -843,13 +845,13 @@ Rok 2020 &
 Budowa grafu pieszej sieci ulicznej; routing do wyznaczania czasu first/last mile w~modelu WTC &
 Sieć ulic (węzły i~krawędzie grafu) &
 Snapshot 2026-01-11 &
-Dane wolontariackie o~zmiennej jakości przestrzennej; możliwe braki w~pokryciu chodnikami i~ścieżkami pieszo-rowerowymi \\ \hline
+Możliwe braki w~pokryciu chodnikami i~ścieżkami pieszo-rowerowymi \\ \hline
 
 \textbf{Dublin -- GTFS} &
-Agregacja rozkładowa; budowa grafów L/P-space i~macierzy TTM &
+Agregacja rozkładowa (schedule-based); budowa grafów L/P-space i~macierzy TTM; estymacja czasu oczekiwania jako połowa headway &
 Przystanek i~linia &
 2026-04-15 -- 2026-12-12 &
-Statyczny snapshot; brak odwzorowania opóźnień i~zmian operacyjnych; feed obejmuje Irlandię, wymaga filtracji do granic obszaru analitycznego \\ \hline
+Statyczny snapshot nie odwzorowuje zmian sezonowych ani rzeczywistych odchyleń kursów; brak danych o~faktycznym napełnieniu pojazdów; brak odwzorowania opóźnień i~zmian operacyjnych \\ \hline
 
 \textbf{Dublin -- Workplace Zones / SAPS} &
 Złączenie tabelaryczne SAPS na kluczu Electoral Division; przeniesienie atrybutów do siatki 1~km przez centroidy komórek &
@@ -861,19 +863,19 @@ Census 2016 &
 Wskaźnik kompozytowy Haase-Pratschke; wartości z~poziomu Electoral Divisions przypisywane do komórek 1~km przez centroid (reguła dominacji) &
 Electoral Division (~1400 os.) $\rightarrow$ siatka 1~km &
 Rok 2022 &
-Reguła centroidu wprowadza błąd przy granicach stref; wskaźnik HP jest miarą pośrednią deprywacji, nie bezpośrednim pomiarem dochodu \\ \hline
+4-letni lag względem GTFS; reguła centroidu wprowadza błąd przy granicach stref; wskaźnik HP jest miarą pośrednią deprywacji, nie bezpośrednim pomiarem dochodu \\ \hline
 
 \textbf{Dublin -- OSM PBF} &
 Budowa grafu pieszej sieci ulicznej; routing first/last mile &
 Sieć ulic &
 Snapshot 2026-02-09 &
-Dane wolontariackie; jakość pokrycia chodnikami zmienna; plik obejmuje całą Irlandię i~Irlandię Północną \\ \hline
+Możliwe braki w~pokryciu chodnikami i~ścieżkami pieszo-rowerowymi; brak odwzorowania opóźnień i~zmian operacyjnych \\ \hline
 
 \textbf{Warszawa -- GTFS} \newline (scalony) &
-Scalenie trzech feedów z~prefiksowaniem przestrzeni nazw ID; przycięcie kalendarzy do wspólnego przekroju dat; wygenerowanie transferów pieszych ($\leq$200~m) &
+Scalenie feedów; przycięcie kalendarzy do wspólnego przekroju dat; wygenerowanie transferów pieszych ($\leq$200~m); Agregacja rozkładowa (schedule-based); budowa grafów L/P-space i~macierzy TTM; estymacja czasu oczekiwania jako połowa headway &
 Przystanek i~linia &
 2026-04-22 -- 2026-05-22 &
-Heterogeniczne warunki licencyjne składowych feedów; kolizje ID wymagają prefiksowania; potencjalne luki w~pokryciu transferów między operatorami \\ \hline
+Statyczny snapshot nie odwzorowuje zmian sezonowych ani rzeczywistych odchyleń kursów; brak danych o~faktycznym napełnieniu pojazdów; brak odwzorowania opóźnień i~zmian operacyjnych; potencjalne luki w~pokryciu transferów między operatorami \\ \hline
 
 \textbf{Warszawa -- miejsca pracy} &
 Modelowe oszacowanie dostawcy (Data Wise); agregacja do siatki 1~km; dostępne wyłącznie dla wariantu Core &
@@ -885,7 +887,7 @@ Brak pełnej dokumentacji metody estymacji; ograniczona audytowalność; dane ni
 Siatka centroidalna NSP snapowana do GEOSTAT 1~km; sumowanie wartości w~komórce &
 Siatka 1~km $\times$ 1~km &
 NSP 2021 &
-Dane dostępne wyłącznie dla granic administracyjnych Warszawy (wariant Core); brak siatki dla 7 powiatów ościennych wariantu Extended \\ \hline
+5-letni lag względem GTFS; Dane dostępne wyłącznie dla granic administracyjnych Warszawy (wariant Core); brak siatki dla 7 powiatów ościennych wariantu Extended \\ \hline
 
 \textbf{Warszawa -- SES proxy} \newline (RCN + JRC) &
 Mediana ceny transakcyjnej $\times$ $\log(\text{wolumen})$ z~RCN; mnożnik gęstości zabudowy z~rastra JRC; agregacja do siatki 1~km; dostępne wyłącznie dla wariantu Core &
@@ -897,7 +899,7 @@ Dane semi-publiczne (RCN); proxy pośredni nie jest bezpośrednim pomiarem zamo�
 Budowa grafu pieszej sieci ulicznej; routing first/last mile &
 Sieć ulic &
 Snapshot 2026-02-09 &
-Dane wolontariackie o~zmiennej jakości; plik obejmuje całą Polskę \\ 
+Możliwe braki w~pokryciu chodnikami i~ścieżkami pieszo-rowerowymi; brak odwzorowania opóźnień i~zmian operacyjnych \\
 \end{longtable}
 \endgroup
 
@@ -994,7 +996,7 @@ Macierze czasów podróży wyznaczono z~użyciem silnika routingowego Conveyal~R
 
 Routing wykonano dla daty 6~maja 2026~r.\ (wtorek roboczy, poza świętami narodowymi we~wszystkich trzech krajach) w~trzech przedziałach czasowych odjazdu: 06:00--07:30 (szczyt poranny), 11:00--12:30 (dolina międzyszczytowa) oraz 19:00--20:30 (szczyt wieczorny). Wewnątrz każdego okna silnik próbkuje czasy odjazdu w~przedziale~$\pm$5~minut, zamiast domyślnych~$\pm$30~minut~--- decyzja ta redukuje wariancję wyniku względem dokładności czasu odjazdu, zachowując reprezentatywność dla całego okna. Ograniczenia routingu obejmują: maksymalny czas podróży 180~minut, prędkość chodu 1{,}25~m/s oraz maksymalną odległość dojścia pieszego 2\,000~m. Dla każdej kombinacji \mbox{miasto--wariant} próbkowano 750~par pochodzenie--cel z~ustalonym ziarnem generatora liczb losowych~--- jest to kompromis między pokryciem przestrzennym a~budżetem obliczeniowym; pełna macierz dla wariantu rozszerzonego Paryża obejmowałaby rząd wielkości $10^9$ par. Przyjęte wartości graniczne sytuują się w~zakresach raportowanych w~analizach dostępności transportu zbiorowego: prędkość chodu zbliżona do empirycznie obserwowanych 1{,}22--1{,}24~m/s~\cite{metropolitan}, okna czasowe odpowiadające szczytom porannym i~wieczornym oraz dolinie międzyszczytowej, stosowanym w~analizach fluktuacji uogólnionych kosztów~\cite{literature_review,characteristics}, a~maksymalny czas podróży w~rzędzie wielkości odcięć typowo używanych w~symulacjach dostępności~\cite{capetown,gravity2}. Dokładne wartości progowe (2\,000~m, 180~min, 1{,}25~m/s) oraz liczebność próby (750~par) stanowią założenia operacyjne pracy, dobrane jako kompromis pokrycia przestrzennego i~budżetu obliczeniowego.
 
-Czas w~pojeździe oraz całkowity czas podróży zwracane są bezpośrednio przez silnik routingowy na podstawie rozkładu GTFS. Estymator czasu oczekiwania odzwierciedla zatem rzeczywistą częstotliwość kursów, a~nie aproksymację analityczną $T_{\text{wait}} \approx \mathrm{headway}/2$ z~uproszczonej definicji metodologii~--- jest to ulepszenie wobec dotychczasowych podejść opartych na stałym ryczałcie. Kara transferowa szacowana jest \mbox{post-hoc} jako funkcja łącznego czasu podróży: przyjęto próg 15~minut dla podróży krótszych niż 45~minut, z~narzutem 10~minut za każdy szacowany transfer, oraz analogicznie 5~minut na transfer dla podróży dłuższych. Asymetria wag odzwierciedla wyższą relatywną uciążliwość transferu w~krótkich podróżach, w~których czas oczekiwania na peronie stanowi większy udział kosztu łącznego. Sam mechanizm doliczania ekwiwalentu czasowego za przesiadkę do uogólnionego kosztu podróży jest konwencją ugruntowaną w~literaturze~\cite{LUO2019102505,disabilities1}; konkretne wartości progu 15~minut oraz narzutów 10 i~5~minut na transfer przyjęte zostały jako założenie operacyjne pracy, dobrane na podstawie obserwowanej asymetrii uciążliwości w~krótkich i~długich podróżach. Dla relacji, w~których routing sieciowy nie zwrócił wyniku (cel poza zasięgiem w~horyzoncie 180~minut), zastosowano awaryjny estymator oparty na odległości euklidesowej między centroidami komórek z~korektą objazdu 1{,}3 oraz prędkością chodu 1{,}25~m/s, z~górnym ograniczeniem 90~minut; wartości uzyskane tym sposobem stanowią marginalną część zbioru i~są identyfikowalne w~wynikach.
+Czas w~pojeździe oraz całkowity czas podróży zwracane są bezpośrednio przez silnik routingowy na podstawie rozkładu GTFS. Estymator czasu oczekiwania odzwierciedla zatem rzeczywistą częstotliwość kursów, a~nie aproksymację analityczną $T_{\text{wait}} \approx \mathrm{headway}/2$ z~uproszczonej definicji metodologii~--- jest to ulepszenie wobec dotychczasowych podejść opartych na stałym ryczałcie. W~macierzach wynikowych nie doliczano osobnej kary przesiadkowej: koszt $c_{ij}$ odpowiada wartości `travel_time_min` zwracanej przez R5 i~obejmuje czas dojścia, oczekiwania, przejazdu oraz przejść i~oczekiwania w~ramach transferów. Przyjęcie dodatkowego ryczałtu za każdą przesiadkę wymagałoby stabilnej identyfikacji liczby transferów dla wszystkich relacji i~miast, a~ponadto mogłoby zniekształcić porównywalność wariantów przez arbitralne przeważenie relacji wieloodcinkowych. Dla relacji, w~których routing sieciowy nie zwrócił wyniku (cel poza zasięgiem w~horyzoncie 180~minut), zastosowano awaryjny estymator oparty na odległości euklidesowej między centroidami komórek z~korektą objazdu 1{,}3 oraz prędkością chodu 1{,}25~m/s, z~górnym ograniczeniem 90~minut; wartości uzyskane tym sposobem stanowią marginalną część zbioru i~są identyfikowalne w~wynikach.
 
 Pełne macierze czasów podróży i~uogólnionego kosztu pozostają artefaktami technicznymi i~nie są publikowane w~tekście głównym z~powodu skali. W~treści rozdziału prezentowane są wyłącznie agregaty: percentyle, krzywe ECDF, mapy mediany oraz mapy udziału relacji w~progu czasowym. Komórki bez aktywnych przystanków w~zasięgu albo osierocone po filtrach administracyjnych oznaczane są wartością pustą i~utrzymywane w~wynikach.
 
@@ -1034,7 +1036,7 @@ Pełne macierze czasów podróży i~uogólnionego kosztu pozostają artefaktami 
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_4_cost_components_profile_proxy}
+    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_4_cost_components_profile}
     \caption{Profil procentowego udziału składowych kosztu podróży (czas w~pojeździe, czas oczekiwania, czas dojścia, kara transferowa) w~formie stacked bar per \mbox{miasto~$\times$~wariant~$\times$~okno czasowe}. Wykres stanowi bezpośredni dowód metodyczny, że uogólniony koszt nie został zredukowany do czasu w~pojeździe~--- ujawnia udział każdej składowej zgodnie z~logiką Whole Travel Chain.}
     \label{fig:wtc_components}
 \end{figure}

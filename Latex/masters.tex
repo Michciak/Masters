@@ -1,20 +1,3 @@
-%
-% Niniejszy plik stanowi przykład formatowania pracy magisterskiej na
-% Wydziale MIM UW.  Szkielet użytych poleceń można wykorzystywać do
-% woli, np. formatujac wlasna prace.
-%
-% Zawartosc merytoryczna stanowi oryginalnosiagniecie
-% naukowosciowe Marcina Wolinskiego.  Wszelkie prawa zastrzeżone.
-%
-% Copyright (c) 2001 by Marcin Woliński <M.Wolinski@gust.org.pl>
-% Poprawki spowodowane zmianami przepisów - Marcin Szczuka, 1.10.2004
-% Poprawki spowodowane zmianami przepisow i ujednolicenie 
-% - Seweryn Karłowicz, 05.05.2006
-% Dodanie wielu autorów i tłumaczenia na angielski - Kuba Pochrybniak, 29.11.2016
-
-% dodaj opcję [licencjacka] dla pracy licencjackiej
-% dodaj opcję [en] dla wersji angielskiej (mogą być obie: [licencjacka,en])
-% \documentclass[magisterska]{pracamgr}
 \documentclass{pracamgr}
 
 % Dodatkowe importy
@@ -53,40 +36,13 @@
 % Dane magistranta:
 \autor{Michał Koziński}{464410}
 
-
-% Dane magistrantów:
-%\autor{Autor Zerowy}{342007}
-%\autori{Autor Pierwszy}{342013}
-%\autorii{Drugi Autor-Z-Rzędu}{231023}
-%\autoriii{Trzeci z Autorów}{777321}
-%\autoriv{Autor nr Cztery}{432145}
-%\autorv{Autor nr Pięć}{342011}
-
-\title{Holistyczna analiza obszarowa dostępności transportu zbiorowego w aglomeracjach miejskich.}
+\title{Modelowanie dostępności transportu zbiorowego w aglomeracjach miejskich z wykorzystaniem danych GTFS i modeli interakcji przestrzennych.}
 
 
-\tytulang{
-%An implementation of a difference blabalizer based on the theory of $\sigma$ -- $\rho$ phetors
-}
+\tytulang{<Tytuł pracy w tłumaczeniu na język angielski>}
 
 %kierunek: 
-% - matematyka, informacyka, ...
-% - Mathematics, Computer Science, ...
 \kierunek{Inżynieria Obliczeniowa}
-
-% informatyka - nie okreslamy zakresu (opcja zakomentowana)
-% matematyka - zakres moze pozostac nieokreslony,
-% a jesli ma byc okreslony dla pracy mgr,
-% to przyjmuje jedna z wartosci:
-% {metod matematycznych w finansach}
-% {metod matematycznych w ubezpieczeniach}
-% {matematyki stosowanej}
-% {nauczania matematyki}
-% Dla pracy licencjackiej mamy natomiast
-% mozliwosc wpisania takiej wartosci zakresu:
-% {Jednoczesnych Studiow Ekonomiczno--Matematycznych}
-
-% \zakres{Tu wpisac, jesli trzeba, jedna z opcji podanych wyzej}
 
 % Praca wykonana pod kierunkiem:
 % (podać tytuł/stopień imię i nazwisko opiekuna
@@ -97,29 +53,16 @@
   }
 
 % miesiąc i~rok:
-\date{Maj 2026}
-
-%Podać dziedzinę wg klasyfikacji Socrates-Erasmus:
-% \dziedzina{ 
-% %11.0 Matematyka, Informatyka:\\ 
-% 11.1 Matematyka\\ 
-% %11.3 Informatyka\\ 
-% }
- \dziedzina{?}
-
-%Klasyfikacja tematyczna wedlug AMS (matematyka) lub ACM (informatyka)
-% \klasyfikacja{D. Software\\
-%   D.127. Blabalgorithms\\
-%   D.127.6. Numerical blabalysis}
-\klasyfikacja{?}
+\date{Czerwiec 2026}
 
 % Słowa kluczowe:
-% \keywords{blabaliza różnicowa, fetory $\sigma$-$\rho$, fooizm,
-%   blarbarucja, blaba, fetoryka, baleronik}
-\keywords{?}
+\keywords{<Wykaz maksymalnie 10 słów swobodnie wybranych>\\
+<w języku polskim>}
+
+\keywordsang{<w języku angielskim>}
 
 % Tu jest dobre miejsce na Twoje własne makra i~środowiska:
-\newtheorem{defi}{Definicja}[section]
+% \newtheorem{defi}{Definicja}[section]
 
 % koniec definicji
 
@@ -127,28 +70,54 @@
 
 \maketitle
 
-%tu idzie streszczenie na strone poczatkowa
+% Streszczenie
 \begin{abstract}
-  % W~pracy przedstawiono prototypową implementację blabalizatora
-  % różnicowego bazującą na teorii fetorów $\sigma$-$\rho$ profesora
-  % Fifaka.  Wykorzystanie teorii Fifaka daje wreszcie możliwość
-  % efektywnego wykonania blabalizy numerycznej.  Fakt ten stanowi
-  % przełom technologiczny, którego konsekwencje trudno z~góry
-  % przewidzieć.
+<streszczenie pracy w języku polskim (maksymalnie 3000 znaków ze spacjami, nie mniej niż 1000 znaków ze spacjami)>
+\newline\newline
+\noindent<streszczenie pracy w języku angielskim (maksymalnie 3000 znaków ze spacjami, nie mniej niż 1000 znaków ze spacjami)>
 \end{abstract}
 
 \tableofcontents
 %\listoffigures
 %\listoftables
 
+% \chapter*{Wstęp}
+% \addcontentsline{toc}{chapter}{Wstęp}
+
+% Współczesne paradygmaty planowania przestrzennego oraz inżynierii transportu odchodzą od zredukowanego postrzegania mobilności na rzecz wielowymiarowego, holistycznego ujęcia dostępności przestrzennej. W odpowiedzi na tę ewolucję, nadrzędnym celem niniejszej pracy jest walidacja uniwersalności zaproponowanej metodyki oceny dostępności systemów transportu zbiorowego poprzez jej implementację w trzech typologicznie odmiennych aglomeracjach europejskich: Paryżu, Warszawie oraz Dublinie. W tak zdefiniowanym kontekście badawczym, bezpośrednie rankingowanie miast pod względem jakości obsługi komunikacyjnej ma charakter wtórny. Akcent analityczny został przeniesiony na cele pomocnicze, obejmujące: identyfikację mechanizmów strukturalnych kształtujących poziom dostępności, rygorystyczną separację wpływu fizycznej infrastruktury od warstwy operacyjnej usług, kwantyfikację uogólnionego kosztu podróży, ewaluację przestrzennych dysproporcji w alokacji potencjału mobilności oraz ocenę społecznego zróżnicowania dostępu do celów podróży.
+
+% W opracowaniu sformułowano fundamentalne pytania badawcze dotyczące stopnia, w jakim ujednolicona rama metodologiczna zachowuje rzetelność i porównywalność interpretacyjną w obliczu drastycznie odmiennych uwarunkowań morfologicznych i instytucjonalnych, a także w warunkach heterogenicznej jakości otwartych danych miejskich. Odrębną osią badawczą jest pytanie, jakie ograniczenia danych najsilniej wpływają na porównywalność wyników między miastami – zagadnienie traktowane w pracy nie jako marginalne zastrzeżenie metodologiczne, lecz jako samodzielny przedmiot analizy. Badanie dąży ponadto do ustalenia, w jaki sposób obraz dostępności ulega transformacji przy przejściu od elementarnych wskaźników podażowych do zaawansowanej estymacji całego łańcucha podróży (ang. \textit{Whole Travel Chain}) i podwójnie ograniczonych modeli interakcji przestrzennych. Analizie poddano strukturalne źródła wykluczenia transportowego, diagnozując, czy ich geneza tkwi w deficytach infrastrukturalnych (topologia L-space), dysfunkcjach operacyjnych (topologia P-space), czy też w niekorzystnej alokacji przestrzennej rynków docelowych. Uzupełniającą oś badawczą stanowi ocena społecznego zróżnicowania dostępności: pytanie o to, czy i w jaki sposób czynniki społeczno-ekonomiczne współkształtują przestrzenne wzorce dostępności transportu zbiorowego. Architektura metodyczna podjętych badań integruje dualną analizę sieciową z wykorzystaniem teorii grafów, sieciowe modelowanie uogólnionego kosztu przemieszczania się oraz kalibrację modeli grawitacyjnych precyzyjnie odwzorowujących przestrzenną konkurencję o ograniczone zasoby.
+
+% Dobór obszarów metropolitalnych do studium przypadku został podyktowany koniecznością weryfikacji modelu w wysoce zróżnicowanych środowiskach urbanistycznych. Paryż reprezentuje tkankę o wyjątkowej złożoności fizycznej i bardzo dużej gęstości połączeń, stanowiąc środowisko najwyższej złożoności interpretacyjnej. Dublin charakteryzuje się relatywnie najmniejszym systemem transportowym, oferując zarazem najwyższą transparentność i jakość danych otwartych. Z kolei Warszawa stanowi przypadek pośredni, naznaczony specyfiką postkomunistycznej, policentrycznej struktury przestrzennej, generujący największe wyzwania związane z lukami informacyjnymi, co wymusiło implementację zaawansowanych estymatorów zastępczych. Fundamentalny wkład autora w realizację tak zdefiniowanego tematu polega na zaprojektowaniu i wdrożeniu wysoce przenaszalnego potoku analitycznego, który integruje rozproszone zbiory demograficzne z operacyjnymi rozkładami jazdy w formacie GTFS, dokonując ich standaryzacji w ramach ujednoliconej siatki przestrzennej o rozdzielczości 1 km × 1 km, co zapewnia porównywalność wyników między miastami niezależnie od lokalnych układów współrzędnych. Co istotne, w niniejszej pracy zróżnicowana jakość ekosystemów \textit{Open Data} została świadomie zinkorporowana nie jako przeszkoda deprecjonująca badanie, lecz jako jego integralny kontekst analityczny. Podejście to pozwala na obiektywną weryfikację użyteczności zaawansowanych modeli planistycznych w rzeczywistych, obarczonych dużą dozą niepewności warunkach informacyjnych współczesnych metropolii.
+
 \chapter*{Wstęp}
 \addcontentsline{toc}{chapter}{Wstęp}
 
-Współczesne paradygmaty planowania przestrzennego oraz inżynierii transportu odchodzą od zredukowanego postrzegania mobilności na rzecz wielowymiarowego, holistycznego ujęcia dostępności przestrzennej. W odpowiedzi na tę ewolucję, nadrzędnym celem niniejszej pracy jest walidacja uniwersalności zaproponowanej metodyki oceny dostępności systemów transportu zbiorowego poprzez jej implementację w trzech typologicznie odmiennych aglomeracjach europejskich: Paryżu, Warszawie oraz Dublinie. W tak zdefiniowanym kontekście badawczym, bezpośrednie rankingowanie miast pod względem jakości obsługi komunikacyjnej ma charakter wtórny. Akcent analityczny został przeniesiony na cele pomocnicze, obejmujące: identyfikację mechanizmów strukturalnych kształtujących poziom dostępności, rygorystyczną separację wpływu fizycznej infrastruktury od warstwy operacyjnej usług, kwantyfikację uogólnionego kosztu podróży, ewaluację przestrzennych dysproporcji w alokacji potencjału mobilności oraz ocenę społecznego zróżnicowania dostępu do celów podróży.
+Ocena dostępności transportu zbiorowego w~dużych aglomeracjach pozostaje problemem metodologicznie złożonym, ponieważ sama obecność infrastruktury i~usług przewozowych nie przesądza jeszcze o~realnej możliwości dotarcia mieszkańców do miejsc pracy, edukacji czy usług. Miasto może dysponować gęstą siecią przystanków, dużą liczbą linii oraz wysokim wolumenem kursów, a~mimo to oferować ograniczoną dostępność w~sensie funkcjonalnym, jeśli podróż wymaga długiego dojścia pieszego, niekorzystnych przesiadek, oczekiwania na połączenie albo prowadzi do przestrzennie niedopasowanych celów aktywności. Proste wskaźniki podażowe, takie jak liczba przystanków, długość linii, liczba kursów czy zagęszczenie sieci, opisują zatem jedynie potencjalną obecność systemu transportowego, lecz nie odpowiadają w~pełni na pytanie o~rzeczywistą użyteczność transportu zbiorowego dla mieszkańców~\cite{Kozlak_Aleksandra_Znaczenie_2010, LUO2019102505}.
 
-W opracowaniu sformułowano fundamentalne pytania badawcze dotyczące stopnia, w jakim ujednolicona rama metodologiczna zachowuje rzetelność i porównywalność interpretacyjną w obliczu drastycznie odmiennych uwarunkowań morfologicznych i instytucjonalnych, a także w warunkach heterogenicznej jakości otwartych danych miejskich. Odrębną osią badawczą jest pytanie, jakie ograniczenia danych najsilniej wpływają na porównywalność wyników między miastami – zagadnienie traktowane w pracy nie jako marginalne zastrzeżenie metodologiczne, lecz jako samodzielny przedmiot analizy. Badanie dąży ponadto do ustalenia, w jaki sposób obraz dostępności ulega transformacji przy przejściu od elementarnych wskaźników podażowych do zaawansowanej estymacji całego łańcucha podróży (ang. \textit{Whole Travel Chain}) i podwójnie ograniczonych modeli interakcji przestrzennych. Analizie poddano strukturalne źródła wykluczenia transportowego, diagnozując, czy ich geneza tkwi w deficytach infrastrukturalnych (topologia L-space), dysfunkcjach operacyjnych (topologia P-space), czy też w niekorzystnej alokacji przestrzennej rynków docelowych. Uzupełniającą oś badawczą stanowi ocena społecznego zróżnicowania dostępności: pytanie o to, czy i w jaki sposób czynniki społeczno-ekonomiczne współkształtują przestrzenne wzorce dostępności transportu zbiorowego. Architektura metodyczna podjętych badań integruje dualną analizę sieciową z wykorzystaniem teorii grafów, sieciowe modelowanie uogólnionego kosztu przemieszczania się oraz kalibrację modeli grawitacyjnych precyzyjnie odwzorowujących przestrzenną konkurencję o ograniczone zasoby.
+Problem ten nabiera szczególnego znaczenia w~analizach porównawczych. Współczesne miasta generują coraz większe zasoby danych otwartych, zwłaszcza w formacie GTFS, jednak sama dostępność danych nie rozwiązuje automatycznie problemu porównywalności. Aglomeracje różnią się skalą przestrzenną, strukturą morfologiczną, organizacją sieci transportowej, udziałem poszczególnych środków transportu, jakością rozkładów jazdy, kompletnością danych oraz dostępnością informacji społeczno-ekonomicznych. W~rezultacie zaawansowane modele dostępności są często projektowane tak, jakby warstwy wejściowe były kompletne, spójne i~jednakowo audytowalne, podczas gdy w~rzeczywistych środowiskach metropolitalnych stanowią one układ silnie heterogeniczny~\cite{robustness, LUO2019102505}. Różnorodność ta nie jest wyłącznie trudnością techniczną, lecz staje się jednym z~zasadniczych warunków prowadzenia rzetelnej analizy dostępności.
 
-Dobór obszarów metropolitalnych do studium przypadku został podyktowany koniecznością weryfikacji modelu w wysoce zróżnicowanych środowiskach urbanistycznych. Paryż reprezentuje tkankę o wyjątkowej złożoności fizycznej i bardzo dużej gęstości połączeń, stanowiąc środowisko najwyższej złożoności interpretacyjnej. Dublin charakteryzuje się relatywnie najmniejszym systemem transportowym, oferując zarazem najwyższą transparentność i jakość danych otwartych. Z kolei Warszawa stanowi przypadek pośredni, naznaczony specyfiką postkomunistycznej, policentrycznej struktury przestrzennej, generujący największe wyzwania związane z lukami informacyjnymi, co wymusiło implementację zaawansowanych estymatorów zastępczych. Fundamentalny wkład autora w realizację tak zdefiniowanego tematu polega na zaprojektowaniu i wdrożeniu wysoce przenaszalnego potoku analitycznego, który integruje rozproszone zbiory demograficzne z operacyjnymi rozkładami jazdy w formacie GTFS, dokonując ich standaryzacji w ramach ujednoliconej siatki przestrzennej o rozdzielczości 1 km × 1 km, co zapewnia porównywalność wyników między miastami niezależnie od lokalnych układów współrzędnych. Co istotne, w niniejszej pracy zróżnicowana jakość ekosystemów \textit{Open Data} została świadomie zinkorporowana nie jako przeszkoda deprecjonująca badanie, lecz jako jego integralny kontekst analityczny. Podejście to pozwala na obiektywną weryfikację użyteczności zaawansowanych modeli planistycznych w rzeczywistych, obarczonych dużą dozą niepewności warunkach informacyjnych współczesnych metropolii.
+Na tym tle ujawnia się luka badawcza, którą podejmuje niniejsza praca. Dotychczasowe analizy dostępności transportowej często koncentrują się na pojedynczych miastach~\cite{gravity2} albo na wybranych komponentach problemu: topologii sieci~\cite{robustness}, czasie przejazdu~\cite{LUO2019102505}, lokalizacji celów podróży~\cite{gravity2} lub nierównościach społecznych~\cite{capetown, tesi}. Żadna z~nich nie podejmuje próby integracji wszystkich tych elementów w jednej uniwersalnej ramie analitycznej, pozwalającej jednocześnie odróżnić podaż infrastrukturalną od organizacji usług, zastąpić uproszczone miary czasu pełnym uogólnionym kosztem podróży, uwzględnić konkurencję o~ograniczone zasoby docelowe oraz ocenić społeczne zróżnicowanie dostępności. Szczególnie problematyczne pozostaje także pytanie, na ile taka sama procedura badawcza zachowuje wartość interpretacyjną w~miastach różniących się nie tylko strukturą przestrzenną, lecz także jakością i~kompletnością danych.
+
+Głównym celem pracy jest zaproponowanie i~walidacja uniwersalności metodyki holistycznej analizy dostępności transportu zbiorowego. W~tym ujęciu bezpośrednie porównanie poziomów dostępności między poszczególnymi miastami ma charakter wtórny wobec pytania o~stosowalność metody, jej ograniczeń oraz zdolności do diagnozowania mechanizmów niskiej dostępności w~odmiennych warunkach morfologicznych, instytucjonalnych i~informacyjnych.
+
+Aby zrealizować ten cel, sformułowano następujące pytania badawcze:
+\begin{enumerate}
+    \item W~jakim stopniu zaproponowana metodyka holistycznej analizy dostępności transportu zbiorowego zachowuje uniwersalność i~porównywalność interpretacyjną w~typologicznie odmiennych aglomeracjach oraz przy nierównej jakości danych miejskich?
+
+    \item Jak zmienia się przestrzenny obraz dostępności po przejściu od prostych miar podażowych do uogólnionego kosztu podróży (WTC) oraz podwójnie ograniczonych modeli grawitacyjnych uwzględniających konkurencję o~ograniczone cele podróży?
+
+    \item Jakie mechanizmy odpowiadają za niską dostępność transportu zbiorowego w~analizowanych obszarach: deficyty infrastrukturalne \mbox{(L-space)}, słabość organizacji oferty \mbox{(P-space)}, wysoki koszt pełnego łańcucha podróży, niekorzystna lokalizacja celów czy nakładanie się tych czynników?
+
+    \item W~jaki sposób status społeczno-ekonomiczny oraz kontrolowane mapowanie parametru $\beta$ ujawniają społeczne zróżnicowanie dostępności transportowej w~analizowanych aglomeracjach?
+\end{enumerate}
+
+Wkład metodologiczny pracy polega na zaprojektowaniu i~wdrożeniu spójnego potoku analitycznego, który integruje dane GTFS, sieć pieszą, warstwy demograficzne, szacunki zatrudnienia oraz wskaźniki społeczno-ekonomiczne w~ujednoliconej siatce przestrzennej o~rozdzielczości 1~km~$\times$~1~km. Przyjęta architektura łączy w~tej ramie cztery komplementarne warstwy badawcze. Po pierwsze, zastosowano dualną analizę topologiczną sieci w~reprezentacjach \mbox{L-space} i~\mbox{P-space}, oddzielając fizyczną strukturę infrastruktury od logiki operacyjnej usług. Po drugie, wyznaczono uogólniony koszt podróży w~duchu \textit{Whole Travel Chain}, obejmujący dojście piesze, oczekiwanie, czas przejazdu oraz transfery. Po trzecie, wykorzystano modele grawitacyjne~–~w~tym podejście dwustronnie ograniczone~–~powiązane z~rozmieszczeniem oraz pojemnością celów. Po czwarte, uwzględniono wymiar sprawiedliwości transportowej poprzez analizę zróżnicowania społeczno-ekonomicznego oraz kontrolowaną kalibrację parametru $\beta$.~Tak skonstruowana procedura pozwala nie tylko wyznaczać przestrzenne wzorce dostępności, lecz także kompleksowo diagnozować jej uwarunkowania.
+
+Aby zweryfikować uniwersalność tej metodyki, badaniom poddano trzy typologicznie odmienne aglomeracje europejskie: Paryż, Warszawę oraz Dublin. Dobór ten celowo traktuje wspomniane miasta jako zróżnicowane studia przypadków, w~których odmienność ekosystemów informacyjnych jest integralną częścią wyniku badawczego. Paryż reprezentuje bardzo duży, gęsty i~wielomodalny układ transportowy, w~którym wysoka złożoność sieci zwiększa zarówno potencjał analityczny, jak i~trudność interpretacji. Warszawa stanowi przypadek pośredni pod względem skali, lecz generuje największe wyzwania związane z~audytowalnością warstw zatrudnienia i~statusu społeczno-ekonomicznego. Dublin, będąc najmniejszym systemem w~zestawieniu, wyróżnia się relatywnie najlepszym profilem danych otwartych i~przejrzystością źródeł. Żadne z~tych miast nie pełni funkcji referencyjnej; każde stanowi odrębne środowisko testowe, co pozwala wyznaczyć granice porównywalności wyników w warunkach nierównej jakości współczesnych danych miejskich.
+
+Struktura pracy odpowiada przyjętej logice badawczej. W~pierwszej kolejności przedstawiono podstawy teoretyczne dostępności transportowej, topologicznej analizy sieci, modelowania całego łańcucha podróży, modeli grawitacyjnych oraz sprawiedliwości transportowej. Następnie opisano architekturę modelu analitycznego i~procedury przetwarzania danych, ze szczególnym uwzględnieniem standaryzacji przestrzennej oraz ograniczeń źródeł wejściowych. Kolejna część prezentuje implementację potoku i~wyniki poszczególnych warstw analizy w~wybranych miastach. Ostatni rozdział syntetyzuje uzyskane rezultaty, odpowiada na pytania badawcze oraz wskazuje, w~jakim zakresie zaproponowana metodyka może być z~powodzeniem stosowana do diagnozowania innych systemów transportowych.
+
 
 \chapter{Przegląd Literatury i~Podstawy Metodologiczne}\label{chapter:literatura}
 
@@ -159,10 +128,10 @@ W paradygmacie zaawansowanej analizy przestrzennej i~inżynierii transportu, dos
 \subsection{Komponent transportowy (podażowy i~infrastrukturalny)}\label{subsection:komponent_transportowy}
 Komponent ten stanowi rdzeń podażowy całego systemu przemieszczania się, definiując fizyczne oraz operacyjne możliwości pokonywania odległości pomiędzy strefami źródłowymi a~docelowymi. W~najszerszym ujęciu odzwierciedla on wielkość oporu przestrzeni, z~jakim musi zmierzyć się użytkownik sieci transportowej. Na wymiar ten składają się dwa nierozerwalnie połączone aspekty: twarda infrastruktura (układ dróg, torowisk, lokalizacja przystanków i~węzłów przesiadkowych) oraz nałożona na nią miękka warstwa operacyjna (przebieg linii komunikacyjnych, parametry taboru, prędkości eksploatacyjne czy pojemność systemu)~\cite{mrt, l-space2, c-space}.
 
-Z~perspektywy analitycznej, komponent ten pełni rolę głównego pośrednika determinującego wydajność obsługi obszaru miejskiego. Jego rygorystyczna ocena prowadzona jest dwutorowo. Z~jednej strony, strukturę i~układ relacji wewnątrz systemu bada się przy użyciu aparatury matematycznej wywodzącej się z~teorii grafów, co pozwala na identyfikację wąskich gardeł i~ewaluację spójności powiązań. Z~drugiej strony, z~punktu widzenia pasażera, organizacja transportu bezpośrednio przekłada się na całkowity wysiłek i~czas niezbędny do pokonania trasy. Wymusza to syntetyczną kwantyfikację tzw. impedancji, czyli uogólnionego kosztu podróży, który uwzględnia wszystkie obciążenia związane z~przemieszczaniem się. W~konsekwencji komponent transportowy nie tylko warunkuje fizyczną możliwość dotarcia do celu, ale poprzez uciążliwość samej podróży bezpośrednio kształtuje postrzeganą dostępność i~atrakcyjność danego obszaru~\cite{capetown, LUO2019102505}.
+Z~perspektywy analitycznej, komponent ten pełni rolę głównego pośrednika determinującego wydajność obsługi obszaru miejskiego. Jego formalna ocena prowadzona jest dwutorowo. Z~jednej strony, strukturę i~układ relacji wewnątrz systemu bada się przy użyciu aparatury matematycznej wywodzącej się z~teorii grafów, co pozwala na identyfikację wąskich gardeł i~ewaluację spójności powiązań. Z~drugiej strony, z~punktu widzenia pasażera, organizacja transportu bezpośrednio przekłada się na całkowity wysiłek i~czas niezbędny do pokonania trasy. Wymusza to syntetyczną kwantyfikację tzw. impedancji, czyli uogólnionego kosztu podróży, który uwzględnia wszystkie obciążenia związane z~przemieszczaniem się. W~konsekwencji komponent transportowy nie tylko warunkuje fizyczną możliwość dotarcia do celu, ale poprzez uciążliwość samej podróży bezpośrednio kształtuje postrzeganą dostępność i~atrakcyjność danego obszaru~\cite{capetown, LUO2019102505}.
 
 \subsection{Komponent przestrzenny (land-use)}\label{subsection:komponent_przestrzenny}
-Z~drugiej strony równania dostępności znajduje się wymiar przestrzenny. Odnosi się on bezpośrednio do rozmieszczenia, wielkości oraz zróżnicowania rynków celu w~tkance miejskiej (takich jak miejsca pracy, handlu, ochrony zdrowia czy edukacji)~\cite{elavating, capetown, Kozlak_Aleksandra_Znaczenie_2010}. W~modelach transportowych obszar ten reprezentuje miarę atrakcyjności poszczególnych stref, stanowiąc docelowy punkt podróży użytkowników sieci. Współczesne ujęcie tego zagadnienia odchodzi od traktowania celów wyłącznie jako izolowanych punktów na mapie, zwracając uwagę na ograniczoną pojemność tych miejsc oraz zjawisko wzajemnej konkurencji o~zasoby (np. wakaty na rynku pracy). Precyzyjne bilansowanie popytu z~faktycznymi możliwościami rynków docelowych stanowi wyzwanie, które w~zaawansowanej analityce rozwiązuje się poprzez implementację odpowiednich modeli grawitacyjnych, co zostało szerzej omówione w dalszej części pracy~\cite{gravity2, mrt}.
+Z~drugiej strony równania dostępności znajduje się wymiar przestrzenny. Odnosi się on bezpośrednio do rozmieszczenia, wielkości oraz zróżnicowania rynków celu w~tkance miejskiej (takich jak miejsca pracy, handlu, ochrony zdrowia czy edukacji)~\cite{elavating, capetown, Kozlak_Aleksandra_Znaczenie_2010}. W~modelach transportowych obszar ten reprezentuje miarę atrakcyjności poszczególnych stref, stanowiąc docelowy punkt podróży użytkowników sieci. Współczesne ujęcie tego zagadnienia odchodzi od traktowania celów wyłącznie jako izolowanych punktów na mapie, zwracając uwagę na ograniczoną pojemność tych miejsc oraz zjawisko wzajemnej konkurencji o~zasoby (np. wakaty na rynku pracy). Precyzyjne bilansowanie popytu z~faktycznymi możliwościami ilościowymi punktów docelowych stanowi wyzwanie, które w~zaawansowanej analityce rozwiązuje się poprzez implementację odpowiednich modeli grawitacyjnych, co zostało szerzej omówione w dalszej części pracy~\cite{gravity2, mrt}.
 
 \subsection{Komponent czasowy}\label{subsection:komponent_czasowy}
 Oprócz fizycznego pokonywania odległości, krytycznym aspektem ewaluacji systemów transportowych jest ich zmienność. Dostępność, ze szczególnym uwzględnieniem komunikacji zbiorowej, rzadko bywa wartością stałą~–~wykazuje za to znaczną fluktuację w~zależności od pory dnia czy tygodnia. Wymiar czasowy spina ze sobą ograniczenia nakładane z~jednej strony przez harmonogramy funkcjonowania samych celów podróży (np. godziny otwarcia placówek czy ramy czasu pracy), a~z~drugiej~–~przez rozkłady jazdy, które bezpośrednio determinują częstotliwość i~niezawodność usług przewozowych~\cite{gravity2, capetown, review, LUO2019102505}. Zrozumienie tej dynamiki uświadamia, że obszary o~rzekomo doskonałej łączności w~godzinach szczytu mogą cierpieć na drastyczne wykluczenie wieczorami. Rygorystyczne ujęcie tych wahań wymaga włączenia do analizy czasu oczekiwania na przystanku, co zostanie rozwinięte w rozdziale poświęconym modelowaniu całego łańcucha podróży~\cite{capetown, LUO2019102505, elavating}.
@@ -194,7 +163,7 @@ Przykładowo, jeżeli dany system transportowy charakteryzuje się wysoką spój
 
 \subsection{Inne reprezentacje}
 \begin{minipage}{.52\textwidth}
-Zaawansowana analityka sieci transportowych, wykraczając poza dualizm \mbox{L-space} i~\mbox{P-space}], posiłkuje się w~literaturze przedmiotu również modelami \mbox{C-space}, \mbox{B-space} oraz \mbox{M-space}. Topologia \mbox{C-space} (przestrzeń połączeń) odwraca klasyczną logikę grafową~–~węzłami stają się w~niej linie komunikacyjne, połączone krawędzią w~sytuacji, gdy współdzielą co najmniej jeden punkt przesiadkowy. Model \mbox{B-space} opiera się natomiast na grafach dwudzielnych (ang. \textit{bipartite graph}), tworząc dwa rozłączne zbiory węzłów (przystanki oraz linie), między którymi wyznacza się relacje. Reprezentacja \mbox{M-space} jest najbliższa rzeczywistemu odwzorowaniu sieci transportu publicznego (ang. Public Transport Network~-~PTN). osiąga to poprzez przedstawienie jej w~postaci, w której różne metody transportu (lub linie) opisane są na osobnych warstwach grafu, a~międzywarstwowe krawędzie reprezentują węzły wspólne, stanowiąc punkty możliwych przesiadek.~\cite{l-space2, c-space, robustness}.
+Zaawansowana analityka sieci transportowych, wykraczając poza dualizm \mbox{L-space} i~\mbox{P-space}, posiłkuje się w~literaturze przedmiotu również modelami \mbox{C-space}, \mbox{B-space} oraz \mbox{M-space}. Topologia \mbox{C-space} (przestrzeń połączeń) odwraca klasyczną logikę grafową~–~węzłami stają się w~niej linie komunikacyjne, połączone krawędzią w~sytuacji, gdy współdzielą co najmniej jeden punkt przesiadkowy. Model \mbox{B-space} opiera się natomiast na grafach dwudzielnych (ang. \textit{bipartite graph}), tworząc dwa rozłączne zbiory węzłów (przystanki oraz linie), między którymi wyznacza się relacje. Reprezentacja \mbox{M-space} jest najbliższa rzeczywistemu odwzorowaniu sieci transportu publicznego (ang. Public Transport Network~-~PTN). osiąga to poprzez przedstawienie jej w~postaci, w której różne metody transportu (lub linie) opisane są na osobnych warstwach grafu, a~międzywarstwowe krawędzie reprezentują węzły wspólne, stanowiąc punkty możliwych przesiadek.~\cite{l-space2, c-space, robustness}.
 \end{minipage}
 \begin{minipage}{.45\textwidth}
 \vspace*{-0.8cm}

@@ -348,7 +348,7 @@ Pozyskanie wskaźników dostępności nie wyczerpuje celów ewaluacji układu mi
 
 Wyniki dostępności ($A_i$)~z~modelu grawitacyjnego zestawiane są ze wskaźnikami demograficznymi. Do zdiagnozowania stopnia polaryzacji wykorzystano metodykę zapożyczoną z~nauk ekonomicznych: krzywą Lorenza oraz oparty na niej współczynnik Giniego~\cite{tesi}.
 
-\subsubsection{Krzywa Lorenza i współczynnik Giniego w analityce transportowej}
+\subsubsection{Krzywa Lorenza i Współczynnik Giniego w analityce transportowej}
 
 Aby skonstruować krzywą Lorenza ($L(x)$) w~ujęciu transportowym, strefy przestrzenne szereguje się od najsłabiej do najlepiej skomunikowanych (rosnąco wg $A_i$).~Oś rzędnych ($Y$)~odzwierciedla skumulowany odsetek globalnego zasobu dostępności, a~oś odciętych ($X$)~–~skumulowany udział populacji. Przekątna układu symbolizuje stan idealnej równości dystrybucyjnej. Rzeczywista krzywa $L(x)$ przebiega najczęściej poniżej tej prostej, obrazując dysproporcje w~alokacji usług~\cite{tesi, lorenz}.
 
@@ -356,8 +356,7 @@ Miarą odchylenia od stanu egalitarnego jest współczynnik Giniego, definiowany
 $$G = 1 - 2 \int_{0}^{1} L(x) \, dx$$
 Wskaźnik ten przyjmuje wartości z przedziału $[0, 1]$, gdzie $0$~oznacza pełną równość. Wartości wyższe~–~szczególnie te przekraczające krytyczne progi (np. $G > 0.4$)~–~potwierdzają głęboką asymetrię rozkładu, demaskując zjawisko koncentracji korzyści transportowych niemal wyłącznie w strefach centralnych. Metryka ta pozwala w matematyczny sposób ukazać strukturalne wykluczenie peryferii, ewaluując skuteczność systemu w kategoriach zrównoważonego rozwoju~i~przestrzennej integracji społecznej~\cite{tesi, lorenz}.
 
-% nie mogę potwierdzić tych informacji
-% Należy zauważyć, że stosowanie globalnego Współczynnika Giniego oraz klasycznej Krzywej Lorenza w inżynierii transportowej niesie za sobą niebezpieczeństwo wystąpienia tzw. zjawiska ,,ślepoty przestrzennej'' (ang. \textit{Spatial Blindness}). Uśredniony dla aglomeracji wynik, oscylujący wokół bezpiecznych granic rzędu $0.35$, jest w stanie statystycznie zamaskować odizolowane przestrzennie ,,pustynie transportowe'', gubiąc topologię deficytu. Z tego powodu ewaluacja sprawiedliwości rozkładu miar ($A_i$) modelu grawitacyjnego została poddana strukturalnej dekompozycji. 
+Należy zauważyć, że stosowanie globalnego Współczynnika Giniego oraz klasycznej Krzywej Lorenza w inżynierii transportowej niesie za sobą niebezpieczeństwo wystąpienia tzw. zjawiska ,,ślepoty przestrzennej'' (ang. \textit{Spatial Blindness}). Uśredniony dla aglomeracji wynik, oscylujący wokół bezpiecznych granic rzędu $0.35$, jest w stanie statystycznie zamaskować odizolowane przestrzennie ,,pustynie transportowe'', gubiąc topologię deficytu. Z tego powodu ewaluacja sprawiedliwości rozkładu miar ($A_i$) modelu grawitacyjnego została poddana strukturalnej dekompozycji.
 
 
 \chapter{Akwizycja, przetwarzanie i reprezentacja zasobów danych}\label{chapter:dane}
@@ -452,7 +451,7 @@ Ewaluacja komponentu transportowego (odległości fizyczne, zasięgi dojścia pi
 \item[]\textbf{Warszawa}\newline Analizy na obszarze Warszawy przeprowadzono w polskim systemie legislacyjnym \\ \mbox{EPSG:2180} \mbox{(ETRS89 / Polska CS92)}. Pozwala to na dokładne nakładanie na siebie struktur takich jak działki ewidencyjne czy obrysy geometryczne budynków.
 \end{itemize}
 
-\subsection{Budowa macierzy czasu podróży i~Uzupełnianie brakujących par~\mbox{O-D}}
+\subsection{Budowa macierzy czasu podróży i~uzupełnianie brakujących par~\mbox{O-D}}
 
 Uzyskane centroidy komórek pełnią w strukturze modelu rolę wirtualnych węzłów popytu i~podaży, stanowiąc punkty źródłowe (O)~i~docelowe (D)~dla stochastycznych algorytmów optymalizacyjnych, na ich podstawie wyznaczana jest macierz czasu podróży, a liczba relacji \mbox{O-D} wynika wprost z~iloczynu liczby zakwalifikowanych komórek po stronie źródeł i celów. W obu wariantach analizy (Core i Extended) do wyznaczenia macierzy czasu podróży zastosowano zunifikowaną logikę filtrowania: tylko komórki, których centroid leży w odległości nie większej niż 3~000~m od przystanku sieci transportu zbiorowego, są włączane do obliczeń (wariant Extended); komórki w wariancie rdzeniowym (Core) nie podlegają filtrowi bliskości i~są w całości uwzględniane w granicach administracyjnego rdzenia. Filtr ten eliminuje strefy pozbawione obsługi sieciowej, dla których silnik routingowy zwróciłby wyłącznie wartości puste lub czasy zdominowane przez składnik pieszy.
 % W przypadku macierzy o rozmiarze przekraczającym 4 miliony par O-D, zastosowano technikę przesyłania strumieniowego (ang. streaming fill), w której braki par OD uzupełniane są czasami marszu w pakietach (batch size: 24 wiersze pochodzenia), a wyniki zapisywane bezpośrednio do pliku parquet w celu minimalizacji zużycia pamięci operacyjnej.
@@ -649,7 +648,7 @@ Ludność \textit{De Jure} determinuje początkowy potencjał emisyjny, czyli st
 \end{figure}
 
 
-\subsection{Potencjał Docelowy}
+\subsection{Potencjał docelowy}
 
 Problemem metodologicznym okazało się przestrzenne wyizolowanie oraz parametryzacja populacji \textit{De Facto}, definiującej popyt docelowy i fizyczną chłonność stref celu (parametr \mbox{$D_j$ / $E_j$}). Zmienna ta nie odwzorowuje adresów zameldowania, lecz wyznacza realną, dobową akumulację zasobów ludzkich uwarunkowaną aktywnością ekonomiczną~–~przede wszystkim rozmieszczeniem miejsc pracy. Ze względu na fakt, że standardowe bazy spisowe rzadko oferują otwarty dostęp do tego typu statystyk, dla każdego z analizowanych miast konieczne było opracowanie podejścia estymacyjnego.
 

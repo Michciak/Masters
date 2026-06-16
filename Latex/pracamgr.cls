@@ -110,30 +110,30 @@
     \@thanks
   \end{titlepage}%
   
-  \begin{titlepage}
-    \c@page=2
-    \vspace*{2cm}
-    \begin{center}
-      {\large\textbf{Oświadczenie o samodzielnym przygotowaniu pracy}\par}
-    \end{center}
+  % \begin{titlepage}
+  %   \c@page=2
+  %   \vspace*{2cm}
+  %   \begin{center}
+  %     {\large\textbf{Oświadczenie o samodzielnym przygotowaniu pracy}\par}
+  %   \end{center}
 
-    \normalsize
+  %   \normalsize
     
-    Świadoma/y odpowiedzialności prawnej oświadczam, że niniejsza praca dyplomowa
-    została napisana przeze mnie samodzielnie i~nie zawiera treści uzyskanych w~sposób
-    niezgodny z~obowiązującymi przepisami.
+  %   Świadoma/y odpowiedzialności prawnej oświadczam, że niniejsza praca dyplomowa
+  %   została napisana przeze mnie samodzielnie i~nie zawiera treści uzyskanych w~sposób
+  %   niezgodny z~obowiązującymi przepisami.
     
-    Oświadczam również, że przedstawiona praca nie była wcześniej przedmiotem
-    procedur związanych z~uzyskaniem tytułu zawodowego w~wyższej uczelni.
+  %   Oświadczam również, że przedstawiona praca nie była wcześniej przedmiotem
+  %   procedur związanych z~uzyskaniem tytułu zawodowego w~wyższej uczelni.
     
-    Oświadczam ponadto, że niniejsza wersja pracy jest identyczna z~załączoną wersją
-    elektroniczną.
+  %   Oświadczam ponadto, że niniejsza wersja pracy jest identyczna z~załączoną wersją
+  %   elektroniczną.
     
-    \vspace*{26pt}%
+  %   \vspace*{26pt}%
     
-    \noindent Data: \today, \@imienazwisko
-    \vfill
-  \end{titlepage}
+  %   \noindent Data: \today, \@imienazwisko
+  %   \vfill
+  % \end{titlepage}
 
   \setcounter{footnote}{0}%
   \global\let\thanks\relax

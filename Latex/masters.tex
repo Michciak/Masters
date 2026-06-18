@@ -945,11 +945,13 @@ Zestawienie wykresów rozkładowych i~metryk globalnych pokazuje, że \mbox{L-sp
             \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_map_4_1c_diagnostic_diff_P_minus_L}
         \end{minipage}%
     }
-    \caption{Mapa różnicowa $\log_{1+x}(\mathrm{betweenness}_P) - \log_{1+x}(\mathrm{betweenness}_L)$ w~siatce 1~km. Klasyfikacja: dwustronna skala wokół zera. Mapa redukuje obciążenie poznawcze związane z~bezpośrednim porównywaniem pary map Rys.~\ref{fig:topo_map_L_betweenness}--\ref{fig:topo_map_P_betweenness} i~lokalizuje obszary, w~których organizacja oferty wyprzedza fizyczną infrastrukturę (wartości dodatnie) lub pozostaje za nią (wartości ujemne). Na mapie widoczne są naprzemienne strefy przewagi warstwy usługowej i~infrastrukturalnej, często układające się w~pasma lub wyspy. Szczególnie czytelny kontrast pojawia się między Paryżem a~Warszawą w~wariancie rozszerzonym: w~Warszawie dodatnie wartości częściej koncentrują się w~rdzeniu, podczas gdy gminy ościenne wykazują przewagę warstwy infrastrukturalnej (obsługa ograniczona do głównych linii), natomiast w~Paryżu relatywnie słabsza oferta w~samym mieście jest kompensowana przez mniej skrajnie wybrakowanie w kontekście oferty otoczenie metropolitalne.}
+    \caption{Mapa różnicowa $\log_{1+x}(\mathrm{betweenness}_P) - \log_{1+x}(\mathrm{betweenness}_L)$ w~siatce 1~km. Klasyfikacja: dwustronna skala wokół zera. Mapa redukuje obciążenie poznawcze związane z~bezpośrednim porównywaniem pary map Rys.~\ref{fig:topo_map_L_betweenness}--\ref{fig:topo_map_P_betweenness} i~lokalizuje obszary, w~których organizacja oferty wyprzedza fizyczną infrastrukturę (wartości dodatnie) lub pozostaje za nią (wartości ujemne).}
     \label{fig:topo_diff_P_L}
 \end{figure}
 
 Mapy pośrednictwa należy traktować jako diagnozę potencjalnych ról strukturalnych, a~nie jako gotową miarę dostępności czasowej. Wysoka wartość \mbox{L-space} wskazuje korytarz fizycznie ważny dla układu tras, natomiast wysoka wartość \mbox{P-space} pokazuje silniejsze osadzenie w~relacjach usługowych. Dopiero różnica między tymi warstwami pozwala wskazać obszary, w~których infrastruktura i~organizacja linii wzmacniają się albo rozchodzą przestrzennie.
+
+Na mapie widoczne są naprzemienne strefy przewagi warstwy usługowej i~infrastrukturalnej, często układające się w~pasma lub wyspy. Szczególnie czytelny kontrast pojawia się między Paryżem a~Warszawą w~wariancie rozszerzonym: w~Warszawie dodatnie wartości częściej koncentrują się w~rdzeniu, podczas gdy gminy ościenne wykazują przewagę warstwy infrastrukturalnej (obsługa ograniczona do głównych linii), natomiast w~Paryżu relatywnie słabsza oferta w~samym mieście jest kompensowana przez mniej skrajnie wybrakowanie w kontekście oferty otoczenie metropolitalne.
 
 % =====================================================================
 \section{Estymacja uogólnionego kosztu podróży}\label{section:wyniki_wtc}
@@ -967,15 +969,13 @@ Kompletne macierze czasów podróży nie podlegają bezpośredniej prezentacji z
 \begin{figure}[H]
     \centering
     \makebox[\textwidth][c]{%
-        \begin{minipage}{1.15\textwidth}
+        \begin{minipage}{1.11\textwidth}
             \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_4_cost_components_profile}
         \end{minipage}%
     }
     \caption{Profil procentowego udziału składowych kosztu podróży (czas w~pojeździe, czas oczekiwania, czas dojścia, kara transferowa) w~formie stacked bar per \mbox{miasto~$\times$~wariant~$\times$~okno czasowe}. Wykres stanowi bezpośredni dowód metodyczny, że uogólniony koszt nie został zredukowany do czasu w~pojeździe~--- ujawnia udział każdej składowej zgodnie z~logiką Whole Travel Chain.}
     \label{fig:wtc_components}
 \end{figure}
-
-Wykresy \mbox{WTC} pokazują, że największe różnice nie wynikają z~samego wyboru okna czasowego, lecz z~delimitacji i~pełnej konstrukcji łańcucha podróży. Warianty \mbox{Core} mają bardziej zwarte i~korzystniejsze rozkłady kosztu, natomiast warianty \mbox{Extended} przesuwają masę obserwacji ku wyższym wartościom. Dekompozycja komponentów pokazuje dodatkowo, że podobny poziom kosztu całkowitego może mieć różne źródła: w~jednym mieście dominuje czas w~pojeździe, w~innym dojście pierwszej i~ostatniej mili albo przesiadki.
 
 \begin{figure}[H]
     \makebox[\textwidth][c]{%
@@ -1006,6 +1006,8 @@ Wykresy \mbox{WTC} pokazują, że największe różnice nie wynikają z~samego w
     \caption{Porównanie kontrfaktyczne wartości tych samych statystyk wyznaczonych dla samego czasu w~pojeździe oraz dla pełnego uogólnionego kosztu podróży. Wykres kwantyfikuje narzut metodyczny pełnego łańcucha podróży w~stosunku do redukcyjnego podejścia \mbox{supply-only}.}
     \label{fig:wtc_counterfactual}
 \end{figure}
+
+Wykresy \mbox{WTC} pokazują, że największe różnice nie wynikają z~samego wyboru okna czasowego, lecz z~delimitacji i~pełnej konstrukcji łańcucha podróży. Warianty \mbox{Core} mają bardziej zwarte i~korzystniejsze rozkłady kosztu, natomiast warianty \mbox{Extended} przesuwają masę obserwacji ku wyższym wartościom. Dekompozycja komponentów pokazuje dodatkowo, że podobny poziom kosztu całkowitego może mieć różne źródła: w~jednym mieście dominuje czas w~pojeździe, w~innym dojście pierwszej i~ostatniej mili albo przesiadki.
 
 Mapy \mbox{WTC} uzupełniają wykresy rozkładowe o~wymiar przestrzenny. Niskie mediany i~wysoki udział relacji poniżej 45~minut koncentrują się głównie w~rdzeniach oraz wybranych korytarzach, natomiast obszary zewnętrzne częściej tworzą strefy wysokiego kosztu. Oznacza to, że sama obecność przystanków lub topologicznego korytarza nie gwarantuje krótkiego kosztu podróży w~pełnym ujęciu \mbox{Whole Travel Chain}.
 

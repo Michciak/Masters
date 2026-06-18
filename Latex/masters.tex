@@ -71,7 +71,7 @@
 
 % Streszczenie
 \begin{abstract}
-\noindent Dostępność transportu zbiorowego decyduje o~tym, czy mieszkańcy miast mogą rzeczywiście korzystać z~miejsc pracy, usług i~innych zasobów przestrzennych. Sama obecność przystanków, linii lub rozkładów jazdy nie wystarcza jednak do oceny tej dostępności, ponieważ każda podróż obejmuje także dojście piesze, oczekiwanie, przesiadki oraz relację między miejscem zamieszkania a~lokalizacją celów. W~badaniach miejskich coraz częściej wykorzystuje się dane GTFS, sieci piesze OSM, modele grawitacyjne i~wskaźniki sprawiedliwości transportowej, lecz narzędzia te rzadko są łączone w~jednej porównywalnej procedurze. Szczególnie problematyczne pozostaje pytanie, czy ta sama metodyka zachowuje wartość interpretacyjną w~miastach różniących się skalą, strukturą systemu transportowego i~jakością danych. Niniejsza praca podejmuje problem budowy przenaszalnej ramy diagnostycznej dla oceny dostępności transportu zbiorowego w~trzech odmiennych aglomeracjach europejskich: Paryżu, Warszawie i~Dublinie. W~pracy pokazano, że zintegrowanie reprezentacji topologicznych \mbox{L-space} i~\mbox{P-space}, uogólnionego kosztu podróży \mbox{WTC}, podwójnie ograniczonych modeli grawitacyjnych oraz analizy zróżnicowania społeczno-ekonomicznego pozwala diagnozować nie tylko poziom dostępności, lecz także mechanizmy jej ograniczeń. Wyniki wskazują, że proste miary podażowe mogą istotnie zniekształcać obraz dostępności: korytarze infrastrukturalne lub wysoka gęstość przystanków nie muszą przekładać się na niski koszt pełnego łańcucha podróży. Analiza wykazała także, że uwzględnienie obszarów ościennych wpływa na wyniki analiz, a~modele grawitacyjne pokazują, że dostępność zależy nie tylko od kosztu podróży, lecz również od rozmieszczenia i~pojemności celów. Jednocześnie heterogeniczność danych okazała się nie tylko ograniczeniem technicznym, ale samodzielnym wynikiem badawczym: Dublin oferuje najbardziej audytowalny ekosystem danych, Warszawa wymaga największej liczby proxy, a~Paryż testuje granice skali i~stabilności obliczeniowej. Praca pokazuje więc, że holistyczna metodyka dostępności może wspierać planowanie transportu jako narzędzie diagnostyczne, pod warunkiem jawnego raportowania niepewności, lokalnych ograniczeń danych i~scenariuszowego charakteru części parametrów behawioralnych.
+\noindent Dostępność transportu zbiorowego decyduje o~tym, w jakim stopniu mieszkańcy miast mogą rzeczywiście korzystać z~miejsc pracy, usług i~innych zasobów przestrzennych. Sama obecność przystanków, linii lub rozkładów jazdy nie wystarcza jednak do oceny tej dostępności, ponieważ każda podróż obejmuje także dojście piesze, oczekiwanie, przesiadki oraz relację między miejscem zamieszkania a~lokalizacją celów. W~badaniach miejskich coraz częściej wykorzystuje się dane GTFS, sieci piesze OSM, modele grawitacyjne i~wskaźniki sprawiedliwości transportowej, lecz narzędzia te rzadko są łączone w~jednej porównywalnej procedurze. Szczególnie problematyczne pozostaje pytanie, czy ta sama metodyka zachowuje wartość interpretacyjną w~miastach różniących się skalą, strukturą systemu transportowego i~jakością danych. Niniejsza praca podejmuje problem budowy przenaszalnej ramy diagnostycznej dla oceny dostępności transportu zbiorowego w~trzech odmiennych aglomeracjach europejskich: Paryżu, Warszawie i~Dublinie. W~pracy pokazano, że zintegrowanie reprezentacji topologicznych \mbox{L-space} i~\mbox{P-space}, uogólnionego kosztu podróży \mbox{WTC}, podwójnie ograniczonych modeli grawitacyjnych oraz analizy zróżnicowania społeczno-ekonomicznego pozwala diagnozować nie tylko poziom dostępności, lecz także mechanizmy jej ograniczeń. Wyniki wskazują, że proste miary podażowe mogą istotnie zniekształcać obraz dostępności: korytarze infrastrukturalne lub wysoka gęstość przystanków nie muszą przekładać się na niski koszt pełnego łańcucha podróży. Analiza wykazała także, że uwzględnienie obszarów ościennych wpływa na wyniki analiz, a~modele grawitacyjne pokazują, że dostępność zależy nie tylko od kosztu podróży, lecz również od rozmieszczenia i~pojemności celów. Jednocześnie heterogeniczność danych okazała się nie tylko ograniczeniem technicznym, ale samodzielnym wynikiem badawczym: Dublin oferuje najbardziej audytowalny ekosystem danych, Warszawa wymaga największej liczby proxy, a~Paryż testuje granice skali i~stabilności obliczeniowej. Praca pokazuje więc, że holistyczna metodyka dostępności może wspierać planowanie transportu jako narzędzie diagnostyczne, pod warunkiem jawnego raportowania niepewności, lokalnych ograniczeń danych i~scenariuszowego charakteru części parametrów behawioralnych.
 \newline\newline
 \noindent Public transport accessibility determines whether urban residents can effectively reach jobs, services and other spatial opportunities. The presence of stops, routes or timetables alone is not sufficient to measure this accessibility, because each journey also includes walking access, waiting, transfers and the spatial relation between origins and destinations. Urban transport research increasingly uses GTFS data, OSM pedestrian networks, gravity models and equity indicators, but these components are rarely integrated into one comparable workflow. A key unresolved question is whether the same analytical procedure remains interpretable across cities that differ in scale, network structure and data quality. This thesis addresses this problem by developing a transferable diagnostic framework for public transport accessibility in three contrasting European metropolitan areas: Paris, Warsaw and Dublin. Paper shows that combining \mbox{L-space} and \mbox{P-space} network representations, Whole Travel Chain costs, doubly constrained gravity models and socioeconomic stratification makes it possible to identify not only accessibility levels, but also the mechanisms that produce low accessibility. The results show that supply-based indicators may substantially distort the interpretation of accessibility: infrastructure corridors or high stop density do not necessarily translate into low full-chain travel costs. The analysis also demonstrates that the results are significantly affected by the inclusion of suburbs, while gravity models show that accessibility depends not only on travel cost but also on the location and capacity of destination opportunities. At the same time, data heterogeneity emerges not merely as a technical limitation, but as a research finding in its own right: Dublin provides the most auditable data ecosystem, Warsaw requires the most extensive proxy layers, and Paris tests the limits of computational scale and model stability. The thesis therefore shows that a holistic accessibility framework can support transport planning as a diagnostic decision-support tool, provided that uncertainty, local data limitations and the scenario-based character of selected behavioural parameters are explicitly reported.
 \end{abstract}
@@ -884,10 +884,10 @@ Z~uwagi na złożoność obliczeniową deterministycznego wyznaczania centralno�
     \makebox[\textwidth][c]{%
         \begin{minipage}{1.15\textwidth}
             \includegraphics[width=\linewidth,keepaspectratio]{Latex/images/chapter4/topologia_figure_4_1_centrality_violin_faceted}
-            \caption{Rozkład trzech miar centralności (\textit{betweenness}, \textit{closeness}, \textit{eigenvector}) w~reprezentacjach \mbox{L-space} i~\mbox{P-space}, w~układzie facet \mbox{miasto~$\times$~wariant}. Klasyfikacja: skala liniowa w~obrębie każdej miary; każda miara skalowana niezależnie. Na wykresie widać, że rozkłady \mbox{P-space} są zazwyczaj szersze i~przesunięte ku wyższym wartościom niż rozkłady \mbox{L-space}, a~w wariantach Extended częściej pojawiają się wydłużone ogony.}
-            \label{fig:topo_centrality_violin}
         \end{minipage}%
     }
+    \caption{Rozkład trzech miar centralności (\textit{betweenness}, \textit{closeness}, \textit{eigenvector}) w~reprezentacjach \mbox{L-space} i~\mbox{P-space}, w~układzie facet \mbox{miasto~$\times$~wariant}. Klasyfikacja: skala liniowa w~obrębie każdej miary; każda miara skalowana niezależnie. Na wykresie widać, że rozkłady \mbox{P-space} są zazwyczaj szersze i~przesunięte ku wyższym wartościom niż rozkłady \mbox{L-space}, a~w wariantach Extended częściej pojawiają się wydłużone ogony.}
+    \label{fig:topo_centrality_violin}
 \end{figure}
 
 \begin{figure}[H]
@@ -905,38 +905,46 @@ Z~uwagi na złożoność obliczeniową deterministycznego wyznaczania centralno�
 \end{figure}
 
 \begin{figure}[H]
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.15\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_figure_4_1b_bis_loglog_kde}
+        \end{minipage}%
+    }
+    \caption{Estymata gęstości jądrowej (KDE) par (pośrednictwo L-space, pośrednictwo P-space) per węzeł w~skali logarytmicznej, panel \mbox{miasto~$\times$~wariant}. Stanowi rozszerzenie kwintylowej Rys.~\ref{fig:topo_quintile_heatmap} o~ciągłe wartości surowe~--- pozwala oszacować gęstość punktów w~obrębie każdego pola heatmapy oraz zaobserwować ogony rozkładu (węzły skrajnie wysokiej centralności). Na wykresie widać jednocześnie gęste skupienia niskich wartości oraz rzadsze, odległe ogony odpowiadające węzłom bardzo centralnym.}
+    \label{fig:topo_loglog_kde}
+\end{figure}
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.85\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_figure_4_1d_zero_share_by_city_variant}
     \caption{Udział węzłów o~zerowej wartości pośrednictwa w~obu reprezentacjach, per kombinacja \mbox{miasto--wariant}. Wykres ilościowo dokumentuje rozmiar peryferii topologicznej i~uzupełnia rozkłady z~Rys.~\ref{fig:topo_centrality_violin} o~informację o~ogonie zerowym, niewidocznym na wykresach typu violin. Widać na nim duże zróżnicowanie udziału zer między miastami i~wariantami, od niskich wartości w~Warszawie Core do bardzo wysokich w~Paryżu.}
     \label{fig:topo_zero_share}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.15\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_figure_4_1b_bis_loglog_kde}
-    \caption{Estymata gęstości jądrowej (KDE) par (pośrednictwo L-space, pośrednictwo P-space) per węzeł w~skali logarytmicznej, panel \mbox{miasto~$\times$~wariant}. Stanowi rozszerzenie kwintylowej Rys.~\ref{fig:topo_quintile_heatmap} o~ciągłe wartości surowe~--- pozwala oszacować gęstość punktów w~obrębie każdego pola heatmapy oraz zaobserwować ogony rozkładu (węzły skrajnie wysokiej centralności). Na wykresie widać jednocześnie gęste skupienia niskich wartości oraz rzadsze, odległe ogony odpowiadające węzłom bardzo centralnym.}
-    \label{fig:topo_loglog_kde}
-\end{figure}
-
 Zestawienie wykresów rozkładowych i~metryk globalnych pokazuje, że \mbox{L-space} i~\mbox{P-space} nie są wymiennymi opisami tej samej struktury. \mbox{L-space} zachowuje bardziej lokalny, korytarzowy charakter, podczas gdy \mbox{P-space} silnie zwiększa liczbę relacji między przystankami współobsługiwanymi przez te same linie. Dlatego już na etapie topologicznym należy oddzielać pytanie o~fizyczny układ sieci od pytania o~organizację oferty przewozowej.
 
+\clearpage
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_map_4_1_betweenness_L_grid}
+    \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_map_4_1_betweenness_L_grid}
     \caption{Przestrzenny rozkład pośrednictwa w~reprezentacji L-space, zagregowany do siatki 1~km~$\times$~1~km. Klasyfikacja: kwantyle dobierane per kombinacja \mbox{miasto--wariant}. Mapa lokalizuje obszary o~wysokim znaczeniu tranzytowym w~warstwie fizycznej infrastruktury sieci. Na mapie wysokie wartości układają się przede wszystkim w~pasy i~korytarze, a~nie w~równomierne pola powierzchniowe.}
     \label{fig:topo_map_L_betweenness}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_map_4_2_betweenness_P_grid}
+    \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_map_4_2_betweenness_P_grid}
     \caption{Przestrzenny rozkład pośrednictwa w~reprezentacji P-space, zagregowany do siatki 1~km~$\times$~1~km. Klasyfikacja: kwantyle dobierane per kombinacja \mbox{miasto--wariant}. Mapa lokalizuje obszary o~wysokim znaczeniu tranzytowym w~warstwie operacyjnej (siatka linii bez konieczności przesiadek). Widać na niej, że wysokie wartości częściej tworzą obszary rdzeniowe i~lokalne wyspy centralności usługowej.}
     \label{fig:topo_map_P_betweenness}
 \end{figure}
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_map_4_1c_diagnostic_diff_P_minus_L}
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.12\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/topologia_map_4_1c_diagnostic_diff_P_minus_L}
+        \end{minipage}%
+    }
     \caption{Mapa różnicowa $\log_{1+x}(\mathrm{betweenness}_P) - \log_{1+x}(\mathrm{betweenness}_L)$ w~siatce 1~km. Klasyfikacja: dwustronna skala wokół zera. Mapa redukuje obciążenie poznawcze związane z~bezpośrednim porównywaniem pary map Rys.~\ref{fig:topo_map_L_betweenness}--\ref{fig:topo_map_P_betweenness} i~lokalizuje obszary, w~których organizacja oferty wyprzedza fizyczną infrastrukturę (wartości dodatnie) lub pozostaje za nią (wartości ujemne). Na mapie widoczne są naprzemienne strefy przewagi warstwy usługowej i~infrastrukturalnej, często układające się w~pasma lub wyspy.}
     \label{fig:topo_diff_P_L}
 \end{figure}
@@ -958,49 +966,70 @@ Kompletne macierze czasów podróży nie podlegają bezpośredniej prezentacji z
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.15\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_2_ecdf_wtc_faceted_city_variant}
-    \caption{Krzywe ECDF uogólnionego kosztu podróży w~trzech oknach czasowych, w~układzie facet \mbox{miasto~$\times$~wariant}. Wykres pokazuje cały rozkład $c_{ij}$ i~umożliwia odczyt udziału relacji poniżej dowolnego progu czasu w~każdym oknie. Klasyfikacja: skala liniowa w~minutach, oś~$y$ od~0 do~1. Na wykresie widać, że krzywe wariantów Core leżą zwykle bardziej po lewej stronie, podczas gdy warianty Extended są przesunięte ku wyższym kosztom.}
-    \label{fig:wtc_ecdf}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_3_violin_wtc_faceted_city_variant}
-    \caption{Rozkłady uogólnionego kosztu w~układzie violin per kombinacja \mbox{miasto--wariant}. Wykres ujawnia wielomodalność oraz położenie jądra rozkładu kosztu w~obrębie wariantu. Widać na nim, że rozkłady wariantów Extended są zwykle szersze i~częściej rozciągają się ku wysokim wartościom kosztu.}
-    \label{fig:wtc_violin}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.15\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_4_cost_components_profile}
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.15\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_4_cost_components_profile}
+        \end{minipage}%
+    }
     \caption{Profil procentowego udziału składowych kosztu podróży (czas w~pojeździe, czas oczekiwania, czas dojścia, kara transferowa) w~formie stacked bar per \mbox{miasto~$\times$~wariant~$\times$~okno czasowe}. Wykres stanowi bezpośredni dowód metodyczny, że uogólniony koszt nie został zredukowany do czasu w~pojeździe~--- ujawnia udział każdej składowej zgodnie z~logiką Whole Travel Chain.}
     \label{fig:wtc_components}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=1.15\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_5_counterfactual_ivt_vs_wtc_uplift}
-    \caption{Porównanie kontrfaktyczne wartości tych samych statystyk wyznaczonych dla samego czasu w~pojeździe oraz dla pełnego uogólnionego kosztu podróży. Wykres kwantyfikuje narzut metodyczny pełnego łańcucha podróży w~stosunku do redukcyjnego podejścia \mbox{supply-only}.}
-    \label{fig:wtc_counterfactual}
 \end{figure}
 
 Wykresy \mbox{WTC} pokazują, że największe różnice nie wynikają z~samego wyboru okna czasowego, lecz z~delimitacji i~pełnej konstrukcji łańcucha podróży. Warianty \mbox{Core} mają bardziej zwarte i~korzystniejsze rozkłady kosztu, natomiast warianty \mbox{Extended} przesuwają masę obserwacji ku wyższym wartościom. Dekompozycja komponentów pokazuje dodatkowo, że podobny poziom kosztu całkowitego może mieć różne źródła: w~jednym mieście dominuje czas w~pojeździe, w~innym dojście pierwszej i~ostatniej mili albo przesiadki.
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_map_4_3_median_travel_time_panel_3x2}
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.1\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_3_violin_wtc_faceted_city_variant}
+        \end{minipage}%
+    }
+    \caption{Rozkłady uogólnionego kosztu w~układzie violin per kombinacja \mbox{miasto--wariant}. Wykres ujawnia wielomodalność oraz położenie jądra rozkładu kosztu w~obrębie wariantu. Widać na nim, że rozkłady wariantów Extended są zwykle szersze i~częściej rozciągają się ku wysokim wartościom kosztu.}
+    \label{fig:wtc_violin}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.12\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_2_ecdf_wtc_faceted_city_variant}
+        \end{minipage}%
+    }
+    \caption{Krzywe ECDF uogólnionego kosztu podróży w~trzech oknach czasowych, w~układzie facet \mbox{miasto~$\times$~wariant}. Wykres pokazuje cały rozkład $c_{ij}$ i~umożliwia odczyt udziału relacji poniżej dowolnego progu czasu w~każdym oknie. Klasyfikacja: skala liniowa w~minutach, oś~$y$ od~0 do~1. Na wykresie widać, że krzywe wariantów Core leżą zwykle bardziej po lewej stronie, podczas gdy warianty Extended są przesunięte ku wyższym kosztom.}
+    \label{fig:wtc_ecdf}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.15\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_figure_4_5_counterfactual_ivt_vs_wtc_uplift}
+         \end{minipage}%
+    }
+    \caption{Porównanie kontrfaktyczne wartości tych samych statystyk wyznaczonych dla samego czasu w~pojeździe oraz dla pełnego uogólnionego kosztu podróży. Wykres kwantyfikuje narzut metodyczny pełnego łańcucha podróży w~stosunku do redukcyjnego podejścia \mbox{supply-only}.}
+    \label{fig:wtc_counterfactual}
+\end{figure}
+
+Mapy \mbox{WTC} uzupełniają wykresy rozkładowe o~wymiar przestrzenny. Niskie mediany i~wysoki udział relacji poniżej 45~minut koncentrują się głównie w~rdzeniach oraz wybranych korytarzach, natomiast obszary zewnętrzne częściej tworzą strefy wysokiego kosztu. Oznacza to, że sama obecność przystanków lub topologicznego korytarza nie gwarantuje krótkiego kosztu podróży w~pełnym ujęciu \mbox{Whole Travel Chain}.
+
+\newpage
+
+\begin{figure}[H]
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.15\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_map_4_3_median_travel_time_panel_3x2}
+         \end{minipage}%
+    }
     \caption{Przestrzenny rozkład mediany czasu podróży w~siatce 1~km~$\times$~1~km, panel $3 \times 2$ \mbox{miasto~$\times$~wariant}. Klasyfikacja: kwantyle per kombinacja \mbox{miasto--wariant}. Na mapach widoczny jest zwykle gradient od niższych median w~rdzeniach do wyższych wartości na obszarach peryferyjnych.}
     \label{fig:wtc_map_median}
 \end{figure}
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_map_4_4_share_within_45min_panel_3x2}
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.15\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/wtc_map_4_4_share_within_45min_panel_3x2}
+         \end{minipage}%
+    }
     \caption{Udział relacji spełniających próg 45~minut, w~siatce 1~km~$\times$~1~km, panel $3 \times 2$ \mbox{miasto~$\times$~wariant}. Klasyfikacja: kwantyle per kombinacja \mbox{miasto--wariant}. Na mapie widać, gdzie wysoki udział relacji poniżej 45 minut utrzymuje się w~rdzeniu i~głównych korytarzach, a~gdzie szybko zanika poza nimi.}
     \label{fig:wtc_map_share45}
 \end{figure}
-
-Mapy \mbox{WTC} uzupełniają wykresy rozkładowe o~wymiar przestrzenny. Niskie mediany i~wysoki udział relacji poniżej 45~minut koncentrują się głównie w~rdzeniach oraz wybranych korytarzach, natomiast obszary zewnętrzne częściej tworzą strefy wysokiego kosztu. Oznacza to, że sama obecność przystanków lub topologicznego korytarza nie gwarantuje krótkiego kosztu podróży w~pełnym ujęciu \mbox{Whole Travel Chain}.
 
 % =====================================================================
 \section{Parametryzacja modeli grawitacyjnych}\label{section:wyniki_grawitacyjne}
@@ -1010,7 +1039,7 @@ Wskaźniki dostępności wyestymowano z~wykorzystaniem trzech wariantów podwój
 \begin{table}[H]
   \centering
   \small
-  \renewcommand{\arraystretch}{1.25}
+  \renewcommand{\arraystretch}{1.3}
   \begin{tabular}{l|c|p{4.2cm}|p{5.2cm}}
     \hline
     \textbf{Model} & \textbf{Parametr $\beta$} & \textbf{Charakter scenariusza} & \textbf{Rola interpretacyjna} \\ \hline
@@ -1034,7 +1063,8 @@ Dopasowanie modelu obustronnie ograniczonego przeprowadzono przy użyciu metody 
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{l|c|c|c|c}
         \hline
-        \textbf{Kombinacja miasto--wariant} & \textbf{Model} & \textbf{$\beta$} & \textbf{Zbieżność} & \textbf{Iteracje} \\ \hline
+        % Zagnieżdżona tabela pozwala na użycie '\\' wewnątrz jednej komórki
+        \begin{tabular}{@{}l@{}}\textbf{Kombinacja} \\ \textbf{miasto--wariant}\end{tabular} & \textbf{Model} & \textbf{$\beta$} & \textbf{Zbieżność} & \textbf{Iteracje} \\ \hline
         Dublin~Core & A / B / C & 0{,}03 / 0{,}15 / dyn. & T / T / T & 20 / 20 / 20 \\ \hline
         Dublin~Extended & A / B / C & 0{,}03 / 0{,}15 / dyn. & T / T / T & 20 / 80 / 40 \\ \hline
         Paryż~Core & A / B / C & 0{,}03 / 0{,}15 / dyn. & T / T / T & 20 / 20 / 20 \\ \hline
@@ -1047,43 +1077,56 @@ Dopasowanie modelu obustronnie ograniczonego przeprowadzono przy użyciu metody 
 \end{table}
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=1.15\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_figure_4_5_beta_distribution}
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.15\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_figure_4_5_beta_distribution}
+         \end{minipage}%
+    }
     \caption{Rozkład scenariuszowo przypisanych wartości parametru $\beta$ per kombinacja \mbox{miasto--wariant} dla Modelu~C. Wykres dokumentuje stopień zróżnicowania dynamicznego $\beta$ oraz zakres, w~którym mieszczą się kwantyle: dla większości wariantów rozkład obejmuje pełen przedział $[0{,}03;\,0{,}15]$; dla wariantu rozszerzonego Warszawy zakres między 5.~i~95.~percentylem jest węższy ($\approx$0{,}06--0{,}12) z~powodu większego udziału komórek z~przypisaniem domyślnym. Widać na nim, że rozkład w~Warszawie Extended jest bardziej ściśnięty niż w~pozostałych wariantach.}
     \label{fig:beta_distribution}
 \end{figure}
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_map_4_6_core_accessibility_ABC_panel_3x3}
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.15\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_map_4_6_core_accessibility_ABC_panel_3x3}
+         \end{minipage}%
+    }
     \caption{Indeks dostępności w~triadzie modeli A/B/C, panel $3 \times 3$ \mbox{miasto~$\times$~model}, wariant rdzeniowy. Klasyfikacja: kwantyle per kombinacja \mbox{miasto--model}. Mapa wizualizuje efekt przyjętej wartości $\beta$ na tym samym profilu kosztów. Widać na niej, że przejście od modelu~A do modelu~B zwykle zawęża pola wysokiej dostępności do mniejszej liczby komórek rdzeniowych, co jest spodziewanym efektem.}
     \label{fig:gravity_map_core}
 \end{figure}
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_map_4_6_extended_accessibility_ABC_panel_3x3}
-    \caption{Indeks dostępności w~triadzie modeli A/B/C, panel $3 \times 3$ \mbox{miasto~$\times$~model}, wariant rozszerzony. Komórki Paryża w~modelach~B i~C oznaczone są neutralnie zgodnie z~notą z~Tabeli~\ref{tab:gravity_ipf_status} (brak zbieżności procedury bilansowania). Na mapach widać silniejsze wygaszenie dostępności poza rdzeniami niż w~wariantach Core, a~dla Paryża część paneli pozostaje neutralna z~powodu braku zbieżności.}
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.15\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_map_4_6_extended_accessibility_ABC_panel_3x3}
+         \end{minipage}%
+    }
+    \caption{Indeks dostępności w~triadzie modeli A/B/C, panel $3 \times 3$ \mbox{miasto~$\times$~model}, wariant rozszerzony. Komórki Paryża w~modelach~B i~C oznaczone są neutralnie zgodnie z~notą z~Tabeli~\ref{tab:gravity_ipf_status} (brak zbieżności procedury bilansowania). Na mapach widać silniejsze wygaszenie dostępności poza rdzeniami niż w~wariantach Core, a~dla Paryża część paneli pozostaje neutralna z~powodu braku zbieżności. Zwracając uwagę na wyniki Modelu C~w~zauważalny sposób odznaczają się obszary, które według scenariusza są zamieszkałe głównie poprzez osoby mniej wrażliwe na dostępność transportu w~kontekście współczynnika oporu.}
+    % \footnote{(1) }
     \label{fig:gravity_map_extended}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_map_4_6b_diff_A_minus_C_panel_3x2}
-    \caption{Mapa różnicowa indeksu dostępności Modelu~A względem Modelu~C, panel $3 \times 2$ \mbox{miasto~$\times$~wariant}. Klasyfikacja: dwustronna skala wokół zera. Mapa lokalizuje obszary, w~których wprowadzenie dynamicznego $\beta$ (Model~C) najsilniej redukuje albo zwiększa wartość indeksu względem stałego $\beta = 0{,}03$ (Model~A). Na mapie widać, że zmiany mają charakter przestrzennie selektywny: tworzą lokalne strefy spadku i~wzrostu zamiast jednolitego przesunięcia całego obszaru.}
+    \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_map_4_6b_diff_A_minus_C_panel_3x2}
+    \caption{Mapa różnicowa indeksu dostępności Modelu~A względem Modelu~C, panel $3 \times 2$ \mbox{miasto~$\times$~wariant}. Klasyfikacja: dwustronna skala wokół zera. Mapa lokalizuje obszary, w~których wprowadzenie dynamicznego $\beta$ (Model~C) najsilniej redukuje albo zwiększa wartość indeksu względem stałego $\beta = 0{,}03$ (Model~A). Na mapie widać, że zmiany mają charakter przestrzennie selektywny: tworzą lokalne strefy spadku i~wzrostu zamiast jednolitego przesunięcia całego obszaru. Wszystkie przedstawione na mapach wartości są nieujemne co bezpośrednio wynika z~faktu, że Model z dynamicznym oporem (Model C) przypisuje wartości $\beta$~nie mniejsze niż w~scenariuszu przyjętym dla Modelu A. Puste i jasne obszary w centralnych partiach analizowanych wariantów pokrywają się z~miejscami gdzie wartości cechy \mbox{socjo-ekonomicznej} są w~dolnych zakresach, przekłada się to na dobieranie mniejszych wartości oporu $\beta$~bezpośrednio implikując zbliżone wartości dostępności dla tych komórek w~obu modelach.}
     \label{fig:gravity_diff_AC}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.15\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_figure_4_6d_accessibility_distribution_boxplot}
+    \includegraphics[width=0.875\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_figure_4_6d_accessibility_distribution_boxplot}
     \caption{Rozkłady indeksu dostępności dla modeli A/B/C w~formie boxplot per kombinacja \mbox{miasto--wariant}. Wykres izoluje efekt modelowania od geografii: pokazuje, jak ten sam parametr $\beta$ przekłada się na położenie i~rozrzut rozkładu wartości indeksu. Widać na nim systematyczne obniżanie median i~kompresję rozkładów wraz ze wzrostem oporu przestrzennego.}
     \label{fig:gravity_box}
 \end{figure}
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_figure_4_6_model_differences}
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.125\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/models_beta_figure_4_6_model_differences}
+         \end{minipage}%
+    }
     \caption{Rozkłady różnic między parami modeli (A$-$B, B$-$C, A$-$C) w~skali symlog, panel per kombinacja \mbox{miasto~$\times$~wariant}. Wykres kwantyfikuje wartości różnic komórka po komórce, eksponując zarówno znak (przesunięcie w~górę vs.\ w~dół), jak i~skalę efektu zmiany parametru $\beta$. Próg liniowej części skali symlog ustawiono na wartość~1~--- odpowiada to jednej jednostce indeksu dostępności (interpretowalnej jako wkład jednego celu zatrudnienia przy pełnej sile funkcji oporu) i~zachowuje czytelność znaku dla małych efektów, kompresując jednocześnie ogony rozkładu sięgające 3--4 rzędów wielkości. Widać na nim zarówno drobne przesunięcia blisko zera, jak i~nieliczne, lecz bardzo duże różnice tworzące długie ogony.}
     \label{fig:gravity_differences}
 \end{figure}
@@ -1108,7 +1151,7 @@ Graficzna reprezentacja korelacji przestrzennej dwóch wymiarów (potencjału do
     \renewcommand{\arraystretch}{1.3}
     \begin{tabular}{l|r|r|r|r}
         \hline
-        \textbf{Kombinacja miasto--wariant} & \textbf{$n_{\text{komórek}}$} & \textbf{Gini (Model~A)} & \textbf{Gini (Model~B)} & \textbf{Gini (Model~C)} \\ \hline
+        \begin{tabular}{@{}l@{}}\textbf{Kombinacja} \\ \textbf{miasto--wariant}\end{tabular} & \textbf{$n_{\text{komórek}}$} & \textbf{Gini (Model~A)} & \textbf{Gini (Model~B)} & \textbf{Gini (Model~C)} \\ \hline
         Dublin~Core & 109 & 0{,}17 & 0{,}52 & 0{,}51 \\ \hline
         Dublin~Extended & 751 & 0{,}25 & 0{,}63 & 0{,}66 \\ \hline
         Paryż~Core & 809 & 0{,}21 & 0{,}59 & 0{,}64 \\ \hline
@@ -1129,35 +1172,41 @@ Graficzna reprezentacja korelacji przestrzennej dwóch wymiarów (potencjału do
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.15\textwidth,keepaspectratio]{Latex/images/chapter4/equity_figure_4_8_city_distribution_comparison}
-    \caption{Porównanie rozkładów indeksu dostępności Modelu~C między ośrodkami w~obu wariantach. Wykres oddziela kwestię rozkładu od geometrii map i~ułatwia porównanie median, rozstępu międzykwartylowego oraz ogonów rozkładu. Widać na nim, że miasta i~warianty różnią się nie tylko położeniem mediany, ale także szerokością rozkładu i~długością ogonów.}
-    \label{fig:equity_distribution}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.95\textwidth,keepaspectratio]{Latex/images/chapter4/equity_map_4_8_bivariate_accessibility_socio_panel_3x2}
+    \includegraphics[width=1.05\textwidth,keepaspectratio]{Latex/images/chapter4/equity_map_4_8_bivariate_accessibility_socio_panel_3x2}
     \caption{Mapa biwariantowa dostępność~$\times$~zmienna socjoekonomiczna (Model~C), panel $3 \times 2$ \mbox{miasto~$\times$~wariant}. Klasyfikacja: tercile per oś (legenda $3 \times 3$). Komórki bez warstwy społeczno-ekonomicznej (w~szczególności wariant rozszerzony Warszawy) oznaczone są jednolitym kolorem braku. Na mapie widoczne są zarówno pola współwystępowania wysokiej dostępności i~wyższego SES, jak i~obszary, w~których te dwa wymiary rozchodzą się przestrzennie.}
     \label{fig:equity_bivariate}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.15\textwidth,keepaspectratio]{Latex/images/chapter4/equity_figure_4_9b_access_vs_ses_scatter}
+    \includegraphics[width=0.75\textwidth,keepaspectratio]{Latex/images/chapter4/equity_figure_4_9b_access_vs_ses_scatter}
     \caption{Wykres rozrzutu indeksu dostępności Modelu~C względem zmiennej socjoekonomicznej per komórka, panel per ośrodek. Wykres umożliwia bezpośredni odczyt kierunku i~siły zależności na poziomie komórki, bez przechodzenia w~formalny test korelacji. Widać na nim raczej szerokie i~rozproszone chmury punktów niż jeden silny, jednolity gradient.}
     \label{fig:equity_scatter}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=1.15\textwidth,keepaspectratio]{Latex/images/chapter4/equity_figure_4_9c_access_by_ses_quintile}
+    \includegraphics[width=0.75\textwidth,keepaspectratio]{Latex/images/chapter4/equity_figure_4_9c_access_by_ses_quintile}
     \caption{Rozkłady indeksu dostępności w~kwintylach zmiennej socjoekonomicznej per kombinacja \mbox{miasto--wariant}. Wykres pokazuje rozkład warunkowy dostępności w~obrębie kolejnych kwintyli zamożności i~stanowi operacyjne uzupełnienie krzywych Lorenza z~Rys.~\ref{fig:equity_lorenz}. Na wykresie widać, że profile kwintylowe nie tworzą zwykle prostego, monotonicznego wzrostu wraz z~SES.}
     \label{fig:equity_quintiles}
 \end{figure}
 
 \begin{figure}[H]
-    \centering
-    \includegraphics[width=1.15\textwidth,keepaspectratio]{Latex/images/chapter4/equity_map_4_8b_bivariate_difference_core_extended}
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.15\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/equity_figure_4_8_city_distribution_comparison}
+         \end{minipage}%
+    }
+    \caption{Porównanie rozkładów indeksu dostępności Modelu~C między ośrodkami w~obu wariantach. Wykres oddziela kwestię rozkładu od geometrii map i~ułatwia porównanie median, rozstępu międzykwartylowego oraz ogonów rozkładu. Widać na nim, że miasta i~warianty różnią się nie tylko położeniem mediany, ale także szerokością rozkładu i~długością ogonów.}
+    \label{fig:equity_distribution}
+\end{figure}
+
+\begin{figure}[H]
+    \makebox[\textwidth][c]{%
+        \begin{minipage}{1.15\textwidth}
+            \includegraphics[width=\textwidth,keepaspectratio]{Latex/images/chapter4/equity_map_4_8b_bivariate_difference_core_extended}
+         \end{minipage}%
+    }
     \caption{Mapa różnicowa profilu biwariantowego (wariant rozszerzony$-$rdzeniowy) dla wybranego ośrodka. Klasyfikacja: dwustronna skala wokół zera, lokalizująca obszary o~największej zmianie profilu sprawiedliwości przy zmianie wariantu delimitacji. Na mapie widoczne są skupienia dodatnich i~ujemnych zmian, pokazujące że wpływ rozszerzenia delimitacji nie jest przestrzennie jednorodny.}
     \label{fig:equity_bivariate_diff}
 \end{figure}
@@ -1165,7 +1214,7 @@ Graficzna reprezentacja korelacji przestrzennej dwóch wymiarów (potencjału do
 Wyniki equity pokazują dwa odrębne zjawiska. Po pierwsze, wzrost oporu przestrzennego zwiększa koncentrację dostępności, co widać w~wartościach Giniego i~krzywych Lorenza. Po drugie, relacja między dostępnością a~statusem społeczno-ekonomicznym nie tworzy jednego prostego gradientu: mapy biwariantowe, wykres rozrzutu i~kwintyle \mbox{SES} wskazują raczej lokalne układy współwystępowania niż uniwersalną zależność liniową.
 
 
-\chapter{Interpretacja wyników i~wnioski}\label{chapter:interpretacja_wnioski}
+\chapter{Dyskusja wyników i~wnioski}\label{chapter:interpretacja_wnioski}
 
 \section{Syntetyczna interpretacja wyników w~świetle celu głównego}\label{section:ch5_synteza_cel_glowny}
 
